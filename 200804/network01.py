@@ -23,3 +23,4 @@ print(msg)
 connectionSock.send(msg.encode("utf-8"))    #클라이언트에 보냄
 print("서버 메시지 전송 완리")
 
+
