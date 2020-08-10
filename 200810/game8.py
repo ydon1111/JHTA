@@ -82,6 +82,16 @@ holeY = 300
 
 holeList = []
 
+#반동
+rebound = 0
+
+# 폰트 설정 
+pygame.font.init()
+myFont = pygame.font.SysFont("Comic Sans MS",30)
+
+
+# 점수판 
+score = 0
 
 
 cnt = 0 
@@ -95,17 +105,22 @@ while isRunning:
     #프레임이 얼마 인지 확인
     # print("fps :"+ str(clock.get_fps()))
 
-    
+    if rebound > 2:
+        rebound -= 2
+
+
     for event in pygame.event.get():  #이벤트 모으기 
         if event.type == pygame.QUIT:
             isRunning = False
         # print(keys[pygame.K_LEFT])
    
         if event.type == pygame.MOUSEBUTTONUP:
+            rebound=50 
             # fsound.play()
             holeX,holeY = pygame.mouse.get_pos()
             dis = pythagoras(holeX,holeY,rx+50,ry+50)
             # print(dis)
+            
             
             if dis <= 40:
                 print("맞음")
@@ -113,6 +128,7 @@ while isRunning:
                 holeList.append((rx+50-holeX,ry+50-holeY))
                 rx= random.randint(10,1100)
                 ry= random.randint(10,700)
+                score += 100
             #만약 dis 의 작으면 맞은것 
             #크면 맞은것 
     # print("홀리스트: ",holeList)        
@@ -171,18 +187,17 @@ while isRunning:
 
     # time.sleep(0.1)
     
-    
+    #토끼 그리기
     if  cnt%2 == 0:
         screen.blit(rabbit1,(rx,ry))
     else: 
         screen.blit(rabbit2,(rx,ry))
     
-    #조준경 그리기 
 
     
     # print(pygame.mouse.get_pressed())          #마우스 클릭하면 어디눌리는 구하기 
 
-  
+    #홀 그리기
     for holeX,holeY in holeList: 
         if len(holeList) <= 5:
             screen.blit(hole,(rx+50-holeX,ry+50-holeY))
@@ -191,11 +206,14 @@ while isRunning:
 
     # screen.blit(hole,(holeX-5,holeY-5))
     
+    #조준경 그리기 
     snipeX , snipeY = pygame.mouse.get_pos()   #마우스 좌표 구하기 
-    screen.blit(snipe,(snipeX-50,snipeY-50))
-    
+    screen.blit(snipe,(snipeX-50,snipeY-50-rebound))
+    # antialias <== False 
+    # 화상 내의 선과 모서리를 매끄럽게 나타내는 효과 
 
-    
+    txt = myFont.render("SCORE :" + str(score), False, (255,0,0))
+    screen.blit(txt,(550,60))
 
     pygame.display.update() #게임화면을 다시 그리기
 

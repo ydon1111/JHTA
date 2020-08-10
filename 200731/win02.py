@@ -25,7 +25,8 @@ class MyApp(QWidget):
         # QMessageBox 클래스 
         #사용자에게 정보를 제공 질문과 응답을 할 수 있는 대화창
          
- response = QMessageBox.question(self,"메세지","정말 나가려구?",QMessageBox.Yes | QMessageBox.No, QMessageBox.No)          print(response)
+        response = QMessageBox.question(self,"메세지","정말 나가려구?",QMessageBox.Yes | QMessageBox.No, QMessageBox.No)          
+        print(response)
         if response == QMessageBox.Yes:
             print("나가지마")
             QCoreApplication.instance().quit()
