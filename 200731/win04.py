@@ -76,7 +76,7 @@ class Myapp(QWidget):
         btn3.clicked.connect(self.rmoveing)
         btn4.clicked.connect(self.lmoveing)
         
-        
+        self.show()
         
     def keyPressEvent(self,e):
         print(e.key())  
@@ -85,11 +85,9 @@ class Myapp(QWidget):
         
         
         
+    
         
-        
-        
-        
-        self.show()
+      
 
 
 
