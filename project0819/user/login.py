@@ -1,4 +1,3 @@
-import sys
 from user.join import *
 from main.main import *
 from common.DBconnect import *
@@ -38,10 +37,25 @@ class Login():
         self.l_login_btn.clicked.connect(lambda : self.login(HomeWindow))
         self.l_join_btn.clicked.connect(HomeWindow.start_join)
         
+        self.l_le_id.setText("user1")
+        self.l_le_pw.setText("test")
+        self.l_le_id.setFocus()
+        
     def login(self, HomeWindow):
-        res = excute("select * from SM_USER_TB where USER_ID = :id and USER_PW = :pw", [self.l_le_id.text(), self.l_le_pw.text()])
-        if len(res) > 0 :
-            HomeWindow.start_main()
-        else:
-            QMessageBox.question(self.centralwidget, "로그인", "아이디 혹은 비밀번호를 확인하세요.", QMessageBox.Yes, QMessageBox.Yes)
+        if self.l_le_id.text() != "" and self.l_le_id.text() != None and self.l_le_pw.text() != "" and self.l_le_pw.text() != None:
+            res = excute("select USER_ID, USER_EMAIL, USER_BIRTH, USER_GENDER from SM_USER_TB where USER_ID = :id and USER_PW = :pw", [self.l_le_id.text(), self.l_le_pw.text()])
+            if len(res) > 0 :
+                id, email, birth, gender = res[0]
+                HomeWindow.user_info = {"id": id, "email": email, "birth": birth, "gender": gender}
+                HomeWindow.start_main()
+            else:
+                QMessageBox.question(self.centralwidget, "로그인", "아이디 혹은 비밀번호를 확인하세요.", QMessageBox.Yes, QMessageBox.Yes)
+                self.l_le_pw.setFocus()
+        elif self.l_le_id.text() == "" or self.l_le_id.text() == None:
+            QMessageBox.question(self.centralwidget, "로그인", "아이디를 입력하세요", QMessageBox.Yes, QMessageBox.Yes)
+            self.l_le_id.setFocus()
+        elif self.l_le_pw.text() == "" or self.l_le_pw.text() == None:
+            QMessageBox.question(self.centralwidget, "로그인", "비밀번호를 입력하세요", QMessageBox.Yes, QMessageBox.Yes)
+            self.l_le_pw.setFocus()
+            
         

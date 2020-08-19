@@ -7,16 +7,16 @@ def excute(query, val_list = []):
         cur.execute(query, val_list)
         res = True
         
-        if query[:6] == "select":
+        if query[:6].upper() == "SELECT":
             res = []
             for data in cur:
                 res.append(data)
-        
-        connecion.commit()
-        connecion.close()
-        
+                
         return res
     except:
         print("DB error")
         return False
+    finally:
+        connecion.commit()
+        connecion.close()
     

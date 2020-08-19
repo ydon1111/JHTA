@@ -8,7 +8,10 @@ from PyQt5.QtCore import *
 class HomeWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setGeometry(200, 100, 1600, 900)
+        self.setFixedSize(1600, 900)
+        self.move(170, 50)
+        
+        self.user_info = dict() # 임시 user 정보 : {"id": USER_ID, "email": USER_EMAIL, "birth": USER_BIRTH, "gender": USER_GENDER}
         
         self.m_login = Login() # 로그인 클래스
         self.m_join = Join() # 회원가입 클래스
@@ -21,6 +24,7 @@ class HomeWindow(QMainWindow):
         self.show()
 
     def start_login(self):
+        self.user_info = dict()
         self.m_login.setupUI(self)
         self.show()
         
