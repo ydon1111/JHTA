@@ -9,7 +9,7 @@ def wther():
     print("----------------------------------------------")
     
 def rcd(): 
-    print("rcd", "| [time] " , str(time.localtime().tm_hour) + ":" + str(time.localtime().tm_min) + ":" + str(time.localtime().tm_sec))
+    print("rcd", "| [time] " ,str(time.localtime().tm_day)+":"+  str(time.localtime().tm_hour) + ":" + str(time.localtime().tm_min) + ":" + str(time.localtime().tm_sec))
     print("추천 크롤링")
     print("----------------------------------------------")
 

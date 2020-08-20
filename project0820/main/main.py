@@ -3,6 +3,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWebEngineWidgets import *
+from common.DBconnect import *
+import cx_Oracle
 
 class main():
     def setupUI(self, HomeWindow):
@@ -24,16 +26,6 @@ class main():
         res = QMessageBox.question(self.centralwidget, "로그아웃", "로그아웃 하시겠습니까?", QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
         if res == QMessageBox.Yes: HomeWindow.start_login()
         
-    def weather_func(self, HomeWindow):
-        ##########################도현 steart###########################
-        print("날씨")
-        ############################도현 end############################
-    
-    def recomm_func(self):
-        ##########################영돈 steart###########################
-        print("추천")
-        ############################도현 end############################
-        
     def initUI(self):
         self.vbox = QVBoxLayout()
         self.whUI()
@@ -42,10 +34,45 @@ class main():
         self.music_play()
         
     def whUI(self):
+        p_img1 = QPixmap("./project/img/sun.png")
+        p_img2 = QPixmap("./project/img/rain.png")
+        
         #수평상자 레이아웃 객체         
-        self.wh_scrollArea = QScrollArea()
-        self.wh_box = QHBoxLayout()
-        self.wh_scrollArea.setWidget(QLabel("날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨날씨", self.centralwidget))
+        self.wh_box = QHBoxLayout() # 최상위 box
+        self.wh_scrollArea = QScrollArea() # 스크롤
+        self.wh_in_box = QHBoxLayout() # 스크롤 안 박스
+
+        self.tn_box = QHBoxLayout() # 오늘, 내일, 모레 날씨 박스
+        for i in range(3):
+            self.lb = QLabel("aaaaaaaaaaa", self.centralwidget)
+            self.lb.setPixmap(p_img1)
+            self.lb.resize(300, 300)
+            self.tn_box.addWidget(self.lb)
+        
+        self.wh_in_box.addLayout(self.tn_box)
+        
+        # 주간 날씨 박스
+        self.week_box = QVBoxLayout()
+        self.ko_week_box = QHBoxLayout()
+        self.no_week_box = QHBoxLayout()
+        
+        for i in range(5):
+            self.lb4 = QLabel("aaaaaaaaaaa", self.centralwidget)
+            self.lb4.setPixmap(p_img2)
+            self.lb4.resize(300, 300)
+            self.ko_week_box.addWidget(self.lb4)
+        self.week_box.addLayout(self.ko_week_box)
+        
+        for i in range(5):
+            self.lb4 = QLabel("aaaaaaaaaaa", self.centralwidget)
+            self.lb4.setPixmap(p_img2)
+            self.lb4.resize(300, 300)
+            self.no_week_box.addWidget(self.lb4)
+        self.week_box.addLayout(self.no_week_box)
+        
+        self.wh_in_box.addLayout(self.week_box)
+        
+        self.wh_scrollArea.setLayout(self.wh_in_box)
         # wh_box.addStretch(1)
         self.wh_box.addWidget(self.wh_scrollArea)
 
@@ -93,27 +120,59 @@ class main():
         self.vbox.addLayout(self.rcd_box)
     
     def music_play(self):
+        # sql = "SELECT RCD_URL, RCD_TNWH_NO FROM SM_RCD_TB WHERE RCD_TYPE = :txt and RCD_TNWH_NO and RCD_TNWH_NO = :txt2"
+        # res = excute(sql, [1],["위에 현재 날씨 고유번호"])
+        # print(res)
         
-        #db에 넣은 자료를 가져와야함 
         self.toggle("Y")
-        
-        self.webview1.setUrl(QUrl("https://i.ytimg.com/vi/rRi_1D97FBs/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCr5LLXMdAsgzIhNBba7pS7-eUoFw")) 
-        self.webview2.setUrl(QUrl("https://i.ytimg.com/vi/rRi_1D97FBs/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCr5LLXMdAsgzIhNBba7pS7-eUoFw")) 
-        self.webview3.setUrl(QUrl("https://i.ytimg.com/vi/rRi_1D97FBs/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCr5LLXMdAsgzIhNBba7pS7-eUoFw")) 
-        self.webview4.setUrl(QUrl("https://i.ytimg.com/vi/rRi_1D97FBs/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCr5LLXMdAsgzIhNBba7pS7-eUoFw")) 
-        self.webview5.setUrl(QUrl("https://i.ytimg.com/vi/rRi_1D97FBs/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLCr5LLXMdAsgzIhNBba7pS7-eUoFw")) 
+        # self.webview1.setUrl(QUrl(res[0][0]))
+        # self.webview2.setUrl(QUrl(res[1][0])) 
+        # self.webview3.setUrl(QUrl(res[2][0]))  
+        # self.webview4.setUrl(QUrl(res[3][0]))  
+        # self.webview5.setUrl(QUrl(res[4][0]))  
+        self.webview1.setUrl(QUrl("https://www.youtube.com/embed/CT-Qm6nbOko?autoplay=0"))
+        self.webview2.setUrl(QUrl("https://www.youtube.com/embed/CT-Qm6nbOko?autoplay=0"))
+        self.webview3.setUrl(QUrl("https://www.youtube.com/embed/CT-Qm6nbOko?autoplay=0"))
+        self.webview4.setUrl(QUrl("https://www.youtube.com/embed/CT-Qm6nbOko?autoplay=0"))
+        self.webview5.setUrl(QUrl("https://www.youtube.com/embed/CT-Qm6nbOko?autoplay=0"))
       
     def food_play(self):
-        #db에 넣은 자료를 가져와야함 
+        # sql = "SELECT RCD_URL, RCD_TNWH_NO FROM SM_RCD_TB WHERE RCD_TYPE = :txt and RCD_TNWH_NO and RCD_TNWH_NO = :txt2"
+        # res = excute(sql, [2],["위에 현재 날씨 고유번호"])
+        # print(res)
+        
+
+
+
+
+
         self.toggle("Y")
+        # self.webview1.setUrl(QUrl(res[0][0]))
+        # self.webview2.setUrl(QUrl(res[1][0])) 
+        # self.webview3.setUrl(QUrl(res[2][0]))  
+        # self.webview4.setUrl(QUrl(res[3][0]))  
+        # self.webview5.setUrl(QUrl(res[4][0]))  
+        
         self.webview1.setUrl(QUrl("https://www.youtube.com/embed/CT-Qm6nbOko?autoplay=0"))
         self.webview2.setUrl(QUrl("https://www.youtube.com/embed/CT-Qm6nbOko?autoplay=0"))
         self.webview3.setUrl(QUrl("https://www.youtube.com/embed/CT-Qm6nbOko?autoplay=0"))
         self.webview4.setUrl(QUrl("https://www.youtube.com/embed/CT-Qm6nbOko?autoplay=0"))
         self.webview5.setUrl(QUrl("https://www.youtube.com/embed/CT-Qm6nbOko?autoplay=0"))
     
+
     def activity_play(self):
-        #db에 넣은 자료를 가져와야함 
+        
+        # sql = "SELECT RCD_URL, RCD_TNWH_NO FROM SM_RCD_TB WHERE RCD_TYPE = :txt and RCD_TNWH_NO and RCD_TNWH_NO = :txt2"
+        # res = excute(sql, [3],["위에 현재 날씨 고유번호"])
+        # print(res)
+
+        # self.webview1.setUrl(QUrl(res[0][0]))
+        # self.webview2.setUrl(QUrl(res[0][0])) 
+        # self.webview3.setUrl(QUrl(res[0][0]))  
+        # self.webview4.setUrl(QUrl(res[0][0]))  
+        # self.webview5.setUrl(QUrl(res[0][0]))  
+
+
         self.webview1.setUrl(QUrl("https://blog.naver.com/min-meme8569?Redirect=Log&logNo=222049704468"))
         self.webview2.setUrl(QUrl("https://blog.naver.com/min-meme8569?Redirect=Log&logNo=222049704468")) 
         self.webview3.setUrl(QUrl("https://blog.naver.com/min-meme8569?Redirect=Log&logNo=222049704468")) 
@@ -132,6 +191,16 @@ class main():
             self.webview3.hide()
             self.webview4.hide()
             self.webview5.hide()
+        
+    def weather_func(self, HomeWindow):
+        ##########################도현 steart###########################
+        print("날씨")
+        ############################도현 end############################
+    
+    def recomm_func(self):
+        ##########################영돈 steart###########################
+        print("추천")
+        ############################도현 end############################
             
             
         
