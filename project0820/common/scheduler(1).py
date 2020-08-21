@@ -111,7 +111,7 @@ def rcd():
 
     #예)'흐리고 비' 날 추천요리 (x) 흐리고 비 --> '비오는' 으로 변경 
     # 비오는 날 추천 요리로 검색 가능하게 해야함 
-    
+    r =''
     for i in range(len(forecast)):
         w = forecast[i]
         if w == '흐리고 비' or w =='비' or w =='소나기':

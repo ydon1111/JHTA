@@ -20,18 +20,18 @@ class HomeWindow(QMainWindow):
         self.start_main() # 처음 시작 화면
 
     def start_join(self):
-        self.set_background_img("./project/img/back1.png")
+        self.set_background_img("./project0820/img/back1.png")
         self.m_join.setupUI(self)
         self.show()
 
     def start_login(self):
-        self.set_background_img("./project/img/back4.png")
+        self.set_background_img("./project0820/img/back4.png")
         self.user_info = dict()
         self.m_login.setupUI(self)
         self.show()
         
     def start_main(self):
-        self.set_background_img("./project/img/back1.png")
+        self.set_background_img("./project0820/img/back1.png")
         self.m_main.setupUI(self)
         self.show()
         
