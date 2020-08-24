@@ -32,18 +32,12 @@
 # 함수의 리턴 값 : 정수 , 문자 , 실수 ,튜플, 리스트 ....
 
  #합계를 리턴합니다...: 300
+target = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-def hap(a,*b):                
-    print("a :",a)
-    print("b :",b)
-    #합계를 구해서 리턴
-    v = a
-    for k in b:
-        v+=k   
-    return v
-   
+def is_even(n):
+    return True if n % 2 == 0 else False
 
-hap(100,200) 
-hap(100,200,300)
-print(hap(100,200,300))
+result = map(is_even, target)
+# result = filter(is_even, target)
 
+print(list(result))
