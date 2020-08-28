@@ -8,3 +8,8 @@ begin
 
 end;
 /
+
+-- SQL> select trigger_name from user_triggers;
+
+
+-- SQL> drop trigger del_tri;    
