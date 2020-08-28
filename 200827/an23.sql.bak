@@ -1,0 +1,13 @@
+
+BEGIN
+  
+   UPDATE emp
+   SET sal = vsal
+   WHERE empno = 7788;
+
+   commit;
+
+END;
+/
+
+

@@ -1,0 +1,75 @@
+ @E:\dev\plsql_workspace\day2\an19.sql
+
+몇번부서: 30
+
+      7499 ALLEN            1600         30
+      7521 WARD             1250         30
+      7654 MARTIN           1250         30
+      7698 BLAKE            2850         30
+      7844 TURNER           1500         30
+      7900 JAMES             950         30
+
+ @E:\dev\plsql_workspace\day2\an19.sql
+
+몇번부서: 20
+      7369 SMITH             800         20
+      7566 JONES            2975         20
+      7788 SCOTT            3000         20
+      7876 ADAMS            1100         20
+      7902 FORD             3000         20
+
+HW02
+@HW02.SQL 
+사번 입력 : 7788 
+사번  이름        JOB                   MGR 
+----- --------     -------------     -----------
+     7788 SCOTT      ANALYST         7566
+
+HW03
+@HW03.SQL 
+사번 입력 : 7788 
+사번  이름        부서명             위치 
+----- --------     -------------     -----------
+ 7788 SCOTT      RESEARCH       DALLAS
+
+HW04
+@HW04.SQL 
+
+JOB 검색: MANAGER
+	사번 	 이름        급여       JOB            부서번호 
+	-----	 --------     ---------   --------     -----------
+      7566             JONES            2975 MANAGER           20
+      7698             BLAKE            2850 MANAGER           30
+      7782             CLARK            2450 MANAGER           10
+
+
+HW05
+4번 소스에서  10번 부서사원만 제외 (단 IF문 사용 ) 
+@HW05.SQL 
+JOB 검색: MANAGER
+	사번 	 이름        급여       JOB            부서번호 
+	-----	 --------     ---------   --------     -----------
+      7566             JONES            2975 MANAGER           20
+      7698             BLAKE            2850 MANAGER           30
+ 
+HW06
+@E:\dev\plsql_workspace\day2\an19.sql
+부서번호 : 10 
+현재 사원들의 급여 확인 ! 
+
+@HW06.SQL 
+부서번호:10
+
+10번 부서 사원들의 급여를 10% 인상 해서 db에 저장한다. 
+
+@E:\dev\plsql_workspace\day2\an19.sql
+부서번호 : 10 
+사원들의 급여가 10% 인상되었는지  확인 ! 
+
+
+
+
+
+
+
+

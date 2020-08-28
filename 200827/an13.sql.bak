@@ -1,0 +1,18 @@
+DECLARE 
+vempno := emp.empno%TYPE 
+vename := emp.ename%TYPE 
+vsal := emp.sal%TYPE 
+vjob := emp.job%TYPE 
+
+
+BEGIN
+    SELECT *
+		INTO vempno,vename,vsal,vjob;
+	FROM emp 
+	WHERE empno = 7788;
+	-- 사번, 이름 ,급여 ,job 
+	DBMS_OUTPUT.PUT_LINE('Hello PLSQL');
+END;
+/
+
+

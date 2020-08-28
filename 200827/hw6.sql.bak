@@ -1,0 +1,29 @@
+DECLARE 
+
+ vsal number;
+ CURSOR c1 IS 
+	SELECT sal 
+	FROM emp
+	WHERE deptno = 10; 
+
+
+
+BEGIN
+	FOR c2 IN c1 loop
+	dbms_output.put_line(c2.sal);
+	END loop;
+
+	UPDATE emp
+	SET sal = sal*(1.1)
+	WHERE deptno = 10;
+	
+	dbms_output.put_line('----------------');
+	
+	FOR c2 IN c1 loop
+	dbms_output.put_line(c2.sal);
+	END loop;
+
+END;
+/
+
+
