@@ -1,16 +1,17 @@
-create OR REPLACE function find_annsal(vempno emp.empno%type)
-    return number 
+create OR REPLACE function find_dname(vempno emp.empno%type)
+    return dept.dname%type                -- 출력할 값의 형식을 정해 줘야함 
+
 is 
-    vannsal emp.sal%type :=0;
+    vdname dept.dname%type;
 
 begin
   
-    select sal*12 +nvl(comm,0)
-     into vannsal 
-    from emp 
-    where empno = vempno;
+    select dname
+     into vdname
+    from dept d , emp e
+    where d.deptno = e.deptno and empno = vempno;
 
-    return vannsal;
+    return vdname;
 
 end;
 /
@@ -30,3 +31,5 @@ end;
 
 
 -- CREATE OR REPLACE FUNCTION         수정할 때 앞에 사용(회사에서는 쓰면안됨)
+
+-- col find_dname(empno) format a20   출력값 크기조절 
