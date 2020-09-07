@@ -1,3 +1,4 @@
+import math
 #임포트 하는 방법 3가지
 # 1.import 모듈명
 
@@ -18,5 +19,3 @@ print(dir())
 
 # from random import *
 # print(dir())
-
-import math

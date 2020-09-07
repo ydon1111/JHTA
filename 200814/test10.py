@@ -28,7 +28,6 @@ element.send_keys("포항")
 element.send_keys(Keys.ENTER)
 
 
-
 element = browser.find_element_by_xpath('//*[@id="res_cont_tab01"]/form/div/fieldset/ul[2]/li[1]/a/img')
 element.click()
 

@@ -4,11 +4,6 @@ from animal import Animal
 
 #자식 클래스 , derived class , child
 
-
-
-
-
-
 class Rabbit(Animal):
 
     def __init__(self,foots):
@@ -20,11 +15,9 @@ class Rabbit(Animal):
     def jump(self):
         print("깡총깡총 뛰어요")
     
-
     def sleeping(self):
         print("쿨쿨 자요")
     
-
 if __name__ == "__main__":
     r = Rabbit(4)
     print(r.eyes)
