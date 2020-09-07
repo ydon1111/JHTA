@@ -135,8 +135,6 @@ m.magic_move() # 동해 번쩍 서해 번쩍
 7. 
 	Rectangle, Triangle 은 Figure 클래스의 구현클래스로 코드를 변경합니다.
 
-
-
 	Rectangle, Triangle 의 getArea() 는 Figure 클래스 의 getArea() 를 
 	method overriding 시켜줍니다. 
 

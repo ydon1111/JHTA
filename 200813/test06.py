@@ -16,7 +16,6 @@ lastpage = int(i) * 10 - 9
 
 while page_num < lastpage + 1:
     url = f"https://search.naver.com/search.naver?date_from=&date_option=0&date_to=&dup_remove=1&nso=&post_blogurl=&post_blogurl_without=&query=%{plusurl}&sm=tab_pge&srchby=all&st=sim&where=post&start={page_num}"
-
     html = urllib.request.urlopen(url).read()
     soup = BeautifulSoup(html, 'html.parser')
     

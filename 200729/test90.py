@@ -18,7 +18,7 @@ class Agar:
             print("먹이주기")
     
     def merge(self):
-        self.weight +=1
+        self.weight += 1
         self.radius += 0.2
         print("셀 먹기")
 

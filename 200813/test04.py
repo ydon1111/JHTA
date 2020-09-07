@@ -6,13 +6,11 @@ from pathlib import Path
 
 headers = {'User-Agent' : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36"}
 url = "https://comic.naver.com/webtoon/detail.nhn?titleId=20853&no=1237&weekday=tue"
-res = requests.get(url)         #응답 값 확인
+res = requests.get(url)        #응답 값 확인
 res.raise_for_status()         #응답하면 실행 응답안하면 실행 안함 
-
 # pprint(res.text)
 
 bs(res.text,'lxml') #값정리 
-
 soup  = bs(res.text,'lxml')
 # pprint(soup)
 

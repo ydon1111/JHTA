@@ -1,7 +1,6 @@
 
 from test88 import Parent
 
-
 class Child(Parent):
     def __init__(self):
         super().__init__()
@@ -14,8 +13,6 @@ class Child(Parent):
     
     def singing(self):
         print("다른노래 부르기 ")
-
-
 
     def club(self):
         print("클럽가기")
