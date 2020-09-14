@@ -1,0 +1,30 @@
+SELF JOIN 하는 법 
+
+
+
+CASE 문 사용하는법
+
+
+select ename, job, sal , 
+case 
+when JOB = 'MANAGER' THEN SAL*1.1
+WHEN JOB = 'CLEAK' THEN SAL*1.05
+END "UPSAL2"
+FROM EMP;
+
+
+10번 부서 사원들중에서 30번 부서에는 없는 업무를 하는 사원의 사원번호 이름 부서명 입사일 지역을 출력 
+NOT IN 을 몰랐음 ... 
+
+SUB
+30번 부서 사원들의 JOB?  ==>'MANAGER' , 'CLERK'
+
+
+SELECT E.EMPNO, E.ENAME , D.DNAME , E.HIREDATE , D.LOC  
+FROM EMP E, DEPT D 
+WHERE E.DETPNO = D.DEPTNO 
+AND E.DEPTNO =10 
+AND JOB NOT IN (SELECT JOB FROM EMP WHERE DEPTNO = 30)
+ 
+
+

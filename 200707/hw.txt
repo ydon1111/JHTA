@@ -1,0 +1,644 @@
+
+1. 
+	사원명      입사일       근속일  
+         ----------    ----------     ----------
+	SMITH      80/12/17       14447.4482
+	ALLEN      81/02/20       14382.4482
+	WARD       81/02/22       14380.4482
+	JONES      81/04/02       14341.4482
+
+
+
+SQL> SELECT ENAME"사원명" , HIREDATE "입사일"  , SYSDATE - HIREDATE "근속일"
+  2  FROM EMP;
+
+사원명     입사일       근속일
+---------- -------- ----------
+SMITH      80/12/17 14447.4944
+ALLEN      81/02/20 14382.4944
+WARD       81/02/22 14380.4944
+JONES      81/04/02 14341.4944
+MARTIN     81/09/28 14162.4944
+BLAKE      81/05/01 14312.4944
+CLARK      81/06/09 14273.4944
+SCOTT      87/04/19 12133.4944
+KING       81/11/17 14112.4944
+TURNER     81/09/08 14182.4944
+ADAMS      87/05/23 12099.4944
+
+사원명     입사일       근속일
+---------- -------- ----------
+JAMES      81/12/03 14096.4944
+FORD       81/12/03 14096.4944
+MILLER     82/01/23 14045.4944
+HONG       20/07/07 .072013889
+
+15 개의 행이 선택되었습니다.
+
+
+
+
+2. 
+	사원명      입사일       근속월 
+         ----------    ----------     ----------
+	SMITH      80/12/17                       474.691888
+	ALLEN      81/02/20                       472.595114
+	WARD       81/02/22                       472.530598
+
+
+SQL> SELECT ENAME"사원명" , HIREDATE "입사일"  , MONTHS_BETWEEN(SYSDATE,HIREDATE) "근속월"
+  2  FROM EMP;
+
+사원명     입사일       근속월
+---------- -------- ----------
+SMITH      80/12/17 474.693401
+ALLEN      81/02/20 472.596627
+WARD       81/02/22 472.532111
+JONES      81/04/02 471.177272
+MARTIN     81/09/28 465.338562
+BLAKE      81/05/01  470.20953
+CLARK      81/06/09 468.951465
+SCOTT      87/04/19 398.628885
+KING       81/11/17 463.693401
+TURNER     81/09/08 465.983723
+ADAMS      87/05/23 397.499853
+
+사원명     입사일       근속월
+---------- -------- ----------
+JAMES      81/12/03 463.145014
+FORD       81/12/03 463.145014
+MILLER     82/01/23 461.499853
+HONG       20/07/07          0
+
+15 개의 행이 선택되었습니다.
+
+
+
+
+3. 
+	사원명      입사일       근속월 
+         ----------    ----------     ----------
+	SMITH      80/12/17                       474
+	ALLEN      81/02/20                       472
+	WARD       81/02/22                       472
+
+
+SQL> SELECT ENAME"사원명" , HIREDATE "입사일"  , ROUND(MONTHS_BETWEEN(SYSDATE,HIREDATE) , 0) "근속월"
+  2  FROM EMP;
+
+사원명     입사일       근속월
+---------- -------- ----------
+SMITH      80/12/17        475
+ALLEN      81/02/20        473
+WARD       81/02/22        473
+JONES      81/04/02        471
+MARTIN     81/09/28        465
+BLAKE      81/05/01        470
+CLARK      81/06/09        469
+SCOTT      87/04/19        399
+KING       81/11/17        464
+TURNER     81/09/08        466
+ADAMS      87/05/23        397
+
+사원명     입사일       근속월
+---------- -------- ----------
+JAMES      81/12/03        463
+FORD       81/12/03        463
+MILLER     82/01/23        461
+HONG       20/07/07          0
+
+15 개의 행이 선택되었습니다.
+
+
+
+
+
+4. 
+	
+	사원명      입사일       근속년  
+         ----------    ----------     ----------
+	SMITH      80/12/17           40
+	ALLEN      81/02/20           39
+	WARD       81/02/22          39
+	JONES      81/04/02           39
+	MARTIN     81/09/28          39
+
+
+
+SQL> SELECT ENAME"사원명" , HIREDATE "입사일"  , ROUND(MONTHS_BETWEEN(SYSDATE,HIREDATE)/12 , 0) "근속년"
+  2  FROM EMP;
+
+사원명     입사일       근속년
+---------- -------- ----------
+SMITH      80/12/17         40
+ALLEN      81/02/20         39
+WARD       81/02/22         39
+JONES      81/04/02         39
+MARTIN     81/09/28         39
+BLAKE      81/05/01         39
+CLARK      81/06/09         39
+SCOTT      87/04/19         33
+KING       81/11/17         39
+TURNER     81/09/08         39
+ADAMS      87/05/23         33
+
+사원명     입사일       근속년
+---------- -------- ----------
+JAMES      81/12/03         39
+FORD       81/12/03         39
+MILLER     82/01/23         38
+HONG       20/07/07          0
+
+15 개의 행이 선택되었습니다.
+
+
+
+5. 
+	사원명      입사일       근속년       근속월 
+         ----------    ----------     ----------  ----------
+	SMITH      80/12/17           40            2
+	ALLEN      81/02/20           39            3
+	WARD       81/02/22          39            1
+	JONES      81/04/02           39
+	MARTIN     81/09/28          39
+
+
+SQL> SELECT ENAME"사원명" , HIREDATE "입사일"  , ROUND(MONTHS_BETWEEN(SYSDATE,HIREDATE)/12 , 0) "근속년" , MOD( ROUND(MONTHS_BETWEEN(SYSDATE,HIREDATE) , 0) , 12) "근속월"
+  2  FROM EMP;
+                          **  TRUNC(MOD(MONTHES_BETWEEN(SYSDATE, HIREDATE),12),0) 
+사원명     입사일       근속년     근속월
+---------- -------- ---------- ----------
+SMITH      80/12/17         40          7
+ALLEN      81/02/20         39          5
+WARD       81/02/22         39          5
+JONES      81/04/02         39          3
+MARTIN     81/09/28         39          9
+BLAKE      81/05/01         39          2
+CLARK      81/06/09         39          1
+SCOTT      87/04/19         33          3
+KING       81/11/17         39          8
+TURNER     81/09/08         39         10
+ADAMS      87/05/23         33          2
+
+사원명     입사일       근속년     근속월
+---------- -------- ---------- ----------
+JAMES      81/12/03         39          7
+FORD       81/12/03         39          7
+MILLER     82/01/23         38          6
+
+14 개의 행이 선택되었습니다.
+
+
+
+
+
+6. 
+	사원명      입사일       근속기간 
+         ----------    ----------     ----------------------------
+	SMITH      80/12/17           40 년        2개월
+	ALLEN      81/02/20           39  년       3개월
+	WARD       81/02/22          39            1
+	JONES      81/04/02           39
+	MARTIN     81/09/28          39
+
+
+SQL> SELECT ENAME"사원명" , HIREDATE "입사일"  , ROUND(MONTHS_BETWEEN(SYSDATE,HIREDATE)/12 , 0) ||'년' || MOD( ROUND(MONTHS_BETWEEN(SYSDATE,HIREDATE) , 0) , 12) ||'월' "근속기간"
+  2  from emp;
+
+사원명     입사일
+---------- --------
+근속기간
+--------------------------------------------------------------------------------
+SMITH      80/12/17
+40년7월
+
+ALLEN      81/02/20
+39년5월
+
+WARD       81/02/22
+39년5월
+
+
+사원명     입사일
+---------- --------
+근속기간
+--------------------------------------------------------------------------------
+JONES      81/04/02
+39년3월
+
+MARTIN     81/09/28
+39년9월
+
+BLAKE      81/05/01
+39년2월
+
+
+사원명     입사일
+---------- --------
+근속기간
+--------------------------------------------------------------------------------
+CLARK      81/06/09
+39년1월
+
+SCOTT      87/04/19
+33년3월
+
+KING       81/11/17
+39년8월
+
+
+사원명     입사일
+---------- --------
+근속기간
+--------------------------------------------------------------------------------
+TURNER     81/09/08
+39년10월
+
+ADAMS      87/05/23
+33년2월
+
+JAMES      81/12/03
+39년7월
+
+
+사원명     입사일
+---------- --------
+근속기간
+--------------------------------------------------------------------------------
+FORD       81/12/03
+39년7월
+
+MILLER     82/01/23
+38년6월
+
+
+14 개의 행이 선택되었습니다.
+
+col 근속기간 format a15 
+
+
+
+7. 
+ null 칸에 ceo 넣기 
+
+          사번        이름            MGR 
+            ----         ----           -----
+       7839          KING             CEO           
+
+
+   SQL> select empno "사번" ,ename "이름" , decode(nvl(mgr,0), 0 , 'CEO',mgr) "MGR"
+  2  FROM EMP;
+  
+                    **NVL(TO_CHAR(MGR,'9999'), 'CEO')
+                                     
+
+      사번 이름       MGR
+---------- ---------- ----------------------------------------
+      7369 SMITH      7902
+      7499 ALLEN      7698
+      7521 WARD       7698
+      7566 JONES      7839
+      7654 MARTIN     7698
+      7698 BLAKE      7839
+      7782 CLARK      7839
+      7788 SCOTT      7566
+      7839 KING       CEO
+      7844 TURNER     7698
+      7876 ADAMS      7788
+
+      사번 이름       MGR
+---------- ---------- ----------------------------------------
+      7900 JAMES      7698
+      7902 FORD       7566
+      7934 MILLER     7782
+
+14 개의 행이 선택되었습니다.
+
+
+
+1. 사원들의 이름, 부서 번호, 부서 이름을 출력하라 ?
+
+SELECT E.ENAME , DEPTNO, D.DNAME
+FROM EMP E NATURAL JOIN DEPT D;
+
+
+
+2. 30 번 부서의 사원들의 이름, 직업, 부서위치를 출력하라
+
+SELECT E.ENAME, E.JOB, D.LOC, E.DEPTNO
+FROM EMP E, DEPT D 
+WHERE E.DEPTNO = D.DEPTNO 
+AND E.DEPTNO = 30 
+
+
+SELECT E.ENAME, E.JOB, D.LOC, DEPTNO
+FROM EMP E NATURAL JOIN DEPT D 
+WHERE DEPTNO = 30 
+
+
+
+3. 커미션을 받는 사원의 이름 , 부서이름 및 부서위치를
+ 출력하라 ? (단 COMM 이 NULL 이 아닌 사원)  
+
+SQL> SELECT E.ENAME , E.DEPTNO, D.LOC
+  2  FROM EMP E, DEPT D
+  3  WHERE E.DEPTNO = D.DEPTNO
+  4  AND COMM >=0; (IS NOT NULL;)
+  
+  
+  SQL> SELECT E.ENAME , DEPTNO, D.LOC
+    FROM EMP E NATURAL JOIN DEPT D
+    WHERE COMM IS NOT NULL
+  
+  
+
+ENAME          DEPTNO LOC
+---------- ---------- -------------
+TURNER             30 CHICAGO
+MARTIN             30 CHICAGO
+WARD               30 CHICAGO
+ALLEN              30 CHICAGO
+
+
+4. dallas 에서 근무하는 사원의 이름 , 직업, 부서번호 , 부서이름
+ 을 출력하라 ?
+
+SQL> SELECT E.ENAME, E.JOB, E.DEPTNO, D.DNAME
+     FROM EMP E , DEPT D
+     WHERE E.DEPTNO = D.DEPTNO
+     AND D.LOC = 'DALLAS' ;
+  
+  
+  
+   SELECT E.ENAME, E.JOB, DEPTNO, D.DNAME
+   FROM EMP E NATURAL JOIN DEPT D
+   WHERE D.LOC = 'DALLAS'
+  
+  
+  
+
+ENAME      JOB           DEPTNO DNAME
+---------- --------- ---------- --------------
+SMITH      CLERK             20 RESEARCH
+JONES      MANAGER           20 RESEARCH
+SCOTT      ANALYST           20 RESEARCH
+ADAMS      CLERK             20 RESEARCH
+FORD       ANALYST           20 RESEARCH
+
+
+
+5. 이름에 A 가 들어가는 사원들의 이름과 부서이름을 출력하라 ?
+ 
+SQL>  select e.ename, d.dname
+  2   from emp e , dept d
+  3   where e.deptno = d.deptno
+  4    and e.ename LIKE '%A%';
+  
+   select e.ename, d.dname
+  from emp e NATURAL JOIN dept d
+  WHERE e.ename LIKE '%A%';
+
+ENAME      DNAME
+---------- --------------
+ALLEN      SALES
+WARD       SALES
+MARTIN     SALES
+BLAKE      SALES
+CLARK      ACCOUNTING
+ADAMS      RESEARCH
+JAMES      SALES
+
+7 개의 행이 선택되었습니다.
+
+
+
+6. 사원이름과 그 사원의 관리자 이름을 출력하라
+( 단 컬럼 HEADING 을 employeee, manager 출력 )
+
+SQL>   SELECT E.ENAME "employee" , C.ENAME "manager"
+  2     FROM EMP E, EMP C
+  3     WHERE E.MGR = C.EMPNO(+);
+  
+  
+  
+		SELECT E.ENAME "employee" , C.ENAME "manager"
+        FROM EMP E LEFT JOIN  EMP C ON (E.MGR = C.EMPNO)
+        
+        
+
+employee   manager
+---------- ----------
+FORD       JONES
+SCOTT      JONES
+JAMES      BLAKE
+TURNER     BLAKE
+MARTIN     BLAKE
+WARD       BLAKE
+ALLEN      BLAKE
+MILLER     CLARK
+ADAMS      SCOTT
+CLARK      KING
+BLAKE      KING
+
+employee   manager
+---------- ----------
+JONES      KING
+SMITH      FORD
+KING
+
+
+
+7. 사원이름과 직업, 급여, 급여등급 을 출력하라 ?
+
+SQL> SELECT E.ENAME , E.JOB, E.SAL, S.GRADE
+  2  FROM EMP E, SALGRADE S
+  3  WHERE E.SAL >= S.LOSAL
+  4  AND E.SAL <=S.HISAL;
+  
+  
+  SELECT E.ENAME , E.JOB, E.SAL, S.GRADE
+    FROM EMP E JOIN SALGRADE S
+	ON E.SAL BETWEEN S.LOSAL AND S.HISAL 
+   
+ENAME      JOB              SAL      GRADE
+---------- --------- ---------- ----------
+SMITH      CLERK            800          1
+JAMES      CLERK            950          1
+ADAMS      CLERK           1100          1
+WARD       SALESMAN        1250          2
+MARTIN     SALESMAN        1250          2
+MILLER     CLERK           1300          2
+TURNER     SALESMAN        1500          3
+ALLEN      SALESMAN        1600          3
+CLARK      MANAGER         2450          4
+BLAKE      MANAGER         2850          4
+JONES      MANAGER         2975          4
+
+ENAME      JOB              SAL      GRADE
+---------- --------- ---------- ----------
+SCOTT      ANALYST         3000          4
+FORD       ANALYST         3000          4
+KING       PRESIDENT       5000          5
+
+14 개의 행이 선택되었습니다.
+
+
+
+8. 사원이름과 부서명과 월급을 출력하는데 월급이 3000 이상인 사원을
+ 출력하라 ? 
+
+
+SQL>    SELECT E.ENAME, D.DNAME , E.SAL
+      FROM EMP E, DEPT D
+    WHERE E.DEPTNO = D.DEPTNO
+      AND E.SAL >= 3000 ;
+	  
+	  SELECT E.ENAME, D.DNAME , E.SAL
+      FROM EMP E NATURAL JOIN DEPT D
+      WHERE E.SAL >= 3000 ;
+	  
+	  
+	  
+	  
+	  
+
+ENAME      DNAME                 SAL
+---------- -------------- ----------
+SCOTT      RESEARCH             3000
+FORD       RESEARCH             3000
+KING       ACCOUNTING           5000
+
+
+9. 사원의 이름, 부서번호 와 같은 부서에 근무하는 동료 사원들을
+출력하라 ? 
+
+EX)
+ SCOTT 20 SMITH
+ SCOTT 20 JONES
+ SMITH 20 SCOTT
+ …
+
+
+SQL> SELECT D.ENAME , D.DEPTNO, C.ENAME
+  FROM EMP D , EMP C
+    WHERE D.DEPTNO = C.DEPTNO
+   AND D.ENAME <> C.ENAME
+
+
+	SELECT D.ENAME , C.DEPTNO, C.ENAME
+	FROM EMP D JOIN EMP C
+    ON D.DEPTNO = C.DEPTNO 
+	AND D.ENAME <> C.ENAME
+
+
+
+
+
+
+ENAME          DEPTNO DECODE(D.D
+---------- ---------- ----------
+FORD               20 SMITH
+ADAMS              20 SMITH
+SCOTT              20 SMITH
+JONES              20 SMITH
+JAMES              30 ALLEN
+TURNER             30 ALLEN
+BLAKE              30 ALLEN
+MARTIN             30 ALLEN
+WARD               30 ALLEN
+JAMES              30 WARD
+TURNER             30 WARD
+
+ENAME          DEPTNO DECODE(D.D
+---------- ---------- ----------
+BLAKE              30 WARD
+MARTIN             30 WARD
+ALLEN              30 WARD
+FORD               20 JONES
+ADAMS              20 JONES
+SCOTT              20 JONES
+SMITH              20 JONES
+JAMES              30 MARTIN
+TURNER             30 MARTIN
+BLAKE              30 MARTIN
+WARD               30 MARTIN
+
+ENAME          DEPTNO DECODE(D.D
+---------- ---------- ----------
+ALLEN              30 MARTIN
+JAMES              30 BLAKE
+TURNER             30 BLAKE
+MARTIN             30 BLAKE
+WARD               30 BLAKE
+ALLEN              30 BLAKE
+MILLER             10 CLARK
+KING               10 CLARK
+FORD               20 SCOTT
+ADAMS              20 SCOTT
+JONES              20 SCOTT
+
+ENAME          DEPTNO DECODE(D.D
+---------- ---------- ----------
+SMITH              20 SCOTT
+MILLER             10 KING
+CLARK              10 KING
+JAMES              30 TURNER
+BLAKE              30 TURNER
+MARTIN             30 TURNER
+WARD               30 TURNER
+ALLEN              30 TURNER
+FORD               20 ADAMS
+SCOTT              20 ADAMS
+JONES              20 ADAMS
+
+ENAME          DEPTNO DECODE(D.D
+---------- ---------- ----------
+SMITH              20 ADAMS
+TURNER             30 JAMES
+BLAKE              30 JAMES
+MARTIN             30 JAMES
+WARD               30 JAMES
+ALLEN              30 JAMES
+ADAMS              20 FORD
+SCOTT              20 FORD
+JONES              20 FORD
+SMITH              20 FORD
+KING               10 MILLER
+
+ENAME          DEPTNO DECODE(D.D
+---------- ---------- ----------
+CLARK              10 MILLER
+
+56 개의 행이 선택되었습니다.
+
+
+SELECT D.ENAME , D.DEPTNO, DECODE(D.DEPTNO , C.DEPTNO , C.ENAME  )
+   FROM EMP D , EMP C
+   WHERE 
+   D.ENAME <> DECODE(D.DEPTNO , C.DEPTNO , C.ENAME  );
+
+
+
+
+10. BLAKE 이란 사원보다 늦게 입사한 사원의 이름과 입사일을 출력하라 ? 
+
+SELECT e.ename, e.hiredate
+FROM EMP E , EMP C 
+WHERE C.ename = 'BLAKE' AND e.hiredate > c.hiredate;
+
+SELECT e.ename, e.hiredate
+FROM EMP E JOIN EMP C 
+ON C.ename = 'BLAKE' AND e.hiredate > c.hiredate;
+
+
+
+
+
+
+
+
+
+
+
+
+

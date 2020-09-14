@@ -1,0 +1,355 @@
+1. 사용자 생성, 권한 부여
+<권한>
+SYSTEM PRIVILEGE -> SYSTEM 전체 영향 : 관리자가 권한을 가지고 있음 (CONNECT, RESOURCE)
+                            GRANT 권한 TO 사용자명;
+                            REVOKE 권한 FROM 사용자명;
+OBJECT PRIVIEGE -> OBJECT : 생성자가 권한을 가지고 있음(SELECT, INSERT, DELETE, UPDATE, ALL)
+                            GRANT 권한 ON 객체명 TO 사용자명;
+                            REVOKE 권한 ON 객체명 FROM 사용자명;
+
+DCL : GRANT, REVOKE (DDL 처럼 AUTO COMMIT)
+
+------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------
+
+SQL> set sqlprompt "_USER>"
+SYSTEM>CREATE USER USER1
+  2  IDENTIFIED BY tiger; -- 비밀번호는 대소문자 구분함
+
+사용자가 생성되었습니다.
+
+SYSTEM>connect user1/tiger;
+ERROR:
+ORA-01045: user USER1 lacks CREATE SESSION privilege; logon denied
+
+
+경고: 이제는 ORACLE에 연결되어 있지 않습니다.
+
+>connect system/oracle
+연결되었습니다.
+
+------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+
+SYSTEM>GRANT CONNECT TO USER1; -- 접속 권한 부여
+
+권한이 부여되었습니다.
+
+SYSTEM>conn user1/tiger
+연결되었습니다.
+USER1>CREATE TABLE T1 (ID NUMBER);
+CREATE TABLE T1 (ID NUMBER)
+*
+1행에 오류:
+ORA-01031: 권한이 불충분합니다
+
+------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------
+
+USER1>connect system/oracle
+연결되었습니다.
+SYSTEM>GRANT RESOURCE TO USER1;
+
+권한이 부여되었습니다.
+
+SYSTEM>connect user1/tiger
+연결되었습니다.
+USER1>CREATE TABLE T1 (ID NUMBER);
+
+테이블이 생성되었습니다.
+
+USER1>SELECT * FROM SCOTT.EMP;
+SELECT * FROM SCOTT.EMP
+                    *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다
+
+------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------
+
+USER1>connect scott/tiger
+연결되었습니다.
+SCOTT>GRANT SELECT ON EMP TO USER1;
+
+권한이 부여되었습니다.
+
+SCOTT>connect user1/tiger
+연결되었습니다.
+USER1>select * from SCOTT.emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE        SAL       COMM
+---------- ---------- --------- ---------- -------- ---------- ----------
+    DEPTNO
+----------
+      1111 HONG                                           2000
+        30
+
+        11 AAA                                            3000
+        20
+
+      7369 SMITH      CLERK           7902 80/12/17        800
+        20
+   .
+   .
+   .
+
+USER1>update SCOTT.emp set sal = 1 where ename = 'SCOTT';
+update SCOTT.emp set sal = 1 where ename = 'SCOTT'
+             *
+1행에 오류:
+ORA-01031: 권한이 불충분합니다
+
+------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------
+
+USER1>connect scott/tiger
+연결되었습니다.
+SCOTT>GRANT UPDATE, DELETE ON EMP TO USER1;
+
+권한이 부여되었습니다.
+
+SCOTT>connect user1/tiger
+연결되었습니다.
+USER1>update SCOTT.emp set sal = 1 where ename = 'SCOTT';
+
+1 행이 갱신되었습니다.
+
+USER1>select * from scott.emp where ename = 'SCOTT';
+
+     EMPNO ENAME      JOB              MGR HIREDATE        SAL       COMM
+---------- ---------- --------- ---------- -------- ---------- ----------
+    DEPTNO
+----------
+      7788 SCOTT      ANALYST         7566 87/04/19          1
+        20
+
+USER1>delete from scott.emp where ename = 'HONG';
+
+1 행이 삭제되었습니다.
+
+USER1>select * from scott.emp where ename = 'HONG';
+
+선택된 레코드가 없습니다.
+
+------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------
+
+USER1>conn scott/tiger
+연결되었습니다.
+
+SCOTT>REVOKE SELECT, UPDATE, DELETE ON EMP FROM USER1;
+
+권한이 취소되었습니다.
+
+SCOTT>connect user1/tiger
+연결되었습니다.
+USER1>select * from scott.emp;
+select * from scott.emp
+                    *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다
+
+USER1>connect system/oracle
+연결되었습니다.
+
+SYSTEM>REVOKE CONNECT FROM USER1;
+
+권한이 취소되었습니다.
+
+SYSTEM>REVOKE RESOURCE FROM USER1;
+
+권한이 취소되었습니다.
+
+
+
+=============================================================================
+=============================================================================
+
+
+2. 비밀번호 관리
+
+비밀번호 변경
+SYSTEM>ALTER USER USER1 -- 관리자와 자신만 사용가능
+  2  IDENTIFIED BY lion;
+
+사용자가 변경되었습니다.
+
+USER1>password
+USER1에 대한 비밀번호를 변경합니다.
+이전 비밀번호: (cat)
+새 비밀번호: (tiger)
+새 비밀번호 다시 입력: (tiger)
+비밀번호가 변경되었습니다.
+
+USER1>conn system/oracle
+연결되었습니다.
+
+SYSTEM>CREATE USER USER2
+  2  IDENTIFIED BY tiger
+  3  PASSWORD EXPIRE;
+
+사용자가 생성되었습니다.
+
+SYSTEM>conn user2/tiger
+ERROR:
+ORA-28001: the password has expired
+
+
+user2에 대한 비밀번호를 변경합니다.
+새 비밀번호:
+새 비밀번호 다시 입력:
+
+-- 이후 관리자로 connect권한 줘야됨
+
+=============================================================================
+=============================================================================
+
+3. 사용자 삭제, 잠금
+(자기 자신이 삭제, 동시접속시 삭제는 불가능)
+사용자 삭제시 해당 사용자가 생성한 모든 테이블 삭제됨
+
+<사용자 삭제>
+SYSTEM>conn user1/tiger
+연결되었습니다.
+USER1>select * from t1;
+
+선택된 레코드가 없습니다.
+
+USER1>insert into t1 values(1);
+
+1 개의 행이 만들어졌습니다.
+
+USER1>insert into t1 values(2);
+
+1 개의 행이 만들어졌습니다.
+
+USER1>select * from t1;
+
+        ID
+----------
+         1
+         2
+
+USER1>commit;
+
+커밋이 완료되었습니다.
+
+USER1>drop user user1;
+drop user user1
+*
+1행에 오류:
+ORA-01031: 권한이 불충분합니다
+
+
+USER1>
+
+(동시 접속)
+SYSTEM>drop user user1;
+drop user user1
+*
+1행에 오류:
+ORA-01940: 현재 접속되어 있는 사용자는 삭제할 수 없습니다
+
+
+SYSTEM>drop user user1;
+drop user user1
+*
+1행에 오류:
+ORA-01922: 'USER1'(을)를 삭제하려면 CASCADE를 지정하여야 합니다
+
+
+SYSTEM>drop user user1 cascade;
+
+사용자가 삭제되었습니다.
+
+------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------
+
+<사용자 잠금>
+
+(사용자 잠금)
+SYSTEM>alter user scott
+  2  account lock;
+
+사용자가 변경되었습니다.
+
+(사용자 잠금 해제)
+SYSTEM>ALTER USER SCOTT
+  2  IDENTIFIED BY tiger
+  3  ACCOUNT UNLOCK;
+
+사용자가 변경되었습니다.
+
+
+=============================================================================
+=============================================================================
+
+
+<server listener 셋팅>
+1. E:\app\user\product\11.2.0\dbhome_1\NETWORK\ADMIN 이동
+2. listener 편집기열기
+3. 
+LISTENER =
+  (DESCRIPTION_LIST =
+    (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = IPC)(KEY = EXTPROC1521))
+      (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))
+      (ADDRESS = (PROTOCOL = TCP)(HOST = DESKTOP-ERR5D88)(PORT = 1521)) --> 추가(hostname)
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.0.69)(PORT = 1521)) --> 추가(ipconig)
+    )
+  )
+4. 전체 내용 복사, 메모장 관리자 권한으로 실행
+5. "listener.ora"로 저장(따옴표까지 다 쳐서 저장), 바꿔쓰기 '예' 클릭(E:\app\user\product\11.2.0\dbhome_1\NETWORK\ADMIN 저장위치)
+6. 컴퓨터 재부팅
+
+<client server 연결 셋팅>
+
+1. E:\app\user\product\11.2.0\dbhome_1\NETWORK\ADMIN 이동
+2. 메모장 관리자 권한으로 실행
+3. tnsnames 열기
+4. 
+ORCL =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = orcl)
+    )
+  )
+복사, 붙여넣기
+5.
+db1 = --> 서버 이름 별칭 수정
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.0.68)(PORT = 1521)) --> server IP, PORT
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = orcl) --> db이름
+    )
+  )
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+C:\Users\user>sqlplus scott/tiger@db1 --> 저장한 원격지로 이동
+SQL> connect system/oracle@db1 --> 저장한 원격지로 이동
+
+SQL*Plus: Release 11.2.0.1.0 Production on 화 7월 14 14:45:23 2020
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+
+다음에 접속됨:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+<방화벽 풀기> -> 특정 포트번호로 접근할 때 방화벽 풀기
+
+제어판\시스템 및 보안\Windows Defender 방화벽->고급설정
+인바운드규칙->새규칙
+포트, 1521, 이름은 oraclePort(구분 가능한 이름 아무거나)
+저장
+
+
+
+

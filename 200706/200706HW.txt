@@ -1,0 +1,76 @@
+다음 결과를 출력하는 SQL문을 작성하시오.
+
+
+1. 이름에 S자가 포함되어 있는 사원의 사번, 이름 ?
+
+SQL> SELECT EMPNO, ENAME
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%S%';
+
+     EMPNO ENAME
+---------- ----------
+      7369 SMITH
+      7566 JONES
+      7788 SCOTT
+      7876 ADAMS
+      7900 JAMES
+
+
+2. JOB이 MANAGER 거나 CLERK인 사원의 사번,이름, JOB?
+
+SQL> SELECT EMPNO, ENAME, JOB
+  2  FROM EMP
+  3  WHERE JOB LIKE 'MANAGER'
+  4  OR JOB LIKE 'CLERK';
+
+     EMPNO ENAME      JOB
+---------- ---------- ---------
+      7369 SMITH      CLERK
+      7566 JONES      MANAGER
+      7698 BLAKE      MANAGER
+      7782 CLARK      MANAGER
+      7876 ADAMS      CLERK
+      7900 JAMES      CLERK
+      7934 MILLER     CLERK
+
+7 개의 행이 선택되었습니다.
+
+
+
+3. 급여가 3000 이상이고 부서 번호가 20인 사원의 사번, 이름, 급여, 부서번호 ?
+
+
+SQL> SELECT EMPNO, ENAME, SAL, DEPTNO
+  2  FROM EMP
+  3  WHERE SAL >= 3000
+  4  AND DEPTNO = 20;
+
+     EMPNO ENAME             SAL     DEPTNO
+---------- ---------- ---------- ----------
+      7788 SCOTT            3000         20
+      7902 FORD             3000         20
+
+
+4. 20, 30 번 부서의 근무하는 사원의 이름 부서번호, 급여 ?
+
+SQL> SELECT ENAME, DEPTNO, SAL
+  2  FROM EMP
+  3  WHERE DEPTNO LIKE 20
+  4  OR DEPTNO LIKE 30;
+
+ENAME          DEPTNO        SAL
+---------- ---------- ----------
+SMITH              20        800
+ALLEN              30       1600
+WARD               30       1250
+JONES              20       2975
+MARTIN             30       1250
+BLAKE              30       2850
+SCOTT              20       3000
+TURNER             30       1500
+ADAMS              20       1100
+JAMES              30        950
+FORD               20       3000
+
+11 개의 행이 선택되었습니다.
+ 

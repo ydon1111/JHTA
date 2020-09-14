@@ -1,0 +1,108 @@
+1. 테이블 생성 
+PRODUCT
+
+PNO     PNAME      PRICE      QTY     STATUS
+
+숫자(4)    문자(30)    숫자(9)     숫자(5)     숫자(2) 
+
+2. 제약 추가 
+PNO 컬럼에 PK 
+PNAME UK 
+PRICE  0~9999999 
+QTY  0~ 5000  
+STATUS  NOT NULL
+
+3. 데이터 추가 
+샘플데이터 5개 추가 
+
+
+CREATE TABLE PRODUCT 
+	(PNO NUMBER(4) CONSTRAINT PNO_PRODUCT_PK PRIMARY KEY,
+	 PNAME VARCHAR2(30) CONSTRAINT PNAME_PRODUCT_UK UNIQUE,
+	 PRICE  NUMBER(9,2) CONSTRAINT PRICE_PRODUCT_BETW CHECK (PRICE BETWEEN 0 AND 9999999),
+	 QTY NUMBER(5,2) CONSTRAINT QTY_PRODUCT_BETW  CHECK (QTY BETWEEN 0 AND 5000),
+	 STATUS NUMBER(2) CONSTRAINT STATUS_PRODUCT_NOTNULL NOT NULL)
+	 
+	 
+	   INSERT INTO PRODUCT 
+		VALUES (1,'사과',2000,1,1)
+	   INSERT INTO PRODUCT 
+		VALUES (2,'딸기',3000,3,1)
+	   INSERT INTO PRODUCT 
+		VALUES (3,'포도',1000,5,2)
+	   INSERT INTO PRODUCT 
+		VALUES (4,'배',10000,10,2)
+	   INSERT INTO PRODUCT 
+		VALUES (5,'수박',50000,2,1)
+
+
+
+
+4.   사원번호 7499 번사원의 월급을 5000으로 바꿔라 ?
+
+	UPDATE EMP2 
+	SET SAL = '5000' 
+	WHERE EMPNO = 7499
+
+
+5.    20번 부서의 사원들의 월급을 4000 으로 바꿔라 ?
+	
+	UPDATE EMP2
+	SET SAL = '4000'
+	WHERE DEPTNO = 20 
+	
+
+6.   부서 테이블에  부서번호 50, 부서위치 Boston , 부서명  reserch 로 해서 data 를 입력하라 ?
+
+	INSERT INTO DEPT2 
+	VALUES (50 , reserch , Boston);
+
+7.  사원번호 7698 번 사원의 부서 번호를 7499번 사원의 부서번호로 바꿔라 ?
+	
+	update emp2
+	set   deptno = (select deptno from emp where empno = 7499)
+	where deptno = (select deptno from emp where empno = 7698)
+    
+
+8.   10 번 부서의 사원들의 커미션을  smith 의 커미션으로 바꿔라 ?
+
+	update emp2
+	set comm = (select comm from emp where ename = 'SMITH')
+	where deptno = 10; 
+
+9.   사원 테이블에 data 를 집어 넣는데  사원번호를 9901 이라고 하고
+       이름을 jackson , 직업을  salesman , 부서번호를 10 번 이라고 해서
+     data 를 집어 넣어라 ?
+	 
+	 INSERT INTO EMP2 
+	 VALUES (9901 , 'JACKSON' , 'SALESMAN' , NULL , NULL , NULL,NULL,10)
+
+
+10.   job 이 salesman 인 사원의  사원번호와 이름 과 직업을 사원테이블에 insert 하여라 ?
+
+     INSERT INTO EMP2
+	 SELECT * FROM EMP2 WHERE JOB = 'SALESMAN';
+	 
+	 	
+     
+11.   7369번 사원과 같은 직업을 가진 사원들의 월급을 7698 번 사원의 월급으로
+      수정하여라 ?
+	  
+	 
+	  UPDATE EMP2
+	  SET SAL = (SELECT SAL FROM EMP2 WHERE EMPNO = 7698) 
+	  WHERE JOB = (SELECT JOB FROM EMP2 WHERE EMPNO = 7369);
+	  
+	 
+12.  jackson 사원의 data 만  삭제 하여라 ?
+
+	 DELETE EMP2
+	 WHERE ENAME = 'JACKSON'
+
+13.   data 를 집어 넣는데  사원 번호를 9902, 이름을 동수 , 그리고 입사일을
+     현재 날짜로 집어 넣어라 ?
+	 
+	 INSERT INTO EMP2 (EMPNO , ENAME , HIREDATE)
+	 VALUES (9902,'동수',SYSDATE);
+
+
