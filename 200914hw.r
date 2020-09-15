@@ -63,9 +63,9 @@ rownames(mc) <- c("kim","lee","hong","choi")
 mc
 
 
-7 apply(mc,1,sum)
+ apply(mc,1,sum)
   apply(mc,1,mean)
-8 apply(mc,2,sum)
+ apply(mc,2,sum)
   apply(mc,2,mean)
 
 
@@ -117,7 +117,7 @@ apply(hw,1,mean)
 matrix(1:2500, nrow =50, ncol = 50 , byrow = TRUE)
 
 
-txtme <- read.table(file='me.txt',header = F,sep = "\t")
+txtme <- read.table(file='./200914/me.txt',header = F,sep = "\t")
 txtme
 
 #자료에서 ' , ' 를 지워서 함
