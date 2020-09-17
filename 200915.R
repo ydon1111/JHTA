@@ -415,6 +415,7 @@ str5
 
 jumin2 <- "111111-1111118"
 jumin3 <- str_sub(jumin2,1,8)
+jumin3
 c(jumin3,"*****")
 paste(c(jumin3,"******"),collapse = "")
 
