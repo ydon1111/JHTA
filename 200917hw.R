@@ -27,13 +27,37 @@ table(client$gender2)
 # <Vector 준비>
 EMP <- c("2014홍길동220", "2002이순신300", "2010유관순260")
 library(stringr)
-
+library(dplyr)
 # <출력 결과>
 # 전체 급여 평균 : 260
+emp_pay<- function(EMP){
+  year <- str_extract(EMP,"^[0-9]{4}")
+  name <- str_extract(EMP,"[가-힣]{3}")
+  sal <- str_extract(EMP,"[0-9]+$")
+  
+  
+  year <- as.numeric(year)
+  sal <- as.numeric(sal)
+  tmp <- data.frame(year,name,sal)
+  tmp2 <- tmp %>% filter(sal>=(mean(tmp$sal)))
+  tmp
+  tmp2
+  # tmp
+  # str(tmp)
+  
+  cat("전체 급여 평균", mean(tmp$sal),"\n")
+  
+  nrow(tmp2)
+  
+  for(i in c(1:nrow(tmp2))){
+    cat(as.character(tmp2[i,2]) ,"=>",tmp2[i,3], "\n")
+  }
+}
 
-emp_year <-as.numeric(str_split_fixed(EMP,"[가-힣]{3}",2)[,1])
-emp_pay<- as.numeric(str_split_fixed(EMP,"[가-힣]{3}",2)[,2])
-emp_name <- str_extract(EMP,"[가-힣]{3}")
+
+emp_year <-as.numeric(str_split_fixed(EMP,"[가-힣]{3}",2)[,1]) # 대괄호 밖에 ^[] 시작부분 
+emp_pay<- as.numeric(str_split_fixed(EMP,"[가-힣]{3}",2)[,2]) # +$ 끝이 찾고자하는것 
+emp_name <- str_extract(EMP,"[가-힣]{3}")                     # 대괄호 안에는 [^] not 의 의미 
 emp_avgpay <- mean(as.numeric(emp_pay))
 
 emp <-data.frame(emp_name,emp_pay,emp_year)
