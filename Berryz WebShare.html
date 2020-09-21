@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0031)http://192.168.0.68/share/data/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Berryz WebShare</title>
+	
+	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT">
+	<link rel="stylesheet" type="text/css" href="./Berryz WebShare_files/dev-style.css">
+	<script src="./Berryz WebShare_files/common.js.다운로드"></script>
+	<script src="./Berryz WebShare_files/sortabletable.js.다운로드"></script>
+</head>
+
+<body bgcolor="#FFFFFF">
+	<form id="pluginForm" method="POST" action="http://192.168.0.68/share/data/">
+		<input type="HIDDEN" name="selectedFiles" value="">
+	</form>
+	<div class="header">
+		<a href="http://192.168.0.68/"><img src="./Berryz WebShare_files/logo.png" border="0" alt="UPnL Berryz WebShare"></a>
+	</div>
+	<div id="titleContainer" class="title" border="1">
+		
+		
+		
+		
+	주소: <span id="a./../.." class="subdirTop" onmouseover="SUBDIR_open(this.id.substr(1));SUBDIR_reset_close_timer(); colorme(this);" onmouseout="SUBDIR_close_all();uncolorme(this);"><a href="http://192.168.0.68/">(최상위)/</a></span><span id="a./.." class="subdirTop" onmouseover="SUBDIR_open(this.id.substr(1));SUBDIR_reset_close_timer(); colorme(this);" onmouseout="SUBDIR_close_all();uncolorme(this);"><a href="http://192.168.0.68/share/">share/</a></span><span id="a." class="subdirTop" onmouseover="SUBDIR_open(this.id.substr(1));SUBDIR_reset_close_timer(); colorme(this);" onmouseout="SUBDIR_close_all();uncolorme(this);"><a href="http://192.168.0.68/share/data/">data/</a></span></div>
+	
+		<script type="text/javascript">
+		<!--
+			write_split_address("/share/data/");
+		-->
+		</script><div id="d." style="position: absolute; visibility: hidden; border: 1px solid rgb(128, 128, 128); padding: 0.5em; background-color: rgb(255, 255, 255);">(정보를 가져오는 중입니다)</div><div id="d./.." style="position: absolute; visibility: hidden; border: 1px solid rgb(128, 128, 128); padding: 0.5em; background-color: rgb(255, 255, 255);">(정보를 가져오는 중입니다)</div><div id="d./../.." style="position: absolute; visibility: hidden; border: 1px solid rgb(128, 128, 128); padding: 0.5em; background-color: rgb(255, 255, 255);">(정보를 가져오는 중입니다)</div>
+	
+	<div class="content">
+	
+	
+		<div style="width:100%">
+			<div style="margin-left:20px; float:left;">
+				
+					<a href="http://192.168.0.68/share/">
+						<img alt=".." src="./Berryz WebShare_files/folder_upper.gif"> 상위 폴더로</a>
+				
+
+				
+					<img alt="Upload" style="margin-left:14px;" src="./Berryz WebShare_files/upload.gif"> <font style="color:#aaaaaa;">업로드</font>
+				
+
+				
+					<img alt="Create Folder" style="margin-left:14px;" src="./Berryz WebShare_files/folder_mkdir.gif"> <font style="color:#aaaaaa;">새 폴더</font>
+				
+
+				<img alt="Plugin" style="margin-left:14px;" src="./Berryz WebShare_files/plugin.gif" border="0">
+				<select name="tact" onchange="OnPlugin(this)">
+					<option value="" selected="">추가 기능...</option>
+					<option value="" disabled="">-----------------------</option>
+					<option value="" disabled="">선택된 대상에 적용:</option>
+					
+						 <option value="playlist.asx">&nbsp; &nbsp;asx 목록으로 스트리밍</option>  <option value="playlist.m3u">&nbsp; &nbsp;m3u 목록으로 스트리밍</option>  <option value="rardownload">&nbsp; &nbsp;RAR 파일로 묶어 받기</option>  <option value="zipdownload">&nbsp; &nbsp;ZIP 파일로 묶어 받기</option> 
+					
+					<option value="" disabled="">다른 방식으로 보기:</option>
+					
+						 <option value="album">&nbsp; &nbsp;앨범 모드</option>  <option value="rss">&nbsp; &nbsp;RSS</option> 
+					
+				</select>
+			</div>
+			<div align="right" style="margin-right:20px; float:right;">
+				
+				<a href="http://192.168.0.68/share/data/?action=Login" style="margin-left:14px;">
+					<img src="./Berryz WebShare_files/login.png" border="0"> 로그인</a>
+				
+			</div>
+			<div style="clear:both;">
+			</div>
+		</div>
+		
+		<form id="fileListForm" style="margin:0px; padding:0px;">
+		<input type="hidden" name="checkboxes" style="margin:0px;">
+		<table class="sortable" id="fileListTable" cellspacing="0">
+		<colgroup>
+			<col span="1" class="checkbox">
+			<col span="1" class="icon">
+			<col span="1" class="filename">
+			<col span="1" class="filedate">
+			<col span="1" class="filesize">
+		</colgroup>
+		<thead>
+			<tr>
+				<th class="checkbox non_sortheader" _sorttype="None"><input type="CHECKBOX" name="selectAllCheckbox" onclick="ToggleSelectAll();"></th>
+				<th class="icon non_sortheader" _sorttype="None">&nbsp;</th>
+				<th class="filename sortheader">이름<span class="sort-arrow">&nbsp;&nbsp;&nbsp;</span></th>
+				<th class="filesize sortheader">크기<span class="sort-arrow">&nbsp;&nbsp;&nbsp;</span></th>
+				<th class="filedate sortheader">수정한 날짜<span class="sort-arrow">&nbsp;&nbsp;&nbsp;</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			
+			<tr class="fileentry" id="tr#anscombex.csv" style="background-color: rgb(204, 221, 255);">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#anscombex.csv" value="anscombex.csv" onclick="HighlightRow(&quot;anscombex.csv&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/anscombex.csv">anscombex.csv</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					312
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2020-09-21 AM 08:22
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#anscombey.csv" style="background-color: rgb(204, 221, 255);">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#anscombey.csv" value="anscombey.csv" onclick="HighlightRow(&quot;anscombey.csv&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/anscombey.csv">anscombey.csv</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					340
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2020-09-21 AM 08:22
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#boxfigure1_1_1.csv">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#boxfigure1_1_1.csv" value="boxfigure1_1_1.csv" onclick="HighlightRow(&quot;boxfigure1_1_1.csv&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/boxfigure1_1_1.csv">boxfigure1_1_1.csv</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					76,105
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2020-09-16 PM 02:01
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#dataset.csv">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#dataset.csv" value="dataset.csv" onclick="HighlightRow(&quot;dataset.csv&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/dataset.csv">dataset.csv</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					6,257
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2018-03-14 PM 04:42
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#emp2.csv">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#emp2.csv" value="emp2.csv" onclick="HighlightRow(&quot;emp2.csv&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/emp2.csv">emp2.csv</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					611
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2018-03-12 AM 10:13
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#emp3.xls">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#emp3.xls" value="emp3.xls" onclick="HighlightRow(&quot;emp3.xls&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/emp3.xls">emp3.xls</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					66,048
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2018-03-12 PM 02:47
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#excel.csv">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#excel.csv" value="excel.csv" onclick="HighlightRow(&quot;excel.csv&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/excel.csv">excel.csv</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					4,438
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2018-03-12 PM 04:01
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#movie.csv">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#movie.csv" value="movie.csv" onclick="HighlightRow(&quot;movie.csv&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/movie.csv">movie.csv</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					921
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2020-09-15 PM 02:01
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#sales.csv">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#sales.csv" value="sales.csv" onclick="HighlightRow(&quot;sales.csv&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/sales.csv">sales.csv</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					119
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2018-03-14 PM 12:51
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#student.txt">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#student.txt" value="student.txt" onclick="HighlightRow(&quot;student.txt&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/student.txt">student.txt</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					66
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2018-03-12 AM 11:26
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#student1.txt">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#student1.txt" value="student1.txt" onclick="HighlightRow(&quot;student1.txt&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/student1.txt">student1.txt</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					87
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2018-03-12 AM 11:24
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#student2.txt">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#student2.txt" value="student2.txt" onclick="HighlightRow(&quot;student2.txt&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/student2.txt">student2.txt</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					87
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2018-03-12 AM 11:24
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#student3.txt">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#student3.txt" value="student3.txt" onclick="HighlightRow(&quot;student3.txt&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/student3.txt">student3.txt</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					84
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2018-03-12 AM 11:24
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#student4.txt">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#student4.txt" value="student4.txt" onclick="HighlightRow(&quot;student4.txt&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/student4.txt">student4.txt</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					84
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2018-03-12 AM 11:24
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#studentx.xlsx">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#studentx.xlsx" value="studentx.xlsx" onclick="HighlightRow(&quot;studentx.xlsx&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/studentx.xlsx">studentx.xlsx</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					3,581
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2018-03-12 PM 12:12
+				</td>
+			</tr>
+			
+			<tr class="fileentry" id="tr#table.txt">
+				<td class="checkbox">
+					<input type="checkbox" name="checkbox#table.txt" value="table.txt" onclick="HighlightRow(&quot;table.txt&quot;, this.checked)">
+				</td>
+				
+					<td class="icon"><img alt="F" src="./Berryz WebShare_files/file.gif"></td>
+					<td class="filename"><a href="http://192.168.0.68/share/data/table.txt">table.txt</a></td>
+				
+				<td class="filesize" align="right">&nbsp;
+					657
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					2018-03-09 PM 03:57
+				</td>
+			</tr>
+			
+			
+			
+			 <!--$files-->
+		</tbody>
+		</table>
+		</form>
+		
+		
+			<div class="totalAndFreeSpace">
+			전체 크기: 159,797 바이트
+			
+				/ 디스크 여유 공간: 980,363,841,536 바이트
+			
+			</div>
+		
+	 <!--1-->
+	</div>
+
+	<script type="text/javascript">
+		var st1 = new SortableTable(
+			document.getElementById("fileListTable"),
+			["None", "None", "CaseInsensitiveString", "Number", "InvertTime"]
+			);
+		function ts_resortTable( v ){}
+	</script>
+
+	
+	<div class="footer">
+		Powered by 
+		<a href="http://berryz.upnl.org/webshare" class="footer" target="_blank">Berryz WebShare
+		v0.952 (rev.1157)</a>
+		by 
+		<a href="http://upnl.org/" class="footer" target="_blank">UPnL</a>
+		<a href="http://berryz.upnl.org/main.php/WebShare/Info/" class="footer" target="_blank">[Project Info]</a>
+		<a href="http://berryz.upnl.org/main.php/HelpUs" class="footer" target="_blank">[Help Us]</a>
+<!--
+	<p id="validator">
+		<a href="http://validator.w3.org/check?uri=referer"><img
+			src="http://www.w3.org/Icons/valid-xhtml10"
+			alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
+	</p>-->
+	</div>
+
+
+</body></html>
