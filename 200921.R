@@ -399,6 +399,7 @@ txt3 <- txt %>% html_node("div > div.summary_cet > div.price_area > span > em") 
 txt3
 
 
+#--------------------------------네이버 뮤직 ---------------------------------------------------------
 
 url3<-"https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=%EB%84%A4%EC%9D%B4%EB%B2%84+%EC%9D%8C%EC%95%85&oquery=%EB%84%A4%EC%9D%B4%EB%B2%84%EC%9D%8C%EC%95%85&tqi=U2mgJdp0Yihss63EPsNssssstm8-488294"
 
@@ -447,3 +448,39 @@ get_url = GET(url) #get 방식으로 서버에 접근근
 get_url
 my_html<-read_html(get_url,encoding = 'utf-8')
 my_html
+
+
+vsong <- NULL
+vsinger <- NULL
+valbum <- NULL
+
+for (i in c(1:10)){
+  naver_song <- txt4 %>% html_node(paste("li:nth-child(",i,") > div > div.music_area > div.music_info > div.title > a"))%>% html_text()
+  naver_singer<- txt4 %>% html_node(paste("li:nth-child(",i,") > div > div.music_area > div.music_info > div.info > a.singer"))%>% html_text()
+  naver_album <- txt4 %>% html_node(paste("li:nth-child(",i,") > div > div.music_area > div.music_info > div.info > a.album"))%>% html_text()
+  cat("\n","제목 :",naver_song,"\n","가수 :",naver_singer,"\n","앨범 :",naver_album,"\n","---------")
+  
+  vsong[i] <- naver_song
+  vsinger[i] <- naver_singer
+  valbum[i] <- naver_album
+  
+}
+
+vsong
+vsinger
+valbum
+
+df<-data.frame(vsong,vsinger,valbum)
+df
+
+str(df)
+
+write.csv(x = df , file = "singer.csv",quote =F, row.names = F,fileEncoding = "UTF-8")
+
+
+
+# 애플리케이션 정보
+# Client ID	
+# 8WV5lNCZj94ZpxlZ_Lps
+# Client Secret	
+# VD5nxtqYD5

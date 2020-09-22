@@ -391,7 +391,7 @@ m1
 m2 <- matrix(c(1:9), nrow=3)
 m2
 
-m3 <- matrix(c(1:9), nrow=3, byrow=TRUE)
+m3 <- matrix(c(1:9), nrow=3, byrow=TRUE) #좌측으로 변수 
 m3
 
 #1부터 25까지 5행5열짜리 matrix를 완성하세요
