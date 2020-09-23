@@ -1,6 +1,6 @@
 url <- "https://openapi.naver.com/v1/search/local.xml?"
 
-searchString <- "query=종로3가맛집"
+searchString <- "query=종로3가맛집"]
 
 
 # UTF-8 인코딩
@@ -226,7 +226,8 @@ conn
 dept<-dbReadTable(conn,"EMP")
 dept
 dfxx <- dbGetQuery(conn,"select deptno,  job, AVG(SAL) as avg from emp group by deptno , job")
-dbWriteTable(conn,"df11",dfxx)
+
+dbWriteTable(conn,"df11",dfxx) #테이블 만들어서 넣기 
 
 write.csv(x = dfxx,file = "df.csv",fileEncoding = "UTF-8",row.names = T)
 
@@ -238,3 +239,19 @@ dbDisconnect(conn)
 # 자신의 db에 dfxx라는 테이블 생성
 # 로컬pc에 df.csv 파일 생성 
 # 자원정리 
+
+
+#Mysql 에 연결하기 
+
+drv <- JDBC("com.mysql.jdbc.Driver","E:\\dev\\Rstudio\\mysql-connector-java-8.0.21.jar")
+
+url <-"jdbc:mysql://192.168.0.68:3306/testdb"
+
+username <-"scott"
+password <-"tiger"
+
+conn2<-dbConnect(drv,url,username,password)
+conn2
+
+
+

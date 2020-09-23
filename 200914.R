@@ -396,7 +396,7 @@ m3
 
 #1부터 25까지 5행5열짜리 matrix를 완성하세요
 
-m4 <- matrix(c(1:25), nrow=5, byrow=TRUE)
+m4 <- matrix(c(1:25), nrow=5, byrow=TRUE) 
 m4
 
 m5 <- matrix(seq(1,25), nrow=5)
