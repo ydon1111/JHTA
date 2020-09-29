@@ -398,6 +398,7 @@ box
 names(box)
 
 url <-"https://movie.naver.com/movie/search/result.nhn?&section=all&ie=utf8&query="
+keyword <- 
   
 
 
@@ -405,3 +406,5 @@ txt1<-read_html(url)
 txt1
 navermovie <- txt1 %>% html_node("#content > div.article > div:nth-child(1) > div.lst_wrap > ul") %>% html_text()
 navermovie
+
+
