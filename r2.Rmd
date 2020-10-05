@@ -1,0 +1,40 @@
+---
+title: "iris.markdown"
+author: "yd"
+date: '2020 10 5 '
+output: html_document
+---
+
+# 1. 상관관계
+이번에는 R의 기본 데이터 셋인 iris 를 이용해 데이터항목간의 상관관계에 대해 
+살펴보겠습니다.
+
+*이태릭체*
+**볼드체**
+~~취소선~~
+
+# 1. 큰제목
+## 1-1. 하위제목
+### 1-1-1 상세 내용 
+
+검색하고 싶으면 [구글](http://www.google.com) 가서 물어보세요 
+
+```{r}
+# R chunk : 사이에 필요한 여러가지 R명령어를 넣을 수 있습니다.
+str(iris)
+```
+
+데이터명 : IRIS (아이리스 , 붓꽃 데이터)
+레코드수 : `r nrow(iris)` 개
+변수 갯수: `r ncol(iris)`개
+
+아이리스 꽃 : 프랑스의 국화
+
+#산점도 찍어보기 
+```{r}
+library(ggplot2)
+ggplot(data=iris ,aes(x=Sepal.Length,y=Sepal.Width,colour=Species))+geom_point()+ggtitle("Sepal.Length VS Sepal.Width")
+```
+
+
+

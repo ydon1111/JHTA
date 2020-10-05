@@ -282,7 +282,7 @@ summary(result.lm)
 
 plot(x,y,ylim = c(1,10),xlim = c(1,10))
 
-abline(result,im,col="blue")
+abline(result.im,col="blue")
 
 
 
@@ -344,3 +344,111 @@ corrgram(df[2:4], upper.panel=panel.conf)
 library(PerformanceAnalytics)
 chart.Correlation(df[2:4], pch="+")
 
+
+
+result.lm <- lm(formula = y~x , data = result)
+
+abline(result,im,col="blue")
+
+
+
+#다중회귀분석 : 여러개의 독립변수 --> 종속변수에 미치는 영향 분석
+#귀무가설 : 음려수 제품의 적절성과 친밀도는 제품만족에 양의 영향을 미치지 않는다. 
+#연구가설 : 음료수 제품의 적절성과 친밀도는 제품만족에 양의 영향을 미친다. 
+
+# 적절성 + 친밀도 => 만족도 
+
+y<-result$제품_만족도
+x1 <- result$제품_적절성
+x2 <- result$제품_친밀도
+
+y
+x1
+x2
+
+# 회귀방정식 y(종속변수)= 상수 + 베타1*x1+베타2*x2
+
+result.lm <- lm(formula = y ~x1 +x2 ,data = result)
+summary(result.lm)
+
+
+# y= 0.66731 + 0.68522*x1 + 0.09593*x2
+
+# 데이터 수집
+# 학습데이터 와 검증데이터 분리 샘플링 
+
+# 7:3 , 8:2 
+
+result <- read.csv(file = "product.csv",header = T)
+result
+
+str(result)
+# 7:3 
+t<-sample(1:10,3)
+t
+# length(result)  : 열의 갯수
+nrow(result)
+
+sample(1:nrow(result),3)
+
+nrow(result)*0.7
+round(nrow(result)*0.7,0)
+
+
+t <- sample(1:nrow(result),nrow(result)*0.7)
+t
+
+train <- result[t,]
+train
+
+test <- result[-t,]
+test
+
+dim(test)
+
+#회귀분석 
+
+result.lm <- lm(formula = 제품_만족도~제품_적절성 + 제품_친밀도,data=train)
+summary(result.lm)
+
+
+# 2. iris 데이터셋 대상으로 다음과 같이 다중회귀분석을 수행하시오.
+
+#  조건1) 학습데이터(train),검증데이터(test)를 7 : 3 비율로 셈플링
+
+
+t<-sample(1:10,3)
+t
+# length(result)  : 열의 갯수
+nrow(result)
+
+sample(1:nrow(iris),3)
+
+nrow(iris)*0.7
+round(nrow(iris)*0.7,0)
+
+
+t <- sample(1:nrow(iris),nrow(iris)*0.7)
+t
+
+train <- iris[t,]
+train
+
+test <- iris[-t,]
+test
+
+
+
+#  조건2) y변수 : Sepal.Length, x변수 : Sepal.Width, Petal.Length, Petal.Width)
+result.lmtrain <- lm(formula = Sepal.Length~Sepal.Width + Petal.Length + Petal.Width,data=train)
+summary(result.lm)
+
+
+#  조건3) 1차분석 : train 데이터로 분석, 2차 분석 : test 데이터로 분석
+result.lmtest <- lm(formula = Sepal.Length~Sepal.Width + Petal.Length + Petal.Width,data=test)
+summary(result.lm)
+
+#  조건4) 회귀선이 모델에 적합한지 검정
+
+abline(result.lmtrain,col="blue")
+abline(result.lmtest,col="red")
