@@ -57,3 +57,4 @@ def grades_std(s):
 print("평균 : ", grades_avg(grades))
 print("분산 : ",grades_variance(grades))
 print("표준편차 : ", grades_std(grades))
+
