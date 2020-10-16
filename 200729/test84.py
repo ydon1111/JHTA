@@ -25,7 +25,6 @@ class Monkey(Animal):
     def TreeClimbing(self):
         print("나무를 타요")
 
-
     def sleeping(self):
         print("쿨쿨 자요")
     
