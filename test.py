@@ -230,8 +230,8 @@ coin = int(coin)
 money = [50000,10000,5000,1000,500,100,50,10,1]
 
 for i in range(9):
-    mok, coin = divmod(coin,money[i])
-    print(mok)
+	mok, coin = divmod(coin,money[i])
+	print(str(money[i])+'권 : '+str(mok)+'개')
 
 
 '''
