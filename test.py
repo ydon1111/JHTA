@@ -225,30 +225,57 @@
 	10권    : 2개
 	1원     : 1개 
 '''
-coin = input('돈을 입력하세요 : ' )
-coin = int(coin)
-money = [50000,10000,5000,1000,500,100,50,10,1]
+# coin = input('돈을 입력하세요 : ' )
+# coin = int(coin)
+# money = [50000,10000,5000,1000,500,100,50,10,1]
 
-for i in range(9):
-	mok, coin = divmod(coin,money[i])
-	print(str(money[i])+'권 : '+str(mok)+'개')
+# for i in range(9):
+# 	mok, coin = divmod(coin,money[i])
+# 	print(str(money[i])+'권 : '+str(mok)+'개')
 
 
 '''
 17. 	아래의 리스트를 정렬해서 출력하세요 
 	[  4, 9 , 2, 6, 1, 3, 8 , 0,7,  5 ]
+'''
 
+# i = [  4, 9 , 2, 6, 1, 3, 8 , 0,7,  5 ]
+# r = sorted(i)
+# print(r)
+
+
+'''
 18.
 	파이썬의 버젼확인 DOS명령은? 
+'''
+# python --version
 
+'''
 19. 파이썬에서 객체와 속성 또는 메소드 간의 연결을 위해 그들 사이에 쓰는 연산자는?
+'''
+# dot (.)
 
+'''
 20. import 키워드는 언제 가용하는가? 
+'''
+# 필요할때 
+# 모듈사용할때 
 
+'''
 21. 파이썬 내장 객체중  딕셔너리의 특징은 ?
+# '''
+# key와 values값이 짝으로 이루어짐 
+# key 값이 중복이 안됨
 
-22 .아래의 리스트를 set으로 변경하려고 한다. 변환 한 후에 결과를 출력하면 어ㄸ?ㅎ게 될까?  
+
+'''
+22 .아래의 리스트를 set으로 변경하려고 한다. 변환 한 후에 결과를 출력하면 어떻게 될까?  
 	m = [ 1, 2, 3, 2, 1, 5 3, 3, 2, 1]  
+'''
+# m = [ 1, 2, 3, 2, 1, 5, 3, 3, 2, 1] 
+# print(set(m))
+
+'''
 
 23. 다음 코드가 실행될수 있는 class를 작성하세요 
 
@@ -264,7 +291,32 @@ sm.sleeping()
 찌이잉~~~~
 바나나 을 먹어요 
 쿨쿨 잡니다.
+'''
+# class SuperMan:
+# 	def __init__(self,name,age,job):
+# 		self.name = name
+# 		self.age = age
+# 		self.job = job
+# 	def fly(self):
+# 		print('비행 : 날아보아오.~~~')
+# 	def laser(self):
+# 		print('찌이잉~~~~')
+# 	def eating(self,x):
+# 		print(x+ '을 먹어요')
+# 	def sleeping(self):
+# 		print('쿨쿨 잡니다.')
 
+
+# sm = SuperMan("슈퍼맨", 20, "신문기자")
+
+# sm.fly()
+# sm.laser()
+# sm.eating("바나나")
+# sm.sleeping()
+
+
+
+'''
 24.  아래 결과를 출력하는 GuGuDan 클래스를 작성하세요 
 
 g = GuGuDan()
@@ -275,3 +327,18 @@ g.print()
 
 
 '''
+
+# class GuGuDan:
+# 	def __init__(self,dan=2):
+# 		self.dan = dan
+# 	def print(self):
+# 		for i in range(1,10):
+# 			print(str(self.dan) + "*" + str(i) + "=" + str(self.dan * i))
+
+# g = GuGuDan()
+# g.dan = 7
+# g.print()
+
+
+
+
