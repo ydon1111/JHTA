@@ -328,16 +328,18 @@ g.print()
 
 '''
 
-# class GuGuDan:
-# 	def __init__(self,dan=2):
-# 		self.dan = dan
-# 	def print(self):
-# 		for i in range(1,10):
-# 			print(str(self.dan) + "*" + str(i) + "=" + str(self.dan * i))
+class GuGuDan:		
+	dan = None	
+	def print(self):
+		if self.dan == None:
+			print('단을 입력하세요.')
+		else:
+			for i in range(1,10):
+				print(str(self.dan) + "*" + str(i) + "=" + str(self.dan * i))
 
-# g = GuGuDan()
-# g.dan = 7
-# g.print()
+g = GuGuDan()
+g.dan = 7
+g.print()
 
 
 
