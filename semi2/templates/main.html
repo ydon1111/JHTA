@@ -1,0 +1,78 @@
+{% extends 'index.html' %}
+{% block content %}
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container" style="text-align: center; display:block; margin-top: 150px;">
+      <div style="display:inline-block; margin: 0; position: absolute; left: 20%; top: 40px;">
+        <img src="{{url_for('static', filename='img/main/haengbog_2.png')}}" alt="haengbog" data-aos="slide-up" data-aos-delay="300" style="width: 350px; display: inline-grid;">
+      </div>
+      <div style="display:inline-block; margin: 0; position: absolute; left: 33%; top: -40px;">
+        <img src="{{url_for('static', filename='img/main/hago_2.png')}}" alt="hago" data-aos="slide-up" data-aos-delay="1200" style="width: 350px; display: inline-grid;">
+      </div>
+      <div style="display:inline-block; margin: 0; position: absolute; left: 45%; top: -50px;">
+        <img src="{{url_for('static', filename='img/main/sip_2.png')}}" alt="sip" data-aos="slide-up" data-aos-delay="2100" style="width: 350px; display: inline-grid;">
+      </div>
+      <div style="display:inline-block; margin: 0; position: absolute; left: 58%; top: -55px;">
+        <img src="{{url_for('static', filename='img/main/jo_2.png')}}" alt="jo" data-aos="slide-up" data-aos-delay="3000" style="width: 350px; display: inline-grid;">
+      </div>
+      <div style="display: block; position: absolute; top: -20px;">
+        <img src="{{url_for('static', filename='img/main/main_title.png')}}" alt="pul" style="width: 80%;">
+      </div>
+    </div>
+  </section><!-- End Hero Section -->
+  
+  <main id="main">
+  
+    <!-- ======= Get Started Section ======= -->
+    <section id="get-started" class="padd-section text-center">
+  
+      <div class="container" data-aos="fade-up">
+        <div class="section-title text-center">
+  
+          <div class="set_font_B" style="font-size: 2em;">행복하고싶조</div>
+          <div class="separator set_font_L">I want to be happy.</div>
+  
+        </div>
+      </div>
+  
+      <div class="container">
+        <div class="row">
+  
+          <div class="col-md-6 col-lg-6" data-aos="zoom-in" data-aos-delay="100" style="margin-bottom: 30px;">
+            <div class="feature-block">
+              <img src="{{url_for('static', filename='img/main/haengbog.png')}}" alt="img" class="img-fluid" style="width:100px; height: 100px;">
+              <h4>Song Yun Young<br/>Haengbog</h4>
+              <p>오늘도 맑음 ESFP</p>
+            </div>
+          </div>
+  
+          <div class="col-md-6 col-lg-6" data-aos="zoom-in" data-aos-delay="200" style="margin-bottom: 30px;">
+            <div class="feature-block">
+              <img src="{{url_for('static', filename='img/main/hago_1.png')}}" alt="img" class="img-fluid" style="width:130px; height: 100px;">
+              <h4>Kim Yeong Don<br/>Hago</h4>
+              <p>생각하는게 싫은 ESFJ</p>
+            </div>
+          </div>
+  
+          <div class="col-md-6 col-lg-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="feature-block">
+              <img src="{{url_for('static', filename='img/main/sip_1.png')}}" alt="img" class="img-fluid" style="width:125px; height: 100px;">
+              <h4>Park Ji Yeon<br/>Sip</h4>
+              <p>돈많은 백수가 꿈인 ENFP</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="feature-block">
+              <img src="{{url_for('static', filename='img/main/jo.png')}}" alt="img" class="img-fluid" style="width:100px; height: 100px;">
+              <h4>Lee Sang Woo<br/>Jo</h4>
+              <p>강남이 답이다 ENTP</p>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  
+    </section><!-- End Get Started Section -->
+  </main><!-- End #main -->
+{% endblock %}

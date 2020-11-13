@@ -1,0 +1,182 @@
+{% extends 'index.html' %}
+{% block content %}
+<section id="aca" class="padd-section text-center"></section>
+  <div class="jumbotron jumbotron-fluid" style="padding: 3px;">
+    <div class="container">
+      <div class="col-md-8" style="display:inline-grid;">
+        <h1 class="display-4 set_font_B">행복연구소</h1>
+        <p class="lead set_font_L" style="margin:0px;">행복을 느끼는 요인은 무엇일까?</p>
+      </div>
+      <div class="col-md-3" style="display:inline-block;"><img src="{{url_for('static', filename='img/main/all.png')}}" style="width: 280px;"></div>
+    </div>
+  </div>
+
+  <div class="card" style="width:80%; margin:auto;">
+    <div class="card-body" style="text-align:left;">
+        OECD 국가별 행복지수에 대한 연구 이후 우리나라의 행복지수에 대한 궁금증으로 본 프로젝트를 시작하였다.<br/>
+        우리는 과연 얼마나 행복할까? 행복을 느끼는 요인은 무엇일까?<br/>
+        객관적 지표로 행복도 예측 모형을 만들고자 본 프로젝트를 진행하였다.<br/>
+        <br/>
+        건강, 안전, 환경, 경제, 교육, 관계 및 사회참여, 여가, 삶의 만족도 영역을 바탕으로 행복도 예측 모형을 설계하였다.<br/>
+        건강, 안전, 환경, 경제, 교육, 관계 및 사회참여, 여가에 대한 지역별 지수를 활용하였고<br/>
+        삶의 만족도 영역은 개인에게 설문을 받아 행복도 예측을 할 것이다.<br/>
+    </div>
+  </div>
+
+  <section id="ov_1" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">분산분석 가정</div>
+    </div>
+    <div class='text-center' style="margin:15px;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/khl/histogram.png')}}" class="container-md" style='width:40%;'>
+      <p class='set_font_L' style='margin:10px;'>정규성</p>
+    </div>
+    <p style='margin: auto; text-align: left; border-top: 1px dashed gray; padding: 10px; border-bottom: 1px dashed gray; font-size: 1rem; font-weight: 400; line-height: 1.5; width: 80%;'>
+      정규성과 등분산성을 만족하지 못하지만,<br/>
+      <b style="border-bottom:1px solid red;">Data Sample이 30개 이상이라는점</b>을 근거로 분석 진행
+    </p>
+  </section>
+
+  <section id="ov_1" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">분산분석</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">지역별 행복지수에 대한 분산분석</div>
+    </div>
+    <div style="margin: auto; width: 80%; padding-top: 20px;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/khl/hh.png')}}" class="container-md" style="width: 45%; padding: 0;">
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+        pp-value= 1.61405293819104e-05 < 0.05<br/>
+        <br/>
+        유의수준 0.05 하에서 귀무가설을 기각하므로, 모든 집단 사이에 적어도 1개 이상의 차이가 있다.<br/>
+        즉, 우리나라 지역별 행복지수에 차이가 있다고 볼 수 있다.
+        <div style="font-weight: bold; border-bottom: 1px double red; margin: 22px 10px; display: inline-block;">사후검정 필요</div>
+      </p>
+    </div>
+  </section>
+
+  <section id="ov_4" class="about-us padd-section">
+    <div>
+      <div style="font-size: 2em; width: 80%; margin: auto; padding: 10px 0;" class="set_font_L">분산분석 이후 사후검정</div>
+    </div>
+    <div style="margin:auto; width: 80%;" data-aos="fade-up">
+      <p class='set_font_L' style='margin:10px;'>지역별 행복지수에 대한 사후검정(HSD)</p>
+      <img src="{{url_for('static', filename='img/khl/after.png')}}" class="container-md" style='width:40%;'>
+      <div style='margin-top:40px; display: inline-block; width: 55%;'>
+        <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+          다른 지역별 간 차이는 두드러지지 않으나, 유독 경상북도가 타지역들과 차이를 보임 
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ov_1" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">요인분석</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">어떤 요인때문에 경상북도가 다른 지역과 차이를 보일지 분석</div>
+    </div>
+    <div style="margin: auto; width: 80%; padding-top: 20px;" data-aos="fade-up">
+      <div>
+        <img src="{{url_for('static', filename='img/khl/h.png')}}" class="container-md" style="width: 50%; padding: 0;">
+        <img src="{{url_for('static', filename='img/khl/h2.png')}}" class="container-md" style="width: 45%; padding: 0;">
+      </div>
+      <div style="text-align: center;">
+        <p class='set_font_L col-5' style='margin:10px; display:inline-block;'>지역별 건강지수</p>
+        <p class='set_font_L col-5' style='margin:10px; display:inline-block;'>지역별 주관적 건강수준 인지율</p>
+      </div>
+      <div>
+        <img src="{{url_for('static', filename='img/khl/d.png')}}" class="container-md" style="width: 50%; padding: 0;">
+        <img src="{{url_for('static', filename='img/khl/l.png')}}" class="container-md" style="width: 48%; padding: 0;">
+      </div>
+      <div style="text-align: center;">
+        <p class='set_font_L col-5' style='margin:10px; display:inline-block;'>지역별 인구 천명당 의료기관 종사 의사수</p>
+        <p class='set_font_L col-5' style='margin:10px; display:inline-block;'>지역별 건강생활실천율</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ov_8" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">모형 설계</div>
+    </div>
+    <div>
+      <div style="font-size: 2em; width: 80%; margin: auto; padding: 50px 0 10px 0;" class="set_font_L">SVM</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">해당자료를 분류하는 초평면(hyperplane)간 간격(margin)을 최대화하는 기계학습 방법</div>
+    </div>
+    <div class='text-center' style="margin:15px;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/khl/svm.png')}}" class="container-md" style='width:40%;'>
+      <div style='margin-top:40px;'>
+        <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+          정확도: 0.8985507246376812
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ov_4" class="about-us padd-section">
+    <div>
+      <div style="font-size: 2em; width: 80%; margin: auto; padding: 10px 0;" class="set_font_L">K-최근접이웃(K-Nearest Neighbor, KNN)</div>
+    </div>
+    <div class='text-center' style="margin:15px;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/khl/knn.png')}}" class="container-md" style='width:40%;'>
+      <div style='margin-top:40px;'>
+        <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+          정확도: 정확도: 0.8115942028985508
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ov_4" class="about-us padd-section">
+    <div>
+      <div style="font-size: 2em; width: 80%; margin: auto; padding: 10px 0;" class="set_font_L">의사결정나무(Decision Tree)</div>
+    </div>
+    <div class='text-center' style="margin:15px;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/khl/dtree.png')}}" class="container-md" style='width:80%;'>
+      <div style='margin-top:40px;'>
+        <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+          정확도: 정확도: 0.855072463768116
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ov_1" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">모형 비교</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">각 모형별 정확도 비교를 통해 최적의 모형 선출</div>
+    </div>
+    <div style="margin: auto; width: 80%; padding-top: 20px;" data-aos="fade-up">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">모델명</th>
+            <th scope="col">정확도</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>의사결정 나무(Decision Tree)</td>
+            <td>0.855072463768116</td>
+          </tr>
+          <tr>
+            <td>랜덤 포레스트 (Random Forest)</td>
+            <td>0.8405797101449275</td>
+          </tr>
+          <tr>
+            <td>최근접이웃 (KNN)</td>
+            <td>0.8115942028985508</td>
+          </tr>
+          <tr>
+            <td style="border-top: 2px solid red; border-left: 2px solid red; border-bottom: 2px solid red;">서포트 벡터 머신(SVM)</td>
+            <td style="border-top: 2px solid red; border-right: 2px solid red; border-bottom: 2px solid red;">0.8985507246376812</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="text-align:center; margin: 70px 0 150px 0;">
+        <img src="{{url_for('static', filename='img/khl/res.png')}}" class="container-md" style='width:75%;'>
+      </div>
+    </div>
+  </section>
+</section>
+{% endblock %}
+

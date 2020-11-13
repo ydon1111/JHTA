@@ -1,0 +1,191 @@
+/******************************************************************************* slider *******************************************************************************/
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    display: inline;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider-wrap {
+    width: 100%;
+}
+
+/******************************************************************************* radio group *******************************************************************************/
+
+* {box-sizing: border-box;}
+
+.radio-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    margin: 15px 0px;
+}
+
+.radio-tile-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.input-container {
+    position: relative;
+    height:  2rem;
+    width:  2rem;
+    margin: 0.5rem;
+    color: #079ad9;
+}
+
+.radio-button {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    cursor: pointer;
+}
+
+.radio-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #079ad9;
+    border-radius: 5px;
+    padding: 1rem;
+    transition: transform 300ms ease;
+}
+  
+.radio-button:checked + .radio-tile {
+    background-color: #079ad9;
+    border: 2px solid #079ad9;
+    color: #fff;
+    transform: scale(1.1, 1.1);
+}
+
+.radio-tile-label {
+    margin: 0px;
+}
+
+.radio-lh-txt {
+    width: 45px;
+    padding-top: 12px;
+    margin-left: 7px;
+    font-weight: bold;
+    color: #079ad9;
+}
+
+/******************************************************************************* image *******************************************************************************/
+
+.graph-img {
+    width: 800px;
+    height: 600px;
+}
+
+/******************************************************************************* font style *******************************************************************************/
+
+@font-face {
+    font-family: "hunddukB";
+    src: url('../vendor/font-awesome/fonts/a옛날목욕탕B.ttf');
+}
+
+@font-face {
+    font-family: "hunddukL";
+    src: url('../vendor/font-awesome/fonts/a옛날목욕탕L.ttf');
+}
+
+.set_font_B {
+    font-family: 'hunddukB';
+}
+
+.set_font_L {
+    font-family: 'hunddukL';
+}
+
+/******************************************************************************* button *******************************************************************************/
+.c-btn {
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 15px 40px;
+}
+
+/******************************************************************************* progress *******************************************************************************/
+.counter {
+    display: inline-flex;
+    cursor:pointer;
+    width:300px;
+    height:300px;
+    max-width:100%;
+    position:relative;
+    justify-content:center;
+    align-items:center;
+    font-size: calc(1em + 1vmin);
+    transition: height .2s ease-in-out;
+    background: #fff;
+    border-radius:50%;
+    box-shadow:0px 1px 10px 2px rgba(0,0,0,0.2);
+    margin:1em 0;
+}
+.percentage {
+    position:absolute;
+    text-align:center;
+    top:50%;
+    left:0;
+    right:0;
+    vertical-align:middle;
+    transform:translate3d(0,-50%,0);
+}
+canvas {
+    position:absolute;
+    top:0;
+    left:0;
+}
+.bg-style {
+    padding:2em;
+}
+
+/******************************************************************************* etc *******************************************************************************/
+.reference {
+    width: 100%;
+    text-align: right;
+    font-size: 13px;
+    color: #F15F5F;
+    padding: 20px 15%;
+}
+
+

@@ -1,0 +1,211 @@
+{% extends 'index.html' %}
+{% block content %}
+<section id="aca" class="padd-section text-center"></section>
+  <div class="jumbotron jumbotron-fluid" style="padding: 36px;">
+    <div class="container">
+      <div class="col-md-8" style="display:inline-grid;">
+        <h1 class="display-4 set_font_B">과체중율</h1>
+        <p class="lead set_font_L" style="margin:0px;">국가별 과체중율에 따른 행복지수에 대한 연구</p>
+      </div>
+      <div class="col-md-3" style="display:inline-block;"><img src="{{url_for('static', filename='img/main/haengbog.png')}}" style="width: 200px;"></div>
+    </div>
+  </div>
+
+  <div class="card" style="width:80%; margin:auto;">
+    <div class="card-body" style="text-align:left;">
+        행복은 심리적요소이지만, 외적인 요건을 무시하기는 어렵다.<br/>
+        과연 우리는 보이는 부분을 통해 행복을 다르게 느낄 것인가라는 의문에서 본 분석을 진행하였다.<br/>
+        <br/>
+        외적요건의 경우 많은 요소들이 있으므로 체중을 기준으로 하며<br/>
+        5대륙 128개국에 대한 행복지수와 과체중율에 대한 분석을 진행하였다.<br/>
+    </div>
+  </div>
+
+  <section id="ov_1" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">상관분석</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">행복지수와 과체중율에 대한 산점도와 막대그래프를 통해 상관분석 필요하다고 판단</div>
+    </div>
+    <div class='text-center' style="margin:15px;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/ov/scatter.png')}}" class="container-md" style='width:40%;'>
+      <p class='set_font_L' style='margin:10px;'>행복지수와 과체중율 산점도</p>
+    </div>
+  </section>
+
+  <section id="ov_2" class="about-us padd-section">
+    <div class='text-center' style="margin:15px;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/ov/histo.png')}}" class="container-md">
+      <p class='set_font_L' style='margin:10px;'>대륙에 따른 행복지수와 과제중율의 그래프 흐름이 유사</p>
+    </div>
+  </section>
+
+  <section id="ov_3" class="about-us padd-section">
+    <div style="margin-bottom:30px;">
+      <div style="font-size: 2em; width: 80%; margin: auto; padding: 10px 0;" class="set_font_L">상관분석 가정</div>
+    </div>
+    <div class='text-center' style="margin: auto; width: 80%;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/ov/line_normal.png')}}" class="container-md">
+      <div>
+        <div class='set_font_L col-3' style='margin:10px; display:inline-block;'>선형성</div>
+        <div class='set_font_L col-7' style='margin:10px; display:inline-block;'>정규성&등분산성</div>
+      </div>
+      <p style='margin: 10px; text-align: left; border-top: 1px dashed gray; padding: 10px; border-bottom: 1px dashed gray; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+        정규성과 등분산성을 만족하지 못하지만,<br/>
+        Data Sample이 30개 이상이라는점을 근거로 분석 진행
+      </p>
+    </div>
+  </section>
+
+  <section id="ov_4" class="about-us padd-section">
+    <div>
+      <div style="font-size: 2em; width: 80%; margin: auto; padding: 10px 0;" class="set_font_L">행복지수와 과체중율에 대한 상관분석</div>
+    </div>
+    <div style="margin: auto; width: 80%; padding-top: 20px;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/ov/formula_1.png')}}" class="container-md" style="width: 20%; padding: 0;">
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+        p-value=5.228110580228632e-19  < 0.05<br/>
+        <br/>
+        유의수준 0.05 하에서 귀무가설을 기각하므로, 
+        행복지수와 과체중율이 서로 상관관계가 있다고 볼 수 있다.
+      </p>
+      <div style="text-align:center;"><img src="{{url_for('static', filename='img/ov/formula_2.png')}}" class="container-md" style="width: 70%; padding: 0;"></div>
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+        상관계수가 약 0.68이므로 행복지수와 과체중율을 양의 상관관계를 가진다고 볼 수 있다.
+      </p>
+    </div>
+  </section>
+
+  <section id="ov_5" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">분산분석</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">
+        상관분석을 통해 과체중율와 행복지수가 양의 상관관계가 있다고 볼 수 있었는데,<br/>
+        과연 대륙별 과체중율와 행복지수가 각각 차이가 있는지에 대한 분산분석이 필요하다고 판단
+      </div>
+    </div>
+    <div style="margin: auto; padding-top: 40px; width: 80%;" data-aos="fade-up">
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;' class="set_font_L">
+        1. 대륙별 행복지수에 대한 분산검정
+      </p>
+      <img src="{{url_for('static', filename='img/ov/formula_3.png')}}" class="container-md" style="width: 40%; padding: 0 7px;">
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+        p-value= 7.542242355084407e-11 < 0.05<br/>
+        <br/>
+        유의수준 0.05 하에서 귀무가설을 기각하므로, 
+        다섯 집단 사이에 적어도 1개 이상의 차이가 있다.
+        즉, 다섯 대륙별 행복지수에 차이가 있다고 볼 수 있다.
+        <div style="font-weight: bold; border-bottom: 1px double red; margin: 22px 10px; display: inline-block;">사후검정 필요</div>
+      </p>
+    </div>
+  </section>
+
+  <section id="ov_6" class="about-us padd-section" style="padding-top: 0;">
+    <div style="margin: auto; width: 80%;" data-aos="fade-up">
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;' class="set_font_L">
+        2. 대륙별 과체중율에 대한 분산검정
+      </p>
+      <img src="{{url_for('static', filename='img/ov/formula_4.png')}}" class="container-md" style="width: 40%; padding: 0 7px;">
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+        p-value= 6.301243507228164e-17 < 0.05<br/>
+        <br/>
+        유의수준 0.05 하에서 귀무가설을 기각하므로, 다섯 집단 사이에 적어도 1개 이상의 차이가 있다.<br/>
+        즉, 다섯 대륙별 과체중율에 차이가 있다고 볼 수 있다.
+        <div style="font-weight: bold; border-bottom: 1px double red; margin: 22px 10px; display: inline-block;">사후검정 필요</div>
+      </p>
+    </div>
+  </section>
+
+  <section id="ov_7" class="about-us padd-section">
+    <div style="margin-bottom: 30px;">
+      <div style="font-size: 2em; width: 80%; margin: auto; padding: 10px 0;" class="set_font_L">분산분석 이후 사후검정</div>
+    </div>
+    <div class='text-center' style="margin: auto; width: 80%;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/ov/after.png')}}" class="container-md" style="width:80%;">
+      <div>
+        <div class='set_font_L col-5' style='margin:10px; display:inline-block;'>대륙별 행복지수에 대한 사후검정(HSD)</div>
+        <div class='set_font_L col-5' style='margin:10px; display:inline-block;'>대륙별 과체중율에 대한 사후검정(HSD)</div>
+      </div>
+      <div>
+        <div class='col-5' style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5; display:inline-block;'>
+          아프리카&아시아 | 아메리카&유럽&오세아니아 <br/>
+          두 그룹 사이의 행복지수의 차이가 있는 것으로 보임
+        </div>
+        <div class='col-5' style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5; display:inline-block;'>
+          아프리카와 아시아 사이에도 차이는 있으나, <br/>
+          대략적으로 아프리카&아시아 | 아메리카&유럽&오세아니아 <br/>
+          두 그룹 사이의 과체중율의 차이가 있는 것으로 보임
+        </div>
+      </div>      
+    </div>
+  </section>
+
+  <section id="ov_8" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">확률밀도함수</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">봉우리 2개의 이유</div>
+    </div>
+    <div class='text-center' style="margin:15px;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/ov/double.png')}}" class="container-md" style='width:40%;'>
+      <div style='margin-top:40px;'>
+        <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+          앞선 분석에서 체중율에 따라 대륙이 두 그룹으로 구분되는 것 확인
+        </p>
+        <div style="border-bottom: 1px double red; display: inline-block;">
+          체중율에 대한 확률밀도그래프에서 곡선이 2개가 나온 원인을 파악 가능
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ov_9" class="about-us padd-section">
+    <div style="margin-bottom: 30px;">
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">비교분석</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">각 대륙별 과체중율이 행복지수에 얼만큼의 영향을 보이는지 분석</div>
+    </div>
+    <div style="margin:auto; width: 80%;" data-aos="fade-up">
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;' class="set_font_L">
+        대륙별 비교율= ‘행복지수/과체중율’의 평균*100
+      </p>
+      <p style='margin: 10px; font-size: 1rem; line-height: 1.5;' class="set_font_L">Asi_pro=</p>
+      <p style='margin: 0 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+        (df_OH_16_3[df_OH_16_3['Continent']=='Asia'].HappinessScore16/df_OH_16_3[df_OH_16_3['Continent']=='Asia'].OverWeigh16).mean()*100
+      </p>
+      <img src="{{url_for('static', filename='img/ov/bar.png')}}" class="container-md" style='width:55%;'>
+      <div style='margin-top:40px; display: inline-block;'>
+        <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+          - 아시아와 아프리카의 비율이 상대적으로 높으며,<br/>
+          특히 다른 대륙 대비 아시아의 비율이 높다.<br/>
+          <br/>
+          - 즉, 타대륙에 비해 아시아인들의 행복지수에<br/>
+          체중이 중요하게 작용하고 있다고 볼 수 있다.<br/>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ov_10" class="about-us padd-section" style="margin-bottom: 150px;">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">결론</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">
+        국가별 과체중율에 따른 행복지수에 대한 연구
+      </div>
+    </div>
+    <div style="margin: auto; padding-top: 40px; width: 80%;" data-aos="fade-up">
+      <div class="card" style="width:95%; margin:auto; background-color: #ebfbff;">
+        <div class="card-body" style="text-align:left;">
+          과체중율과 행복지수는 양의 상관관계를 보이지만,<br/>
+          <br/>
+          아시아의 경우 과체중율에 따른 행복지수의 변화가 다른 대륙에 비해 민감하게 나타는 것을 확인할 수 있었다.<br/>
+          <br/>
+          단순히 과체중율과 행복지수의 상관관계만 가지고<br/>
+          행복하기 위해 체중을 늘려도 상관없다는 판단을 내리기는 어렵다.<br/>
+          <br/>
+          이 연구를 통해, 외적요건으로 행복을 다르게 느낄 수 있다는 것을 생각해 볼 수 있는 기회라고 생각한다.
+        </div>
+      </div>
+    </div>
+  </section>
+  
+</section>
+{% endblock %}
+
