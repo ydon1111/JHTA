@@ -2,6 +2,8 @@
 1.  사용자로부터 국어 , 영어, 수학 점수를 입력받아  총점과 평균을 출력 
 '''
 
+# x,y,z = input('국 영 수 점수 입력 : ').split()
+
 # x = int(input('국어점수 : '))
 # y = int(input('영어점수 : '))
 # z = int(input('수학점수 : '))
@@ -206,7 +208,12 @@
 #             [1],60*60)
 #         [1],60*60)[0])
 
-    
+timeConverter = input('초를 입력하세요')
+x = int(timeConverter)
+
+day , na = divmod(x,24*60*60)
+print(day , na)
+
 
 '''
 16.
@@ -258,7 +265,7 @@
 '''
 20. import 키워드는 언제 가용하는가? 
 '''
-# 필요할때 
+
 # 모듈사용할때 
 
 '''
@@ -328,18 +335,18 @@ g.print()
 
 '''
 
-class GuGuDan:		
-	dan = None	
-	def print(self):
-		if self.dan == None:
-			print('단을 입력하세요.')
-		else:
-			for i in range(1,10):
-				print(str(self.dan) + "*" + str(i) + "=" + str(self.dan * i))
+# class GuGuDan:		
+# 	dan = None	
+# 	def print(self):
+# 		if self.dan == None:
+# 			print('단을 입력하세요.')
+# 		else:
+# 			for i in range(1,10):
+# 				print(str(self.dan) + "*" + str(i) + "=" + str(self.dan * i))
 
-g = GuGuDan()
-g.dan = 7
-g.print()
+# g = GuGuDan()
+# g.dan = 7
+# g.print()
 
 
 

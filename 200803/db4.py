@@ -19,7 +19,7 @@ sql2="""
     INSERT INTO dept (deptno,loc) VALUES (:deptno,:loc)
 """
 
-
+.
 
 cur.execute(sql,[1,"SALESMAN","SEOUL"])
 cur.execute(sql,[2,None,"BUSAN"])
