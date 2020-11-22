@@ -10,6 +10,21 @@
 # totmean = totsum/3
 # print('총점 :' , totsum , '평균 :',totmean)
 
+# x,y,z = input('국어, 영어, 수학 점수 입력 :').split() #한번에 여러숫자를 받음 split 을 통해서 받는값 구분
+# x=int(x) #숫자로 출력 
+# y=int(y) #숫자로 출력 
+# z=int(z) #숫자로 출력 
+# print('국어 :',x ,'영어 :',y, '수학 :', z)
+# i = x+y+z #입력값 더하기 
+# j = (x+y+z)/3 #입력값 더하고 나누기 
+
+
+# x , y ,z = input("국어 ,영어 ,수학점수 입력 : ").split()
+# x = int(x)
+# y = int(y)
+# z = int(z)
+
+
 '''
 2.
 	1부터 100까지 출력 
@@ -18,6 +33,7 @@
 # for i in range(1,101):
 #     print(i)
 # print(list(range(1,101)))
+
 
 '''
 3. 아래의 결과를 출력하는 코드를 작성하세요 
@@ -45,6 +61,9 @@
 '''
 
 # for i in range(1,6):
+# 	print(str(i)*5)
+
+# for i in range(1,6):
 #     # print(i,i,i,i,i)
 #     print(str(i)*5)
 
@@ -58,6 +77,10 @@
 55555
 '''
 
+# for i in range (9,4,-1):
+# 	print(str(i)*5)
+
+
 # for i in range(9,4,-1):
 #     # print(i,i,i,i,i)
 #     print(str(i)*5)
@@ -67,6 +90,12 @@
 1234
 5678
 '''
+
+# for i in range(2):
+# 	for r in range(1,5):
+# 		print(i*4+r, end = ' ')
+# 	print(' ')
+
 
 # for i in range(1,3):
 #     for r in range(1,5):
@@ -142,6 +171,12 @@
 12  1부터 100 합계를 출력
 	5050
 '''
+
+# temp = 0
+# for i in range(1,101):
+# 	temp += i
+# print(temp)
+
 # sum1 = 0
 # for i in range(1,101):
 #     sum1 += i 
@@ -168,6 +203,11 @@
 	1234
 	12345
 '''
+# a = ''
+# for i in range(1,6):
+# 	a = a+ str(i)
+# 	print(a)
+
 # a= ''
 # for i in range(1,6):
 #     a = a+ str(i)
@@ -206,7 +246,15 @@
 #             [1],60*60)
 #         [1],60*60)[0])
 
-    
+
+timeConverter = input('초를 입력하세요')
+x = int(timeConverter)
+day , na = divmod(x,24*60*60)
+hour, na = divmod(na,60*60)
+minute , na = divmod(na,60)
+sec  = na
+print(day,hour,minute,sec)
+
 
 '''
 16.
@@ -258,7 +306,7 @@
 '''
 20. import 키워드는 언제 가용하는가? 
 '''
-# 필요할때 
+
 # 모듈사용할때 
 
 '''
@@ -328,18 +376,18 @@ g.print()
 
 '''
 
-class GuGuDan:		
-	dan = None	
-	def print(self):
-		if self.dan == None:
-			print('단을 입력하세요.')
-		else:
-			for i in range(1,10):
-				print(str(self.dan) + "*" + str(i) + "=" + str(self.dan * i))
+# class GuGuDan:		
+# 	dan = None	
+# 	def print(self):
+# 		if self.dan == None:
+# 			print('단을 입력하세요.')
+# 		else:
+# 			for i in range(1,10):
+# 				print(str(self.dan) + "*" + str(i) + "=" + str(self.dan * i))
 
-g = GuGuDan()
-g.dan = 7
-g.print()
+# g = GuGuDan()
+# g.dan = 7
+# g.print()
 
 
 
