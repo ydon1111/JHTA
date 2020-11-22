@@ -2,6 +2,8 @@
 1.  사용자로부터 국어 , 영어, 수학 점수를 입력받아  총점과 평균을 출력 
 '''
 
+# x,y,z = input('국 영 수 점수 입력 : ').split()
+
 # x = int(input('국어점수 : '))
 # y = int(input('영어점수 : '))
 # z = int(input('수학점수 : '))
@@ -254,6 +256,11 @@ hour, na = divmod(na,60*60)
 minute , na = divmod(na,60)
 sec  = na
 print(day,hour,minute,sec)
+timeConverter = input('초를 입력하세요')
+x = int(timeConverter)
+
+day , na = divmod(x,24*60*60)
+print(day , na)
 
 
 '''
