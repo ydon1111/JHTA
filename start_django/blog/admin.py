@@ -1,3 +1,5 @@
 from django.contrib import admin
-from first_app
+from blog.models import *
+
 # Register your models here.
+admin.site.register(Furits)
