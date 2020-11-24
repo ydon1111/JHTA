@@ -10,7 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +32,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+
+#한국시간으로 변경
+TIME_ZONE = 'Asia/Seoul'
+#한국어로 변경
+LANGUAGE_CODE = 'ko-kr'
 
 # Application definition
 
@@ -54,7 +64,7 @@ ROOT_URLCONF = 'start_django.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,25 +77,64 @@ TEMPLATES = [
     },
 ]
 
+
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'blog',
+]
+
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+
+
 WSGI_APPLICATION = 'start_django.wsgi.application'
 
+
+#외부 파일 불러올때 쓸것
+
+# MEDIA_URL = '/mdia/'
+# MEDIA_ROOT = os.path.join(BASE_DIR,'meida')
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_test',
-        'USER': 'root',
-        'PASSWORD': 'tiger',
-        'HOST': 'localhost',
+DATABASES ={
+    'default' : {
+        'ENGINE': 'django.db.backends.mysql',    
+        'NAME': 'study_db',                  
+        'USER': 'root',                         
+        'PASSWORD': 'tiger',                  
+        'HOST': 'localhost',                   
         'PORT': '3306',
         'OPTIONS': {
             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
-        }
+        }                        
     }
 }
+
+
+
 
 
 # Password validation
