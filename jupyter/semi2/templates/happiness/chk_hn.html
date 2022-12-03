@@ -1,0 +1,962 @@
+{% extends 'index.html' %}
+{% block content %}
+<section id="chk_hn" class="padd-section text-center"></section>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4 set_font_B">나의 행복도는?</h1>
+            <p class="lead set_font_L" style="margin:0px;">나는 현재 얼마나 행복할까?</p>
+        </div>
+    </div>
+    <div style="padding: 0 15%;">
+        <form action="/chk_hn_dc">
+            <div>
+                <div class="alert alert-info" style="width: 60%;" role="alert">
+                    살고있는 곳이 어디인가요?
+                    <div style='margin: 10px 0 0 0;'>
+                        <select name="city1" id="city1" class="form-control col-5" style="display: inline-block;" onchange="get_city2(this.value)">
+                            {% for c in city1 %}
+                            <option value="{{ c }}">{{ c }}</option>
+                            {% endfor %}
+                        </select>
+                        <select name="city2" id="city2" class="form-control col-5" style="display: inline-block;"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="slider-wrap">
+                            <div>1. 당신은 지금 당신의 삶에 얼마나 +합니까?</div>
+                            <div class="radio-container">
+                                <div class="radio-tile-group">
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    -
+                                </div>
+
+                                <div class="input-container">
+                                    <input id="sv1_1" class="radio-button" type="radio" name="sv1" value="1"/>
+                                    <div class="radio-tile">
+                                    <label for="sv1_1" class="radio-tile-label">1</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv1_2" class="radio-button" type="radio" name="sv1" value="2"/>
+                                    <div class="radio-tile">
+                                    <label for="sv1_2" class="radio-tile-label">2</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv1_3" class="radio-button" type="radio" name="sv1" value="3"/>
+                                    <div class="radio-tile">
+                                    <label for="sv1_3" class="radio-tile-label">3</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv1_4" class="radio-button" type="radio" name="sv1" value="4"/>
+                                    <div class="radio-tile">
+                                    <label for="sv1_4" class="radio-tile-label">4</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv1_5" class="radio-button" type="radio" name="sv1" value="5" checked/>
+                                    <div class="radio-tile">
+                                    <label for="sv1_5" class="radio-tile-label">5</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv1_6" class="radio-button" type="radio" name="sv1" value="6"/>
+                                    <div class="radio-tile">
+                                    <label for="sv1_6" class="radio-tile-label">6</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv1_7" class="radio-button" type="radio" name="sv1" value="7"/>
+                                    <div class="radio-tile">
+                                    <label for="sv1_7" class="radio-tile-label">7</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv1_8" class="radio-button" type="radio" name="sv1" value="8"/>
+                                    <div class="radio-tile">
+                                    <label for="sv1_8" class="radio-tile-label">8</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv1_9" class="radio-button" type="radio" name="sv1" value="9"/>
+                                    <div class="radio-tile">
+                                    <label for="sv1_9" class="radio-tile-label">9</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv1_10" class="radio-button" type="radio" name="sv1" value="10"/>
+                                    <div class="radio-tile">
+                                    <label for="sv1_10" class="radio-tile-label">10</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    +
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+            
+                    <li class="list-group-item">
+                        <div class="slider-wrap">
+                            <div>2.당신은 지금 얼마나 행복합니까?</div>
+                            <div class="radio-container">
+                                <div class="radio-tile-group">
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    -
+                                </div>
+
+                                <div class="input-container">
+                                    <input id="sv2_1" class="radio-button" type="radio" name="sv2" value="1"/>
+                                    <div class="radio-tile">
+                                    <label for="sv2_1" class="radio-tile-label">1</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv2_2" class="radio-button" type="radio" name="sv2" value="2"/>
+                                    <div class="radio-tile">
+                                    <label for="sv2_2" class="radio-tile-label">2</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv2_3" class="radio-button" type="radio" name="sv2" value="3"/>
+                                    <div class="radio-tile">
+                                    <label for="sv2_3" class="radio-tile-label">3</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv2_4" class="radio-button" type="radio" name="sv2" value="4"/>
+                                    <div class="radio-tile">
+                                    <label for="sv2_4" class="radio-tile-label">4</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv2_5" class="radio-button" type="radio" name="sv2" value="5" checked/>
+                                    <div class="radio-tile">
+                                    <label for="sv2_5" class="radio-tile-label">5</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv2_6" class="radio-button" type="radio" name="sv2" value="6"/>
+                                    <div class="radio-tile">
+                                    <label for="sv2_6" class="radio-tile-label">6</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv2_7" class="radio-button" type="radio" name="sv2" value="7"/>
+                                    <div class="radio-tile">
+                                    <label for="sv2_7" class="radio-tile-label">7</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv2_8" class="radio-button" type="radio" name="sv2" value="8"/>
+                                    <div class="radio-tile">
+                                    <label for="sv2_8" class="radio-tile-label">8</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv2_9" class="radio-button" type="radio" name="sv2" value="9"/>
+                                    <div class="radio-tile">
+                                    <label for="sv2_9" class="radio-tile-label">9</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv2_10" class="radio-button" type="radio" name="sv2" value="10"/>
+                                    <div class="radio-tile">
+                                    <label for="sv2_10" class="radio-tile-label">10</label>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    +
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="slider-wrap">
+                            <div>3.의미 있는 삶을 살고 있다고 느낍니까?</div>
+                            <div class="radio-container">
+                                <div class="radio-tile-group">
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    -
+                                </div>
+
+                                <div class="input-container">
+                                    <input id="sv3_1" class="radio-button" type="radio" name="sv3" value="1"/>
+                                    <div class="radio-tile">
+                                    <label for="sv3_1" class="radio-tile-label">1</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv3_2" class="radio-button" type="radio" name="sv3" value="2"/>
+                                    <div class="radio-tile">
+                                    <label for="sv3_2" class="radio-tile-label">2</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv3_3" class="radio-button" type="radio" name="sv3" value="3"/>
+                                    <div class="radio-tile">
+                                    <label for="sv3_3" class="radio-tile-label">3</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv3_4" class="radio-button" type="radio" name="sv3" value="4"/>
+                                    <div class="radio-tile">
+                                    <label for="sv3_4" class="radio-tile-label">4</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv3_5" class="radio-button" type="radio" name="sv3" value="5" checked/>
+                                    <div class="radio-tile">
+                                    <label for="sv3_5" class="radio-tile-label">5</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv3_6" class="radio-button" type="radio" name="sv3" value="6"/>
+                                    <div class="radio-tile">
+                                    <label for="sv3_6" class="radio-tile-label">6</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv3_7" class="radio-button" type="radio" name="sv3" value="7"/>
+                                    <div class="radio-tile">
+                                    <label for="sv3_7" class="radio-tile-label">7</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv3_8" class="radio-button" type="radio" name="sv3" value="8"/>
+                                    <div class="radio-tile">
+                                    <label for="sv3_8" class="radio-tile-label">8</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv3_9" class="radio-button" type="radio" name="sv3" value="9"/>
+                                    <div class="radio-tile">
+                                    <label for="sv3_9" class="radio-tile-label">9</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv3_10" class="radio-button" type="radio" name="sv3" value="10"/>
+                                    <div class="radio-tile">
+                                    <label for="sv3_10" class="radio-tile-label">10</label>
+                                    </div>
+                                </div>
+
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    +
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="slider-wrap">
+                            <div>4.당신은 지금, 얼마나 스트레스를 받고 있습니까?</div>
+                            <div class="radio-container">
+                                <div class="radio-tile-group">
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    -
+                                </div>
+
+                                <div class="input-container">
+                                    <input id="sv4_1" class="radio-button" type="radio" name="sv4" value="1"/>
+                                    <div class="radio-tile">
+                                    <label for="sv4_1" class="radio-tile-label">1</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv4_2" class="radio-button" type="radio" name="sv4" value="2"/>
+                                    <div class="radio-tile">
+                                    <label for="sv4_2" class="radio-tile-label">2</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv4_3" class="radio-button" type="radio" name="sv4" value="3"/>
+                                    <div class="radio-tile">
+                                    <label for="sv4_3" class="radio-tile-label">3</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv4_4" class="radio-button" type="radio" name="sv4" value="4"/>
+                                    <div class="radio-tile">
+                                    <label for="sv4_4" class="radio-tile-label">4</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv4_5" class="radio-button" type="radio" name="sv4" value="5" checked/>
+                                    <div class="radio-tile">
+                                    <label for="sv4_5" class="radio-tile-label">5</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv4_6" class="radio-button" type="radio" name="sv4" value="6"/>
+                                    <div class="radio-tile">
+                                    <label for="sv4_6" class="radio-tile-label">6</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv4_7" class="radio-button" type="radio" name="sv4" value="7"/>
+                                    <div class="radio-tile">
+                                    <label for="sv4_7" class="radio-tile-label">7</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv4_8" class="radio-button" type="radio" name="sv4" value="8"/>
+                                    <div class="radio-tile">
+                                    <label for="sv4_8" class="radio-tile-label">8</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv4_9" class="radio-button" type="radio" name="sv4" value="9"/>
+                                    <div class="radio-tile">
+                                    <label for="sv4_9" class="radio-tile-label">9</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv4_10" class="radio-button" type="radio" name="sv4" value="10"/>
+                                    <div class="radio-tile">
+                                    <label for="sv4_10" class="radio-tile-label">10</label>
+                                    </div>
+                                </div>
+
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    +
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="slider-wrap">
+                            <div>5.당신은 지금, 지루한 감정을 얼마나 느끼고 있습니까?</div>
+                            <div class="radio-container">
+                                <div class="radio-tile-group">
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    -
+                                </div>
+
+                                <div class="input-container">
+                                    <input id="sv5_1" class="radio-button" type="radio" name="sv5" value="1"/>
+                                    <div class="radio-tile">
+                                    <label for="sv5_1" class="radio-tile-label">1</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv5_2" class="radio-button" type="radio" name="sv5" value="2"/>
+                                    <div class="radio-tile">
+                                    <label for="sv5_2" class="radio-tile-label">2</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv5_3" class="radio-button" type="radio" name="sv5" value="3"/>
+                                    <div class="radio-tile">
+                                    <label for="sv5_3" class="radio-tile-label">3</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv5_4" class="radio-button" type="radio" name="sv5" value="4"/>
+                                    <div class="radio-tile">
+                                    <label for="sv5_4" class="radio-tile-label">4</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv5_5" class="radio-button" type="radio" name="sv5" value="5" checked/>
+                                    <div class="radio-tile">
+                                    <label for="sv5_5" class="radio-tile-label">5</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv5_6" class="radio-button" type="radio" name="sv5" value="6"/>
+                                    <div class="radio-tile">
+                                    <label for="sv5_6" class="radio-tile-label">6</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv5_7" class="radio-button" type="radio" name="sv5" value="7"/>
+                                    <div class="radio-tile">
+                                    <label for="sv5_7" class="radio-tile-label">7</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv5_8" class="radio-button" type="radio" name="sv5" value="8"/>
+                                    <div class="radio-tile">
+                                    <label for="sv5_8" class="radio-tile-label">8</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv5_9" class="radio-button" type="radio" name="sv5" value="9"/>
+                                    <div class="radio-tile">
+                                    <label for="sv5_9" class="radio-tile-label">9</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv5_10" class="radio-button" type="radio" name="sv5" value="10"/>
+                                    <div class="radio-tile">
+                                    <label for="sv5_10" class="radio-tile-label">10</label>
+                                    </div>
+                                </div>
+
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    +
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="slider-wrap">
+                            <div>6.당신은 지금, 짜증나는 감정을 얼마나 느끼고 있습니까?</div>
+                            <div class="radio-container">
+                                <div class="radio-tile-group">
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    -
+                                </div>
+
+                                <div class="input-container">
+                                    <input id="sv6_1" class="radio-button" type="radio" name="sv6" value="1"/>
+                                    <div class="radio-tile">
+                                    <label for="sv6_1" class="radio-tile-label">1</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv6_2" class="radio-button" type="radio" name="sv6" value="2"/>
+                                    <div class="radio-tile">
+                                    <label for="sv6_2" class="radio-tile-label">2</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv6_3" class="radio-button" type="radio" name="sv6" value="3"/>
+                                    <div class="radio-tile">
+                                    <label for="sv6_3" class="radio-tile-label">3</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv6_4" class="radio-button" type="radio" name="sv6" value="4"/>
+                                    <div class="radio-tile">
+                                    <label for="sv6_4" class="radio-tile-label">4</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv6_5" class="radio-button" type="radio" name="sv6" value="5" checked/>
+                                    <div class="radio-tile">
+                                    <label for="sv6_5" class="radio-tile-label">5</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv6_6" class="radio-button" type="radio" name="sv6" value="6"/>
+                                    <div class="radio-tile">
+                                    <label for="sv6_6" class="radio-tile-label">6</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv6_7" class="radio-button" type="radio" name="sv6" value="7"/>
+                                    <div class="radio-tile">
+                                    <label for="sv6_7" class="radio-tile-label">7</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv6_8" class="radio-button" type="radio" name="sv6" value="8"/>
+                                    <div class="radio-tile">
+                                    <label for="sv6_8" class="radio-tile-label">8</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv6_9" class="radio-button" type="radio" name="sv6" value="9"/>
+                                    <div class="radio-tile">
+                                    <label for="sv6_9" class="radio-tile-label">9</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv6_10" class="radio-button" type="radio" name="sv6" value="10"/>
+                                    <div class="radio-tile">
+                                    <label for="sv6_10" class="radio-tile-label">10</label>
+                                    </div>
+                                </div>
+
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    +
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="slider-wrap">
+                            <div>7.당신은 지금, 즐거운 감정을 얼마나 느끼고 있습니까?</div>
+                            <div class="radio-container">
+                                <div class="radio-tile-group">
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    -
+                                </div>
+
+                                <div class="input-container">
+                                    <input id="sv7_1" class="radio-button" type="radio" name="sv7" value="1"/>
+                                    <div class="radio-tile">
+                                    <label for="sv7_1" class="radio-tile-label">1</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv7_2" class="radio-button" type="radio" name="sv7" value="2"/>
+                                    <div class="radio-tile">
+                                    <label for="sv7_2" class="radio-tile-label">2</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv7_3" class="radio-button" type="radio" name="sv7" value="3"/>
+                                    <div class="radio-tile">
+                                    <label for="sv7_3" class="radio-tile-label">3</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv7_4" class="radio-button" type="radio" name="sv7" value="4"/>
+                                    <div class="radio-tile">
+                                    <label for="sv7_4" class="radio-tile-label">4</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv7_5" class="radio-button" type="radio" name="sv7" value="5" checked/>
+                                    <div class="radio-tile">
+                                    <label for="sv7_5" class="radio-tile-label">5</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv7_6" class="radio-button" type="radio" name="sv7" value="6"/>
+                                    <div class="radio-tile">
+                                    <label for="sv7_6" class="radio-tile-label">6</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv7_7" class="radio-button" type="radio" name="sv7" value="7"/>
+                                    <div class="radio-tile">
+                                    <label for="sv7_7" class="radio-tile-label">7</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv7_8" class="radio-button" type="radio" name="sv7" value="8"/>
+                                    <div class="radio-tile">
+                                    <label for="sv7_8" class="radio-tile-label">8</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv7_9" class="radio-button" type="radio" name="sv7" value="9"/>
+                                    <div class="radio-tile">
+                                    <label for="sv7_9" class="radio-tile-label">9</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv7_10" class="radio-button" type="radio" name="sv7" value="10"/>
+                                    <div class="radio-tile">
+                                    <label for="sv7_10" class="radio-tile-label">10</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    +
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="slider-wrap">
+                            <div>8.당신은 지금, 평안한 감정을 얼마나 느끼고 있습니까?</div>
+                            <div class="radio-container">
+                                <div class="radio-tile-group">
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    -
+                                </div>
+
+                                <div class="input-container">
+                                    <input id="sv8_1" class="radio-button" type="radio" name="sv8" value="1"/>
+                                    <div class="radio-tile">
+                                    <label for="sv8_1" class="radio-tile-label">1</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv8_2" class="radio-button" type="radio" name="sv8" value="2"/>
+                                    <div class="radio-tile">
+                                    <label for="sv8_2" class="radio-tile-label">2</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv8_3" class="radio-button" type="radio" name="sv8" value="3"/>
+                                    <div class="radio-tile">
+                                    <label for="sv8_3" class="radio-tile-label">3</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv8_4" class="radio-button" type="radio" name="sv8" value="4"/>
+                                    <div class="radio-tile">
+                                    <label for="sv8_4" class="radio-tile-label">4</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv8_5" class="radio-button" type="radio" name="sv8" value="5" checked/>
+                                    <div class="radio-tile">
+                                    <label for="sv8_5" class="radio-tile-label">5</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv8_6" class="radio-button" type="radio" name="sv8" value="6"/>
+                                    <div class="radio-tile">
+                                    <label for="sv8_6" class="radio-tile-label">6</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv8_7" class="radio-button" type="radio" name="sv8" value="7"/>
+                                    <div class="radio-tile">
+                                    <label for="sv8_7" class="radio-tile-label">7</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv8_8" class="radio-button" type="radio" name="sv8" value="8"/>
+                                    <div class="radio-tile">
+                                    <label for="sv8_8" class="radio-tile-label">8</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv8_9" class="radio-button" type="radio" name="sv8" value="9"/>
+                                    <div class="radio-tile">
+                                    <label for="sv8_9" class="radio-tile-label">9</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv8_10" class="radio-button" type="radio" name="sv8" value="10"/>
+                                    <div class="radio-tile">
+                                    <label for="sv8_10" class="radio-tile-label">10</label>
+                                    </div>
+                                </div>
+
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    +
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="slider-wrap">
+                            <div>9.당신은 지금, 우울한 감정을 얼마나 느끼고 있습니까?</div>
+                            <div class="radio-container">
+                                <div class="radio-tile-group">
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    -
+                                </div>
+
+                                <div class="input-container">
+                                    <input id="sv9_1" class="radio-button" type="radio" name="sv9" value="1"/>
+                                    <div class="radio-tile">
+                                    <label for="sv9_1" class="radio-tile-label">1</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv9_2" class="radio-button" type="radio" name="sv9" value="2"/>
+                                    <div class="radio-tile">
+                                    <label for="sv9_2" class="radio-tile-label">2</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv9_3" class="radio-button" type="radio" name="sv9" value="3"/>
+                                    <div class="radio-tile">
+                                    <label for="sv9_3" class="radio-tile-label">3</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv9_4" class="radio-button" type="radio" name="sv9" value="4"/>
+                                    <div class="radio-tile">
+                                    <label for="sv9_4" class="radio-tile-label">4</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv9_5" class="radio-button" type="radio" name="sv9" value="5" checked/>
+                                    <div class="radio-tile">
+                                    <label for="sv9_5" class="radio-tile-label">5</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv9_6" class="radio-button" type="radio" name="sv9" value="6"/>
+                                    <div class="radio-tile">
+                                    <label for="sv9_6" class="radio-tile-label">6</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv9_7" class="radio-button" type="radio" name="sv9" value="7"/>
+                                    <div class="radio-tile">
+                                    <label for="sv9_7" class="radio-tile-label">7</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv9_8" class="radio-button" type="radio" name="sv9" value="8"/>
+                                    <div class="radio-tile">
+                                    <label for="sv9_8" class="radio-tile-label">8</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv9_9" class="radio-button" type="radio" name="sv9" value="9"/>
+                                    <div class="radio-tile">
+                                    <label for="sv9_9" class="radio-tile-label">9</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv9_10" class="radio-button" type="radio" name="sv9" value="10"/>
+                                    <div class="radio-tile">
+                                    <label for="sv9_10" class="radio-tile-label">10</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    +
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="slider-wrap">
+                            <div>10.당신은 지금, 불안한 감정을 얼마나 느끼고 있습니까?</div>
+                            <div class="radio-container">
+                                <div class="radio-tile-group">
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    -
+                                </div>
+
+                                <div class="input-container">
+                                    <input id="sv10_1" class="radio-button" type="radio" name="sv10" value="1"/>
+                                    <div class="radio-tile">
+                                    <label for="sv10_1" class="radio-tile-label">1</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv10_2" class="radio-button" type="radio" name="sv10" value="2"/>
+                                    <div class="radio-tile">
+                                    <label for="sv10_2" class="radio-tile-label">2</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv10_3" class="radio-button" type="radio" name="sv10" value="3"/>
+                                    <div class="radio-tile">
+                                    <label for="sv10_3" class="radio-tile-label">3</label>
+                                    </div>
+                                </div>
+                            
+                                <div class="input-container">
+                                    <input id="sv10_4" class="radio-button" type="radio" name="sv10" value="4"/>
+                                    <div class="radio-tile">
+                                    <label for="sv10_4" class="radio-tile-label">4</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv10_5" class="radio-button" type="radio" name="sv10" value="5" checked/>
+                                    <div class="radio-tile">
+                                    <label for="sv10_5" class="radio-tile-label">5</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv10_6" class="radio-button" type="radio" name="sv10" value="6"/>
+                                    <div class="radio-tile">
+                                    <label for="sv10_6" class="radio-tile-label">6</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv10_7" class="radio-button" type="radio" name="sv10" value="7"/>
+                                    <div class="radio-tile">
+                                    <label for="sv10_7" class="radio-tile-label">7</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv10_8" class="radio-button" type="radio" name="sv10" value="8"/>
+                                    <div class="radio-tile">
+                                    <label for="sv10_8" class="radio-tile-label">8</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv10_9" class="radio-button" type="radio" name="sv10" value="9"/>
+                                    <div class="radio-tile">
+                                    <label for="sv10_9" class="radio-tile-label">9</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="input-container">
+                                    <input id="sv10_10" class="radio-button" type="radio" name="sv10" value="10"/>
+                                    <div class="radio-tile">
+                                    <label for="sv10_10" class="radio-tile-label">10</label>
+                                    </div>
+                                </div>
+
+                                <div class="radio-lh-txt" style="font-size: 35px; width: 20px; padding-top: 7px;">
+                                    +
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" style='text-align:center;'>
+                        <button type="submit" class="btn c-btn btn-outline-info" >제출</button>
+                        <!-- onclick="get_hn_dc()" -->
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <div class='reference'>
+        * 카카오같이가치의 마음날씨 안녕지수 참고
+    </div>
+</section>
+
+<script>
+
+    // 행복도 ajax
+
+    window.onload = function(){
+        get_city2('서울특별시');
+    }
+
+    // 지역 select box
+    function get_city2(city1){
+        $.ajax({
+            type : 'GET',
+            url : '/hn_city2',
+            data : {city1: city1},
+            dataType : 'json',
+            success : function(result){
+                var objSel = document.getElementById("city2");
+
+                objSel.options.length=0; 
+
+                for (i=0; i < result.city2.length ; i++){
+                    var objOption = document.createElement("option");  
+                        
+                    objOption.text = result.city2[i];
+                    objOption.value = result.city2[i];
+                    
+                    objSel.options.add(objOption);
+                }
+            },
+            error : function(xtr,status,error){
+                    alert(xtr +":"+status+":"+error);
+            }
+        });
+    }
+
+    function get_hn_dc() {
+        var city1 = document.getElementById('city1');
+        var city2 = document.getElementById('city2');
+
+        $.ajax({
+            type: 'GET',
+            url: '/chk_hn_dc',
+            data: {'city1':city1.options[city1.selectedIndex].value, 'city2':city2.options[city2.selectedIndex].value, 
+            'sv1':document.querySelector('input[name="sv1"]:checked').value, 'sv2':document.querySelector('input[name="sv2"]:checked').value, 
+            'sv3':document.querySelector('input[name="sv3"]:checked').value, 'sv4':document.querySelector('input[name="sv4"]:checked').value, 
+            'sv5':document.querySelector('input[name="sv5"]:checked').value, 'sv6':document.querySelector('input[name="sv6"]:checked').value,
+            'sv7':document.querySelector('input[name="sv7"]:checked').value, 'sv8':document.querySelector('input[name="sv8"]:checked').value, 
+            'sv9':document.querySelector('input[name="sv9"]:checked').value, 'sv10':document.querySelector('input[name="sv10"]:checked').value},
+            dataType: 'text',
+            success: function(result) {
+                alert(result);
+            },
+            error : function(xtr,status,error){
+                    alert(xtr +":"+status+":"+error);
+            }
+        })
+    }
+
+</script>
+{% endblock %}
+

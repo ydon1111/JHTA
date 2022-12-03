@@ -1,0 +1,237 @@
+{% extends 'index.html' %}
+{% block content %}
+<section id="aca" class="padd-section text-center"></section>
+<div>
+    <img src="{{url_for('static', filename='img/hn/head_1.png')}}" alt="img">
+</div>
+<!-- 
+<div>
+    <div class="bg-style"> -->
+        <div class="wrapper" style="width: 90%; margin: auto;">
+            <div class="col-6 col-sm-3" style="display: inline-grid;">
+              <div class="counter" data-cp-percentage="{{res.sv_point*100}}" data-cp-color="#00bfeb"></div>
+              <div>
+                <h4>삶의 만족도</h4>
+                <p>자신의 삶(과거와 현재)에 만족하는 정도</p>
+              </div>
+            </div>
+            
+            <div class="col-6 col-sm-3" style="display: inline-grid;">
+              <div class="counter" data-cp-percentage="{{res.hp3*100}}" data-cp-color="#EA4C89"></div>
+              <div>
+                <h4>우리 동네 삶의 만족도</h4>
+                <p>선택한 지역의 평균 삶의 만족도</p>
+              </div>
+            </div>
+            <div class="col-6 col-sm-5" style="display: inline-block; margin-left: 30px; padding: 20px 20px; border: 3px solid #d2d2f9; border-radius: 10px;">
+              <div>
+                <div class="set_font_L" style="font-size: 1em; color: #b9062f;">나의 행복 표정</div>
+                <img src="{{url_for('static', filename='img/hn/smile_' + res.y_res + '.png')}}" style="width: 25%; display: block; margin: auto;">
+                <div style="width: 100%; text-align: center; color: #1290ff; margin-top: 10px;" class="set_font_B">
+                  {{res.ws.content}}
+                </div>
+                <div style="width: 100%; text-align: center; color: #87cefa;" class="set_font_B">
+                  << {{res.ws.w}} >>
+                </div>
+              </div>
+              <div class="set_font_L" style="text-align: center; color: #008c8c; margin-top: 20px;">
+                {% if res.y_res == 'a' %}
+                지금 정말 행복하시군요!
+                {% elif res.y_res == 'b' %}
+                지금 충분히 행복하시군요!
+                {% elif res.y_res == 'c' %}
+                조금만 더 행복을 추구하면 즐거운 삶이 될꺼에요!
+                {% elif res.y_res == 'd' %}
+                조그만 즐거움을 추구하면 금방 행복해 질 수 있어요!
+                {% elif res.y_res == 'e' %}
+                바쁜 일상을 잠시 내려놓고 행복한 상상을 해보세요!
+                {% endif %}
+              </div>
+            </div>
+         </div>
+    <!--</div>
+</div> -->
+
+<div class="accordion" id="accordionExample" style="width: 90%; margin: auto; text-align: center; padding-bottom: 150px;">
+  <div class="card" style="border: 3px solid #cce1ff;">
+    <div class="card-header" id="headingOne" style="background-color: #cce1ff; border: 3px dotted #b4b4ff;">
+      <h2 class="mb-0">
+        <button class="btn btn-block text-left set_font_L" style="color:#3c467d;" type="button" data-toggle="collapse" aria-expanded="false" data-target="#collapseOne" aria-controls="collapseOne">
+          우리 동네 행복 지수
+        </button>
+      </h2>
+    </div>
+
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+      <div class="col-6 col-sm-3" style="display: inline-grid;">
+          <div class="counter" data-cp-percentage="{{res.hp2*100}}" data-cp-color="#CD1039" style="margin:auto;"></div>
+          <h4 style="margin-top: 26px;">행복 역량</h4>
+          <p>건강, 안전, 환경, 경제, 교육, 관계 및 사회참여, 여가 7개 영역을 종합한 지수</p>
+      </div>
+
+      <div class="col-6 col-sm-3" style="display: inline-grid;">
+          <div class="counter" data-cp-percentage="{{res.h*100}}" data-cp-color="#FF8200" style="margin:auto;"></div>
+          <h4 style="margin-top: 26px;">건강</h4>
+          <p>좋은 신체 건강 상태를 유지하면서 평균기대수명까지 삶을 영위할 수 있을 것</p>
+      </div>
+
+      <div class="col-6 col-sm-3" style="display: inline-grid;">
+          <div class="counter" data-cp-percentage="{{res.e*100}}" data-cp-color="#FFC81E" style="margin:auto;"></div>
+          <h4 style="margin-top: 26px;">경제</h4>
+          <p>직업을 가지고 빈곤하지 않게 살아 갈 수 있을 것</p>
+      </div>
+
+      <div class="col-6 col-sm-3" style="display: inline-grid;">
+          <div class="counter" data-cp-percentage="{{res.s*100}}" data-cp-color="#64CD3C" style="margin:auto;"></div>
+          <h4 style="margin-top: 26px;">관계 및 사회참여</h4>
+          <p>다른 사람들에게 신뢰받고 존중받으며, 이웃, 나아가 조직 및 사회내 사람들과 함께 상호작용할 수 있을 것</p>
+      </div>
+
+      <div class="col-6 col-sm-3" style="display: inline-grid;">
+          <div class="counter" data-cp-percentage="{{res.ed*100}}" data-cp-color="#1E90FF" style="margin:auto;"></div>
+          <h4 style="margin-top: 26px;">교육</h4>
+          <p>이성적으로 사고하고 판단할 수 있고 종교, 문학, 음악 등원하는 것을 배우고 표현하는데 있어서 제약이 없을 것</p>
+      </div>
+
+      <div class="col-6 col-sm-3" style="display: inline-grid;">
+          <div class="counter" data-cp-percentage="{{res.sf*100}}" data-cp-color="#6A5ACD" style="margin:auto;"></div>
+          <h4 style="margin-top: 26px;">안전</h4>
+          <p>각종 폭력 및 위험(강도, 사고, 재난)에서 보호 받을 수 있으며 응급진료 접근성이 있을 것</p>
+      </div>
+
+      <div class="col-6 col-sm-3" style="display: inline-grid;">
+          <div class="counter" data-cp-percentage="{{res.l*100}}" data-cp-color="#9932CC" style="margin:auto;"></div>
+          <h4 style="margin-top: 26px;">여가</h4>
+          <p>일상에서 여유와 웃음을 갖고 문화적 삶을 향유하며 즐거운 시간을 보낼 수 있을 것</p>
+      </div>
+
+      <div class="col-6 col-sm-3" style="display: inline-grid;">
+          <div class="counter" data-cp-percentage="{{res.en*100}}" data-cp-color="#008080" style="margin:auto;"></div>
+          <h4 style="margin-top: 26px;">환경</h4>
+          <p>맑고 풍족한 물과 깨끗한 공기를 마시며 살아 갈 수 있을 것</p>
+      </div>
+      <div class="set_font_L" style="font-size: 25px; border-radius: 10px; margin-top: 35px; padding: 10px; background-color: #a3cefb;">
+        <a href="{{url_for('static', filename='file/local/happy2.html')}}" target="_blank" style="color: #fff;">모든 지역 행복도 보기</a>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</section>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var circleProgress = (function(selector) {
+          var wrapper = document.querySelectorAll(selector);
+          Array.prototype.forEach.call(wrapper, function(wrapper, i) {
+            var wrapperWidth,
+              wrapperHeight,
+              percent,
+              innerHTML,
+              context,
+              lineWidth,
+              centerX,
+              centerY,
+              radius,
+              newPercent,
+              speed,
+              from,
+              to,
+              duration,
+              start,
+              strokeStyle,
+              text;
+      
+            var getValues = function() {
+              wrapperWidth = parseInt(window.getComputedStyle(wrapper).width);
+              wrapperHeight = wrapperWidth;
+              percent = wrapper.getAttribute('data-cp-percentage');
+              innerHTML = '<span class="percentage"><strong>' + percent + '</strong>점</span><canvas class="circleProgressCanvas" width="' + (wrapperWidth * 2) + '" height="' + wrapperHeight * 2 + '"></canvas>';
+              wrapper.innerHTML = innerHTML;
+              text = wrapper.querySelector(".percentage");
+              canvas = wrapper.querySelector(".circleProgressCanvas");
+              wrapper.style.height = canvas.style.width = canvas.style.height = wrapperWidth + "px";
+              context = canvas.getContext('2d');
+              centerX = canvas.width / 2;
+              centerY = canvas.height / 2;
+              newPercent = 0;
+              speed = 1;
+              from = 0;
+              to = percent;
+              duration = 1000;
+              lineWidth = 25;
+              radius = canvas.width / 2 - lineWidth;
+              strokeStyle = wrapper.getAttribute('data-cp-color');
+              start = new Date().getTime();
+            };
+      
+            function animate() {
+              requestAnimationFrame(animate);
+              var time = new Date().getTime() - start;
+              if (time <= duration) {
+                var x = easeInOutQuart(time, from, to - from, duration);
+                newPercent = x;
+                text.innerHTML = Math.round(newPercent) + "점";
+                drawArc();
+              }
+            }
+      
+            function drawArc() {
+              var circleStart = 1.5 * Math.PI;
+              var circleEnd = circleStart + (newPercent / 50) * Math.PI;
+              context.clearRect(0, 0, canvas.width, canvas.height);
+              context.beginPath();
+              context.arc(centerX, centerY, radius, circleStart, 4 * Math.PI, false);
+              context.lineWidth = lineWidth;
+              context.strokeStyle = "#ddd";
+              context.stroke();
+              context.beginPath();
+              context.arc(centerX, centerY, radius, circleStart, circleEnd, false);
+              context.lineWidth = lineWidth;
+              context.strokeStyle = strokeStyle;
+              context.stroke();
+      
+            }
+            var update = function() {
+              getValues();
+              animate();
+            }
+            update();
+      
+            var resizeTimer;
+            window.addEventListener("resize", function() {
+              clearTimeout(resizeTimer);
+              resizeTimer = setTimeout(function() {
+                clearTimeout(resizeTimer);
+                start = new Date().getTime();
+                update();
+              }, 250);
+            });
+          });
+      
+          //
+          // http://easings.net/#easeInOutQuart
+          //  t: current time
+          //  b: beginning value
+          //  c: change in value
+          //  d: duration
+          //
+          function easeInOutQuart(t, b, c, d) {
+            if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
+            return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
+          }
+      
+        });
+      
+        circleProgress('.counter');
+      
+        // Gibt eine Zufallszahl zwischen min (inklusive) und max (exklusive) zurück
+        function getRandom(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+    });
+</script>
+{% endblock %}
+

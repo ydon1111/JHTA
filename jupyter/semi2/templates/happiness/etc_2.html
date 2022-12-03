@@ -1,0 +1,110 @@
+{% extends 'index.html' %}
+{% block content %}
+<section id="aca" class="padd-section text-center"></section>
+  <div class="jumbotron jumbotron-fluid" style="padding: 36px;">
+    <div class="container">
+      <div class="col-md-8" style="display:inline-grid;">
+        <h1 class="display-4 set_font_B">여러 지수의 상관관계 두번째</h1>
+        <p class="lead set_font_L" style="margin:0px;">행복지수와 다른 지수간의 상관관계 조사 두번째</p>
+      </div>
+      <div class="col-md-3" style="display:inline-block;"><img src="{{url_for('static', filename='img/main/hago_1.png')}}" style="width: 216px;"></div>
+    </div>
+  </div>
+
+  <div class="card" style="width:80%; margin:auto;">
+    <div class="card-body" style="text-align:left;">
+      조사를 시작한 이유는 행복도와 자살률의 상관관계를 찾고 행복도를 올리면 자살률을 내릴 수 있을것이라는 생각에 조사를 시작하였다. <br/>
+      하지만 자살률과 행복은 서로 상관관계를 가지지 않았다. <br/>
+      그래서 행복도와 상관관계를 가진 여러 요소들을 조사해 보았다. 
+    </div>
+  </div>
+
+  <section id="etc2_1" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">행복도와 자살률</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">행복도와 자살의 어떠한 상관관계가 있는지 확인</div>
+    </div>
+    <div class='text-center' style="margin:15px;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/etc2/etc2_1.png')}}" class="container-md" style='width:40%;'>
+      <p style='margin: 10px; display: inline-block; padding: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5; width: 35%; text-align: left;'>
+        행복도와 자살률과의 상관관계가 뚜렷하지 않아서 다른 요소들을 찾아보기로 하였다.
+      </p>
+    </div>
+  </section>
+
+  <section id="etc2_2" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">행복도와 음주</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">행복도와 자살의 어떠한 상관관계가 있는지 확인</div>
+    </div>
+    <div class='text-center' style="margin:15px;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/etc2/etc2_2.png')}}" class="container-md" style='width:40%;'>
+      <p style='margin: 10px; display: inline-block; padding: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5; width: 35%; text-align: left;'>
+        행복도와 음주는 <b style="border-bottom: 1px solid red;">양의상관관계</b>를 가지고 있는 것으로 나타났다.<br/>
+        따라서 적당한 음주는 <b style="border-bottom: 1px solid red;">행복도를 올려 준다</b>고 볼 수 있다.
+      </p>
+    </div>
+  </section>
+
+  <section id="etc2_3" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">행복도와 흡연</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">행복도와 자살의 어떠한 상관관계가 있는지 확인</div>
+    </div>
+    <div class='text-center' style="margin:15px;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/etc2/etc2_3.png')}}" class="container-md" style='width:40%;'>
+      <p style='margin: 10px; display: inline-block; padding: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5; width: 35%; text-align: left;'>
+        행복도와 흡연은 <b style="border-bottom: 1px solid red;"></b>음의상관관계</b>를 가지고 있는 것으로 나타났다.<br/>
+        따라서 흡연은 본인의 건강 뿐만 아니라 <b style="border-bottom: 1px solid red;">행복도에도 악영향</b>을 미치는 것을 알 수 있다. 
+      </p>
+    </div>
+  </section>
+
+  <section id="etc2_4" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">행복도와 운동</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">행복도와 자살의 어떠한 상관관계가 있는지 확인</div>
+    </div>
+    <div class='text-center' style="margin:15px;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/etc2/etc2_4.png')}}" class="container-md" style='width:40%;'>
+      <p style='margin: 10px; display: inline-block; padding: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5; width: 35%; text-align: left;'>
+        행복도와 운동은 <b style="border-bottom: 1px solid red;">양의상관관계</b>를 가지고 있는 것으로 나타났다.<br/>
+        따라서 적당한 운동은 본인의 건강도 챙기고 <b style="border-bottom: 1px solid red;">행복도도 올릴 수 있을 것이다.</b><br/>
+      </p>
+    </div>
+  </section>
+
+  <section id="etc2_5" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">행복도와 쇼핑</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">행복도와 자살의 어떠한 상관관계가 있는지 확인</div>
+    </div>
+    <div class='text-center' style="margin:15px;" data-aos="fade-up">
+      <img src="{{url_for('static', filename='img/etc2/etc2_5.png')}}" class="container-md" style='width:40%;'>
+      <p style='margin: 10px; display: inline-block; padding: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5; width: 35%; text-align: left;'>
+        행복도와 쇼핑은 <b style="border-bottom: 1px solid red;"></b>양의상관관계</b>를 가지고 있는 것으로 나타났다.<br/>
+        따라서 적당한 쇼핑은 본인의 <b style="border-bottom: 1px solid red;">행복도를 올리는데 도움이 될 것이다.</b>
+      </p>
+    </div>
+  </section>
+
+  <section id="etc2_6" class="about-us padd-section" style="padding-top: 0; margin-bottom: 150px;">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">결론</div>
+    </div>
+    <div style="margin: auto; width: 80%;" data-aos="fade-up">
+      </p>
+      <div style="margin: auto; text-align: center;">
+        <div class="card" style="width:95%; margin:auto; background-color: #ebfbff;">
+          <div class="card-body" style="text-align:left;">
+            적당한 음주, 운동, 쇼핑, 흡연은 행복에 영향을 줄 수 있으며, <br/>
+            자살률은 상관관계가 뚜렷하진 않지만 더 많은 표본의 수를 확보한 후 다시 분석해 볼 필요가 있다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+</section>
+{% endblock %}
+

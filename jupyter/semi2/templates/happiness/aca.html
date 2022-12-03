@@ -1,0 +1,159 @@
+{% extends 'index.html' %}
+{% block content %}
+<section id="aca" class="padd-section text-center"></section>
+  <div class="jumbotron jumbotron-fluid" style="padding: 36px;">
+    <div class="container">
+      <div class="col-md-8" style="display:inline-grid;">
+        <h1 class="display-4 set_font_B">아카지수</h1>
+        <p class="lead set_font_L" style="margin:0px;">행복지수와 스타벅스의 아메리카노 가격은 상관 관계가 있을까?</p>
+      </div>
+      <div class="col-md-3" style="display:inline-block;"><img src="{{url_for('static', filename='img/main/sip_1.png')}}" style="width: 216px;"></div>
+    </div>
+  </div>
+
+  <div class="card" style="width:80%; margin:auto;">
+    <div class="card-body" style="text-align:left;">
+        행복에 관한 요소중 하나는 경제라고 해도 관언이 아닐 것이다.<br/>
+        OECD국가의 행복지수를 표현할 때 사용되는 요소 중 하나인 GNI(국민총소득)과 스타벅스의 아메리카노 가격의 연관성과,<br/>
+        아메리카노 가격이 행복 지수와 연관이 있는지 분석해 보았다.
+    </div>
+  </div>
+
+  <section id="aca_1" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">행복도와 아카지수</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">행복도와 GNI, GNI와 아카지수</div>
+    </div>
+    <div style="margin: auto; width: 80%; padding-top: 45px;" data-aos="fade-up">
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+        유엔 산하 자문기구인 <a href="https://www.unsdsn.org/">지속가능발전해법네트워크(SDSN)</a>은 행복 지수를 산출 가능한, 즉 조사 가능한 행복의 지표로 6가지를 선정했다.<br/>
+        그 중 첫번째는 1인당 국내총생산(GNI)이고 둘째는 건강, 셋째는 사회적 자원 등 이다.<br/>
+        그렇다면 물가수준을 대체할 수 있는 빅맥지수 처럼 스타벅스의 아메리카노 가격도 GNI와 연관성을 갖고, 행복지수와도 상관관계가 있음을 확인할 수 있을 것이다.<br/>
+      </p>
+    </div>
+  </section>
+
+  <section id="aca_2" class="about-us padd-section">
+    <div>
+      <div style="font-size: 2em; width: 80%; margin: auto; padding: 10px 0;" class="set_font_L">아카지수</div>
+    </div>
+    <div style="margin: auto; width: 80%; padding-top: 20px;" data-aos="fade-up">
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;' class="set_font_L">
+        아카지수 = (나라별 스타벅스 아메리카노 가격) * 환율 / (미국 스타벅스 아메리카노 가격)
+      </p>
+      <div style="text-align:center;">
+        <img src="{{url_for('static', filename='img/aca/df.png')}}" class="container-md" style="width: 85%; padding: 0;">
+        <p class='set_font_L' style='margin:10px;'>aca_index = 아카지수 | bm_index = 빅맥지수</p>
+      </div>
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+        빅맥지수와 함께 비교해 보았다.
+      </p>
+    </div>
+  </section>
+
+  <section id="aca_3" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">정규성 검사</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">Shapiro와 Bartlett을 이용한 검사</div>
+    </div>
+    <div style="margin: auto; width: 80%; padding-top: 20px;" data-aos="fade-up">
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+        Shapiro : p-value = 0.1885060966014862 > 0.05<br/>
+        Bartlett : p-value=0.11817365310568206 > 0.05
+      </p>
+      <div style="text-align:center;">
+        <img src="{{url_for('static', filename='img/aca/aca_bm_graph.png')}}" class="container-md" style="width: 85%; padding: 0;">
+        <p class='set_font_L' style='margin:10px;'>aca_index = 아카지수 | bm_index = 빅맥지수</p>
+      </div>
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;'>
+        Shapiro검정과 Bartlett검정을 통해 아카지수가 정규성을 따른다고 할 수 있다.
+      </p>
+    </div>
+  </section>
+
+  <section id="aca_4" class="about-us padd-section">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">GNI, 행복도와 아카지수</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">아카지수와 GNI, 행복도의 관계</div>
+    </div>
+    <div style="margin: auto; width: 80%; padding-top: 20px;" data-aos="fade-up">
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;' class="set_font_L">
+        1. 그래프
+      </p>
+      <div style="text-align:center;">
+        <img src="{{url_for('static', filename='img/aca/aca_res.png')}}" class="container-md" style="width: 55%; padding: 0;">
+        <p class='set_font_L' style='margin: 40px 10px 40px 10px;'>GNI와 아카지수의 관계를 선형 그래프와 산점도 그래프로 표시</p>
+      </div>
+      <div style="text-align:center;">
+        <img src="{{url_for('static', filename='img/aca/aca_bar.png')}}" class="container-md" style="width: 55%; padding: 0;">
+        <p class='set_font_L' style='margin: 40px 10px 40px 10px;'>행복도와 아카지수의 관계를 막대 그래프로 표시</p>
+      </div>
+      <div style="text-align:center;">
+        <img src="{{url_for('static', filename='img/aca/aca_hn_res.png')}}" class="container-md" style="width: 55%; padding: 0;">
+        <p class='set_font_L' style='margin: 40px 10px 0px 10px;'>행복도와 아카지수의 관계를 선형 그래프와 산점도 그래프로 표시</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="aca_5" class="about-us padd-section">
+    <div>
+    </div>
+    <div style="margin: auto; width: 80%; padding-top: 45px;" data-aos="fade-up">
+      <p style='margin: 10px; font-size: 1rem; font-weight: 400; line-height: 1.5;' class="set_font_L">
+        2. 선형회귀 분석
+      </p>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" style="background-color: #EAEAEA;"></th>
+            <th scope="col">P-value</th>
+            <th scope="col">R-value</th>
+            <th scope="col">Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">아카지수 - GNI</th>
+            <td>5.6515074007121486e-05 < 0.05</td>
+            <td>0.5801404753969274</td>
+            <td>아카지수와 GNI는 어느 정도 양의 상관관계를 갖는다.</td>
+          </tr>
+          <tr>
+            <th scope="row">아메리카노 가격 - GNI</th>
+            <td>5.682976997658277e-05 < 0.05</td>
+            <td>0.5799883007009231</td>
+            <td>아메리카노 가격과 GNI는 어느 정도 양의 상관관계를 갖는다.</td>
+          </tr>
+          <tr>
+            <th scope="row">아카지수 - 행복지수</th>
+            <td>0.0023876396565438367 < 0.05</td>
+            <td>0.45630296780478835</td>
+            <td>아카지수와 행복도는 약한 양의 상관관계를 갖는다.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="aca_6" class="about-us padd-section" style="margin-bottom: 150px;">
+    <div>
+      <div style="font-size: 3em; width: 80%; margin: auto; border-bottom: 1px solid gray; padding: 10px 0;" class="set_font_L">결론</div>
+      <div style="width: 80%; margin: auto; padding: 10px 0;">
+        국가별 아카지수에 대한 행복지수의 관계
+      </div>
+    </div>
+    <div style="margin: auto; padding-top: 40px; width: 80%;" data-aos="fade-up">
+      <div class="card" style="width:95%; margin:auto; background-color: #ebfbff;">
+        <div class="card-body" style="text-align:left;">
+          아카지수와 GNI, 행복도가 어느정도 상관관계가 있었지만 아카지수가 행복도를 대체할 수 있을 만큼의 상관계수를 갖진 못했다.<br/>
+          환율에 예민하게 변하는 지수인 만큼 언제 측정하느냐에 따라 상관관계가 차이가 있으므로,<br/>
+          현재 분석한 2019년도 이외의 다른 연도의 추가적인 분석이 필요하다.<br/>
+          또한 더 많은 표본을 모집하여 분석한다면 더 명확한 선형성을 띈 상관관계를 볼 수 있을것으로 예상된다.
+        </div>
+      </div>
+    </div>
+  </section>
+  
+</section>
+{% endblock %}
+
