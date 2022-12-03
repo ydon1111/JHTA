@@ -1,0 +1,45 @@
+
+DECLARE 
+	-- 1. C1 커서를 정의
+	CURSOR C1 IS 
+		SELECT EMPNO , ENAME , SAL 
+		FROM EMP
+		WHERE DEPTNO =10;
+
+	--3개의 변수를 담을 대표변수 : PL/SQL RECORD 
+	C2 C1%ROWTYPE;
+
+BEGIN
+	-- 2. OPEN 
+	OPEN C1; 
+	IF C1%ISOPEN THEN
+		DBMS_OUTPUT.PUT_LINE('CURSOR 오픈됨');
+	END IF;
+	
+	
+	-- 3. FETCH 
+	LOOP 
+		FETCH C1 INTO C2;
+		IF C1%FOUND THEN 
+			DBMS_OUTPUT.PUT_LINE('패치성공');
+		END IF;
+		IF C1%NOTFOUND THEN 
+			DBMS_OUTPUT.PUT_LINE('패치실패');
+		END IF;
+		--더이상 패치할 것이 없다면 탈출 
+
+		EXIT WHEN C1%NOTFOUND;
+			DBMS_OUTPUT.PUT_LINE(C1%ROWCOUNT || '번째 ROW: ' ||C2.EMPNO ||C2.ENAME||' '||C2.SAL);
+		END LOOP;
+	--4. CLOSE
+	CLOSE C1;
+END;
+/
+
+-- 커서명  
+
+--%ISOPEN  T,F  열렸는지 확인 
+--%FOUND   T,F  FETCH 찾았으면 확인 
+--%NOTFOUND T,F FETCH 못찾았으면 T
+--%ROWCOUNT  FETCH 횟수
+

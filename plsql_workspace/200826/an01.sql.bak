@@ -1,0 +1,8 @@
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('HELLO PL/SQL');
+    -- 한줄출력 
+    DBMS_OUTPUT.PUT_LINE('라인 한줄 출력');
+END;
+/
+
+

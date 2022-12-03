@@ -1,0 +1,32 @@
+ACCEPT vno prompt '사번을 입력하세요 :  ' 
+
+
+DECLARE 
+	-- 변수 선언부 
+	-- 스칼라 변수 
+	-- 사원 테이블의 사원번호를 저장할 만한 크기 
+	-- 실행하는 순간에 DB에 가서 특정 테이블의 컬럼과 동일한 자료형을 부여 
+	-- emp.empno%type
+	-- 테이블명.변수%type
+
+	vempno emp.empno%type := &vno;
+	vename emp.ename%type;
+	vsal emp.sal%type;
+
+
+BEGIN
+	--실행부
+	SELECT ename , sal 
+		INTO vename , vsal 
+	FROM emp
+	WHERE empno = vempno;
+
+    DBMS_OUTPUT.PUT_LINE(vempno || ' ' || vename ||' ' || vsal);
+END;
+/
+
+
+
+--SQL> alter table emp
+-- 2  modify empno number(5);
+
