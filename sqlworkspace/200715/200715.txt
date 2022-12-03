@@ -1,0 +1,15 @@
+ 
+ 
+             ip                192.168.0.4
+			 hostname          DESKTOP-ERR5D88
+			 
+			 
+			 
+			 ORCL =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = orcl)
+    )
+  )

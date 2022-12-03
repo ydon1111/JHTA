@@ -1,0 +1,101 @@
+HW2. 
+
+
+1. 다음과 같은 테이블을 생성하고 데이터를 입력하세요 
+
+MEMBER 
+
+ID              PW        NAME    GRADE    REGDATE 
+가변문자20 가변문자10  고정문자10   숫자2   날짜
+
+
+	ID       PW     NAME    GRADE    REGDATE
+	---	---	---	---	-----
+	ABC	111	HONG	3	2019/05/28
+	aaa	bbb	LEE	2	2019/04/11
+	ccc	ddd	KO	1	2019/01/01
+
+
+CREATE TABLE MEMBER 
+(ID VARCHAR2(20) PRIMARY KEY ,
+ PW VARCHAR2(10) UNIQUE,
+ NAME CHAR(10),
+ GRADE NUMBER(2),
+ REGDATE DATE);
+
+
+
+
+INSERT INTO MEMBER
+VALUES('ABC',111,'HONG',3,'2019/05/28');
+INSERT INTO MEMBER
+VALUES('aaa','bbb','LEE',2,'2019/04/11');
+INSERT INTO MEMBER
+VALUES('ccc','ddd','KO',1,'2019/01/01');
+
+DROP TABLE MEMBER;
+
+
+
+2.그림1처럼 TABLE을 생성 하는 SQL문을 작성하시오. 
+
+CREATE TABLE cust
+(CUST_ID  NUMBER(6) ,
+ CUST_GENDER  NUMBER , 
+ CUST_NAME VARCHAR2(10));
+
+
+3.그림2처럼 데이터를 추가 하는 SQL문을 작성하시오. 
+
+INSERT INTO CUST 
+VALUES(1,1,'이창길');
+INSERT INTO CUST 
+VALUES(2,0,'이지연');
+INSERT INTO CUST 
+VALUES(3,1,'');
+INSERT INTO CUST 
+VALUES(4,0,'이나영');
+INSERT INTO CUST 
+VALUES(5,1,'김경숙');
+
+DELETE CUST               
+WHERE CUST_ID =2 ;
+
+4.CUST 테이블에 GRADE 컬럼을 추가 하는 SQL문을 작성하시오  
+
+(단 GRADE 는 숫자2자리) 
+
+ALTER TABLE CUST
+	ADD GRADE NUMBER(2);
+
+
+
+5.GRADE 컬럼에 TYPE을 숫자 4자리로 변경 시키는 SQL문을 작성하시오 
+
+ALTER TABLE CUST 
+	MODIFY GRADE CHAR(4);
+
+
+그림1) 
+
+SQL> desc cust 
+
+ Name                                      Null?    Type 
+ ----------------------------------------- -------- ---------------------- 
+ CUST_ID                                            NUMBER(6) 
+ CUST_GENDER                                        NUMBER 
+ CUST_NAME                                          VARCHAR2(10) 
+
+
+그림2) 
+
+SQL> select * from cust; 
+
+CUST_ID CUST_GENDER CUST_NAME 
+
+---------- ----------- ---------- 
+         1           1 이창길 
+         2           0 이지연 
+         3           1  
+         4           0 이나영 
+	 5	     1 김경숙 

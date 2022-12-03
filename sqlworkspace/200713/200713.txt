@@ -1,0 +1,493 @@
+SQL
+
+
+QUERY : SELECT
+DML : INSERT , UPDATE , DELETE
+TCL : COMMIT , ROLLBACK 
+DDL : CREATE , ALTER , DROP , RENAME , TRUNCATE , COMMENT 
+
+
+무결성
+DML 의 제약 조건 
+
+
+	COLUMN LEVEL 정의방식
+		컬럼명 자료형 [CONSTRAINT 제약명] 제약종류
+		SYS_C숫자형 으로 임의으 이름을 부여 
+
+
+
+CREATE TABLE DEPT1
+(DEPTNO NUMBER(2) PRIMARY KEY,
+DNAME VARCHAR2(20) UNIQUE,
+LOC VARCHAR2(20))
+/
+
+
+
+  
+	TABLE LEVEL 정의방식	
+		컬럼명 자료형,
+		컬럼명 자료형,
+		CONSTRAINT 제약명 제약종류 (컬럼명)
+
+
+
+CREATE TABLE EMP1
+(EMPNO NUMBER(4) CONSTRAINT EMP1_EMPNO_PK PRIMARY KEY,
+ENAME VARCHAR2(20) NOT NULL,
+SAL NUMBER (7,2),12345.67  소숫점 자리 2 자리 
+DETPNO NUMBER(2),
+CONSTRAINT EMP1_SAL_CK CHECK (SAL BETWEEN 500 AND 5000),
+CONSTRAINT EMP1_DEPTNO_FK FOREIGN KEY (DETPNO)
+  REFERENCES DEPT1(DEPTNO))
+  
+  INSERT INTO DEPT1
+  VALUES (1,'A','B')
+  
+  
+  
+
+  
+  
+  
+  INSERT INTO DEPT1
+  VALUES (1,'전산','서울') 무결성 제약 조건 (PRIMARY KEY)
+  
+  INSERT INTO DEPT1
+  VALUES (2,'전산','서울')  
+  
+  INSERT INTO DEPT1
+  VALUES (3,'전산','부산') 무결성 제약 조건 (UNIQUE)
+  
+  INSERT INTO EMP1 
+  VALUES (1111,'HONG' , 3000, 5) 무결성 제약조건(SCOTT.EMP1_DEPTNO_FK)이 위배되었습니다- 부모 키가
+없습니다
+
+	
+	
+	-- 제약 이름 ==> 어떤 제약 인지 확인 ...
+	-- TABLE <== 관리 정보 ( 자료 사전 )
+	-- DATA DICTIONARY 
+	DESC USER_CONSTRAINTS 
+	
+	
+	위반사항 확인하기 위해 사용 
+	
+	
+	SELECT CONSTRAINT_NAME, CONSTRAINT_TYPE, TABLE_NAME, SEARCH_CONDITION
+	FROM USER_CONSTRAINTS
+	WHERE TABLE_NAME IN ('DEPT1' , 'EMP1');
+	
+	
+	INSERT INTO EMP1 
+	VALUES (1111,'HONG' , 3000, 1)
+  
+  
+	DELETE DEPT1 
+	WHERE DEPTNO = 1; 
+	1행에 오류:
+	ORA-02292: 무결성 제약조건(SCOTT.EMP1_DEPTNO_FK)이 위배되었습니다- 자식
+	레코드가 발견되었습니다
+	->> 추가 언어를 사용해서 함께 삭제하거나 NULL 로 만드는 방법이 있음, (잘안써서 안적음)
+	
+	DELETE DEPT1 
+	WHERE DEPTNO = 2; 
+	
+	
+	
+	UNIQUE : 고유한값만 가져야한다 ... NULL 사용 가능 
+	PK ==> UK + NOT NULL 
+	
+	
+	DEPT1 ==> LOC 컬럼에 UNIQUE 제약 추가 
+	 ALTER TABLE DEPT1 
+	 ADD CONSTRAINT DEPT1_LOC_UK UNIQUE (LOC);
+	 
+	 
+	 1.DATA DICTIONARY에서 이 제약정보 검색
+		제약명 , 제약타입 , 테이블명 , 검색조건 
+		
+		
+	2. LOC 컬럼에 중복된 값 넣어보기 
+	
+	SELECT CONSTRAINT_NAME , CONSTRAINT_TYPE , TABLE_NAME , SEARCH_CONDITION 
+	FROM USER_CONSTRAINTS 
+	WHERE TABLE_NAME = 'DEPT1' ;  
+	
+	
+	INSERT INTO DEPT1 
+	VALUES (2,'연습','B')
+	INSERT INTO DEPT1
+	1행에 오류:
+	ORA-00001: 무결성 제약 조건(SCOTT.DEPT1_LOC_UK)에 위배됩니다
+	
+	
+	-- 제약 삭제
+	
+	ALTER TABLE DEPT1 
+	DROP CONSTRAINT DEPT1_LOC_UK;
+	
+	--NOT NULL 을 제외한 제약조건은 따라 오지 않음
+	
+	CREATE TABLE EMP2
+	AS 
+	SELECT *
+	FROM EMP1; 
+	
+	
+	
+	--컬럼명 변경 
+
+	ALTER TABLE EMP1 RENAME COLUMN DETPNO TO DEPTNO;
+	
+	
+	
+	--HW 
+	1. 테이블 생성 	
+	PRODUCT 
+	
+	PNO     PNAME     PRICE   QTY    STATUS
+	
+	숫자(4)    문자(30)    숫자(9) 숫자(5)  숫자(2)
+	
+	2. 제약조건
+	PNO 컬럼에 PK
+	PNAME UK
+	PRICE 0~9999999
+	QTY 0 ~ 5000
+	STATUS NOT NULL 
+	
+	3.데이터 추가 
+	SAMPLE DATA 5개 추가 
+	
+	
+	
+	
+	CREATE TABLE PRODUCT 
+	(PNO NUMBER(4) CONSTRAINT PNO_PRODUCT_PK PRIMARY KEY,
+	 PNAME VARCHAR2(30) CONSTRAINT PNAME_PRODUCT_UK UNIQUE,
+	 PRICE  NUMBER(9,2) CONSTRAINT PRICE_PRODUCT_BETW CHECK (PRICE BETWEEN 0 AND 9999999),
+	 QTY NUMBER(5,2) CONSTRAINT QTY_PRODUCT_BETW  CHECK (QTY BETWEEN 0 AND 5000),
+	 STATUS NUMBER(2) CONSTRAINT STATUS_PRODUCT_NOTNULL NOT NULL)
+	 
+	 
+	   INSERT INTO PRODUCT 
+		VALUES (1,'사과',2000,1,1)
+	   INSERT INTO PRODUCT 
+		VALUES (2,'딸기',3000,3,1)
+	   INSERT INTO PRODUCT 
+		VALUES (3,'포도',1000,5,2)
+	   INSERT INTO PRODUCT 
+		VALUES (4,'배',10000,10,2)
+	   INSERT INTO PRODUCT 
+		VALUES (5,'수박',50000,2,1)
+
+     INSERT INTO PRODUCT 
+	 VALUES (6,'옥수수',50000,2,3)
+	 
+	  INSERT INTO PRODUCT 
+	 VALUES (7,'체리',880000888888,2,38)
+	 
+	 
+	 
+	 --ROW 삭제 하기 
+	 DELETE FROM PRODUCT
+	 WHERE PNO IN ( 6,7) ; 
+	 
+	 
+	 
+	 
+	 OBJECT 
+	 
+	 -TABLE 
+	 -VIEW
+	 -INDEX
+	 -SeQuence
+	 -SYNONYM
+	 
+	 -INDEX
+	 
+	 
+	 
+	 VIEW 
+	 SELECT 문에 이름을 붙여서 보여줌 
+	 일부만 보여줘서 보안을 높일 수 있고 자료분류가 쉬워짐
+	 
+	 
+	 conn system/oracle
+	 -- 사용자에게 권한 부여
+	 GRANT CREATE VIEW TO scott;
+	 
+	 conn scott/tiger
+	 
+	 CREATE VIEW EMPVW30
+	 AS
+	 SELECT EMPNO,ENAME,SAL,DEPTNO
+	 FROM EMP
+	 WHERE DEPTNO = 30;
+	
+	 DESC USER_VIEWS
+	 
+	 SELECT TEXT
+	 FROM USER_VIEWS
+	 WHERE VIEW_NAME = 'EMPVW30';
+	 
+	 
+	 SELECT *
+	 FROM (SELECT EMPNO , ENAME , SAL , DEPTNO FROM EMP WHERE DEPTNO =30);
+	 
+	 ==
+	 
+	 SELECT *
+	 FROM EMPVW30;
+	 
+	 VIEW : 물리적 테이블에 근거한 논리적 가상테이블 역할
+			SELECT 문에 이름을 부여 
+			SUBQUERY로 동작함 
+			
+	INSERT INTO EMPVW30
+	VALUES (1111, 'HONG' , 2000 , 30);
+	 
+	 
+	 1. 보안 효과 
+	 2. 문장의 단순화 
+	 
+	 CREATE VIEW EMP_DEPT
+	 AS
+	 SELECT E.ENAME , D.DNAME 
+	 FROM EMP E , DEPT D 
+	 WHERE E.DEPTNO = D.DEPTNO;
+	 
+	 
+	 SELECT * FROM EMP_DEPT;
+	 
+	 -------------------
+	 
+	 SIMPLE VIEW                COMPLEX VIEW 
+	 -------------               -----------------
+	 SELECT 문장                   
+	                             JOIN , DISTINCT , GROUP FUNCTION , GROUP BY
+     항상 DML 가능                  일부 DML 가능 
+     
+	 INSERT INTO EMP_DEPT 
+	 VALUES ('홍길동', '영업'); 
+	 
+	 1행에 오류:
+	 ORA-01776: 조인 뷰에 의하여 하나 이상의 기본 테이블을 수정할 수 없습니다.
+	 
+	 CREATE VIEW EMP_AVG_SAL
+	 AS
+	 SELECT DEPTNO , AVG(SAL) AVGSAL
+	 FROM EMP
+	 GROUP BY DEPTNO
+	 
+	 50 부서  5000
+	 
+	 INSERT INTO EMP_AVG_SAL
+	 VALUES (50, 5000)
+     1행에 오류:
+	 ORA-01733: 가상 열은 사용할 수 없습니다
+	 
+	 -- CREATE VIEW 이름
+	 
+	 -- ALTER TABLE 이름
+	 
+	 
+     ALTER VIEW EMPVW30
+	 AS
+	 으로 변경 안됨
+	 
+	 
+	 변경
+	 
+	 CREATE OR REPLACE VIEW EMPVW30
+	 AS 
+	 SELECT EMPNO , ENAME , COMM , DEPTNO
+	 FROM EMP
+	 WHERE DEPTNO = 30
+	 
+	 뷰 삭제
+	 DROP VIEW EMPVW30; 
+	 
+	 
+	 
+	 -- 사번 이름 급여를 급여가 많은 3명만 순으로 출력
+	 
+	 SELECT EMPNO , ENAME , SAL 
+	 FROM EMP 
+	 ORDER BY SAL DESC ;
+	 
+	 ROWNUM , ROWID  -- PSEUDO COLUMN 
+	 로우번호   로우주소 
+	 
+	 
+	 
+	 
+	 SELECT EMPNO , ROWNUM , ROWID
+	 FROM EMP ;
+	 
+	 SELECT DEPTNO , ROWNUM , ROWID
+	 FROM DEPT;
+	 
+	 SELECT ROWNUM , EMPNO , ENAME , SAL
+	 FROM EMP 
+	 ORDER BY SAL DESC;
+	 
+	 
+	 CREATE VIEW E1
+	 AS 
+	 SELECT EMPNO , ENAME , SAL 
+	 FROM EMP
+	 ORDER BY SAL DESC;
+  
+     
+	 SELECT ROWNUM , EMPNO , ENAME ,SAL
+	 FROM E1
+	 WHERE ROWNUM <=3 ;
+	 
+	 ==
+	 
+	 VIEW를 만들지 않고 SUBQUERY로 만듬 (INLINE-VIEW)
+	 
+	 
+	 SELECT ROWNUM , EMPNO , ENAME ,SAL
+	 FROM (SELECT EMPNO , ENAME , SAL FROM EMP ORDER BY SAL DESC)
+	 WHERE ROWNUM <=3 ;
+	 
+	 ROWNUM == 1.ORACLE에서만 작동 
+			   2.STOPKEY  <= 됨  >= 안됨 
+	
+	 SELECT RN , EMPNO , ENAME , SAL 
+	 FROM(SELECT ROWNUM RN, EMPNO , ENAME ,SAL
+	 FROM (SELECT EMPNO , ENAME , SAL FROM EMP ORDER BY SAL DESC)
+	 WHERE ROWNUM <=7)
+	 WHERE RN>=4
+	
+	 급여 하위 3명만 출력
+	 사번 , 이름 ,급여 
+	 
+	 SELECT ROWNUM , EMPNO , ENAME , SAL 
+	 FROM (SELECT EMPNO , ENAME , SAL FROM EMP ORDER BY SAL)
+	 WHERE ROWNUM <=3 ;
+	 
+	 SEQUENCE 
+	 번호 발생기 
+	 
+	 
+	 CREATE SEQUENCE DEPT_DEPTNO 
+	 START WITH 1
+	 INCREMENT BY 1 
+	 MINVALUE 1
+	 MAXVALUE 100
+	 NOCACHE
+	 NOCYCLE;
+	 
+	 INSERT 문에 주로 사용 
+	 
+	 INSERT INTO DEPT 
+	 VALUES (DEPT_DEPTNO.NEXTVAL, 'A' , 'B'); 
+	 
+	 SELECT * FROM DEPT;
+	 
+	 PRIMARY KEY 의 VALUE 
+	 APPLICATION ==> DB 데이터를 추가 
+	 
+	 DESC USER_SEQUENCES 
+	 
+	 SELECT * 
+	 FROM USER_SEQUENCES;
+	 
+	 SELECT DEPT_DEPTNO.NEXTVAL 
+	 FROM DEPT;
+	 
+	 조건 변경 
+	 
+	 ALTER SEQUENCE DEPT_DEPTNO 
+	 CYCLE;
+	 
+     --CYCLE : 
+		PK VALUE 값으로 사용하기 때문에 잘 안사용함
+		
+		
+	 INSERT INTO EMP (EMPNO , ENAME , SAL , DEPTNO)
+	 VALUES (DEPT_DEPTNO.NEXTVAL , 'AAA', 3000 , 20);
+	 
+	 
+	 SEQUENCE 삭제 , 삭제한다고 기존 VALUES 가 사라지지 않음
+	 
+	 DROP SEQUENCE DEPT_DEPTNO; 
+	 
+	 SYNONYM 
+	 동의어   :    해    ,   태양 
+	 
+	 DESC SALGRADE;
+	 
+	 
+	 CREATE SYNONOYM SG
+	 FOR SALGRADE; 
+	 CREATE SYNONYM SG
+	 
+	 DROP SYNONYM SG;
+	 
+	 
+	 
+	 INDEX
+	 빠른 검색 
+	 
+	 
+	 select ename ,rowid 
+	 from emp;
+	 
+	 
+	 AAAR3sAAEAAAACXAAH
+	 
+	 SELECT EMPNO , ENAME , SAL 
+	 FROM EMP 
+	 WHERE ROWID = 'AAAR3sAAEAAAACXAAH' ;
+	 
+	 
+	 DB              BOOK 
+	 INDEX          INDEX 
+	 빠른검색          빠른검색
+	 자주 검색되는      KEYWORD 
+ 	 COLUM의 VALUE   
+     ASC            ASC 
+     ROWID          PAGE NO	 
+	 
+	 
+	 CREATE INDEX IDX_EMP_ENAME 
+	 ON EMP (ENAME) ;
+	 
+	 SELECT EMPNO , ENAME , SAL 
+	 FROM EMP 
+	 WHERE ENAME = 'SCOTT';
+	
+	 TABLE 의 DATA 가 늘어나면 시간이 줄어듬  
+     
+	 SET TIMING ON
+	 
+	 CONNECT sys/oracle as sysdba
+	 
+	 
+	 CREATE INDEX INDEX_EMP_JOB
+	 ON EMP(JOB) ;
+	 
+	 SELECT INDEX_NAME , INDEX_TYPE
+	 FROM USER_INDEXES;
+	 
+	 
+	 CREATE TABLE EMP2
+	 AS 
+	 SELECT * FROM EMP
+	 
+	 CREATE TABLE DEPT2
+	 AS 
+	 SELECT * FROM DEPT 
+	 
+	 DELE
+	
+	 
+
+	 
+	 

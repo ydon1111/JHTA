@@ -1,0 +1,405 @@
+▶사용자생성, 권한부여
+SQL> connect system/oracle
+연결되었습니다.
+SQL> show user
+USER은 "SYSTEM"입니다
+SQL> set sqlprompt "_USER>"
+SYSTEM>CREATE USER USER1
+  2  IDENTIFIED BY tiger;
+
+사용자가 생성되었습니다.
+
+SYSTEM>conn USER1/tiger
+ERROR:
+ORA-01045: user USER1 lacks CREATE SESSION privilege; logon denied
+
+경고: 이제는 ORACLE에 연결되어 있지 않습니다.
+  --->아이디 비번 생성 후 권한 부여해야 함. 아이디는 대소문자 구분x 비번은 구분
+
+▶PRIVILEGE 권한
+1.SYSTEM PRIVILEGE: SYSTEM 전체 영향 : 관리자가 권한가짐/ 로그인
+                           GRANT 권한 TO 사용자명;
+                           REVOKE 권한 FROM 사용자명;
+2.OBJECT PRIVILEGE: 해당 OBJECT에만 영향 : (오브젝트)생성자 
+                           GRANT 권한 ON 객체명 TO 사용자명;
+                           REVOKE 권한 ON 객체명 FROM 사용자명;
+
+▶DCL (data control): GRANT, REVOKE
+  DDL,DCL만나면 AUTO COMMIT된다
+
+▶SYSTEM>GRANT CONNECT TO USER1; ->연결권한 (SYSTEM>conn USER1/tiger)
+SYSTEM>GRANT RESOURCE TO USER1; -> CREATE TABLE 권한
+
+>conn system/oracle
+연결되었습니다.
+SYSTEM>GRANT CONNECT TO USER1;
+
+권한이 부여되었습니다.
+
+SYSTEM>conn USER1/tiger
+연결되었습니다.
+USER1>
+USER1>CREATE TABLE T1
+  2  (ID NUMBER);
+CREATE TABLE T1
+*
+1행에 오류:
+ORA-01031: 권한이 불충분합니다
+
+USER1>conn system/oracle
+연결되었습니다.
+SYSTEM>GRANT RESOURCE TO USER1;
+
+권한이 부여되었습니다.
+
+SYSTEM>conn USER1/tiger
+연결되었습니다.
+USER1>CREATE TABLE T1
+  2  (ID NUMBER);
+
+테이블이 생성되었습니다.
+
+USER1>DESC T1;
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 NUMBER
+
+▶SELECT * FROM 스키마.EMP;
+   SELECT * FROM 사용자.EMP;
+      스키마: 오브젝트가 저장될 수 있는 도메인
+      스키마이름=사용자이름
+      SCOTT은 자기꺼니까 안해도상관없음
+
+USER1>SELECT * FROM EMP;
+SELECT * FROM EMP
+              *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다
+
+USER1>SELECT * FROM SCOTT.EMP;
+SELECT * FROM SCOTT.EMP
+                    *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다
+   --->보안강화 있기는 있다 권한부여필요
+         오브젝트 권한의 권한소유자는 scott이므로 scott으로 로그인
+
+USER1>conn scott/tiger
+연결되었습니다.
+SCOTT>GRANT SELECT ON EMP TO USER1;
+
+권한이 부여되었습니다.
+
+SCOTT>conn USER1/tiger
+연결되었습니다.
+USER1>SELECT * FROM SCOTT.EMP;
+
+15 개의 행이 선택되었습니다.
+
+USER1>UPDATE SCOTT.EMP
+  2  SET SAL=100
+  3  WHERE ENAME='SCOTT';
+UPDATE SCOTT.EMP
+             *
+1행에 오류:
+ORA-01031: 권한이 불충분합니다
+
+USER1>conn scott/tiger
+연결되었습니다.
+SCOTT>GRANT UPDATE, DELETE ON EMP TO USER1;
+
+SCOTT>conn USER1/tiger
+연결되었습니다.
+USER1>UPDATE SCOTT.EMP
+  2  SET SAL=100
+  3  WHERE ENAME='SCOTT';
+
+1 행이 갱신되었습니다.
+
+USER1>SELECT SAL FROM SCOTT.EMP WHERE ENAME='SCOTT';
+
+       SAL
+----------
+       100
+
+USER1>DELETE SCOTT.EMP WHERE ENAME='SCOTT';
+1 행이 삭제되었습니다.
+
+USER1>SELECT * FROM SCOTT.EMP WHERE ENAME='SCOTT';
+선택된 레코드가 없습니다.
+
+USER1>ROLLBACK;
+롤백이 완료되었습니다.
+
+USER1>SELECT * FROM SCOTT.EMP WHERE ENAME='SCOTT';
+
+     EMPNO ENAME      JOB              MGR HIREDATE        SAL       COMM
+---------- ---------- --------- ---------- -------- ---------- ----------
+    DEPTNO
+----------
+      7788 SCOTT      ANALYST         7566 87/04/19        100
+
+USER1>conn scott/tiger
+연결되었습니다.
+SCOTT>REVOKE SELECT,UPDATE,DELETE ON EMP FROM USER1;
+
+권한이 취소되었습니다.
+
+USER1>SELECT * FROM SCOTT.EMP;
+SELECT * FROM SCOTT.EMP
+                    *
+1행에 오류:
+ORA-00942: 테이블 또는 뷰가 존재하지 않습니다
+
+USER1>conn system/oracle
+연결되었습니다.
+SYSTEM>REVOKE CONNECT, RESOURCE FROM USER1;
+
+권한이 취소되었습니다.
+
+SYSTEM>conn USER1/tiger
+ERROR:
+ORA-01045: user USER1 lacks CREATE SESSION privilege; logon denied
+
+경고: 이제는 ORACLE에 연결되어 있지 않습니다.
+
+>conn USER1/tiger
+ERROR:
+ORA-01045: user USER1 lacks CREATE SESSION privilege; logon denied
+
+>conn system/oracle
+연결되었습니다.
+SYSTEM>GRANT CONNECT,RESOURCE TO USER1;
+
+권한이 부여되었습니다.
+
+SYSTEM>conn
+사용자명 입력: user1
+비밀번호 입력:
+연결되었습니다.
+USER1>
+USER1>conn system/oracle
+연결되었습니다.
+SYSTEM>DESC DBA_USERS;
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ USERNAME                                  NOT NULL VARCHAR2(30)
+ USER_ID                                   NOT NULL NUMBER
+ PASSWORD                                           VARCHAR2(30)
+ ACCOUNT_STATUS                            NOT NULL VARCHAR2(32)
+ LOCK_DATE                                          DATE
+ EXPIRY_DATE                                        DATE
+ DEFAULT_TABLESPACE                        NOT NULL VARCHAR2(30)
+ TEMPORARY_TABLESPACE                      NOT NULL VARCHAR2(30)
+ CREATED                                   NOT NULL DATE
+ PROFILE                                   NOT NULL VARCHAR2(30)
+ INITIAL_RSRC_CONSUMER_GROUP                        VARCHAR2(30)
+ EXTERNAL_NAME                                      VARCHAR2(4000)
+ PASSWORD_VERSIONS                                  VARCHAR2(8)
+ EDITIONS_ENABLED                                   VARCHAR2(1)
+ AUTHENTICATION_TYPE                                VARCHAR2(8)
+
+SYSTEM>SELECT USERNAME, PASSWORD, ACCOUNT_STATUS
+  2  FROM DBA_USERS;
+
+USERNAME                       PASSWORD
+------------------------------ ------------------------------
+ACCOUNT_STATUS
+--------------------------------
+MGMT_VIEW
+OPEN
+
+SYS
+OPEN
+
+SYSTEM
+OPEN
+
+USERNAME                       PASSWORD
+------------------------------ ------------------------------
+ACCOUNT_STATUS
+--------------------------------
+DBSNMP
+OPEN
+
+SYSMAN
+OPEN
+
+SCOTT
+OPEN
+
+
+USERNAME                       PASSWORD
+------------------------------ ------------------------------
+ACCOUNT_STATUS
+--------------------------------
+USER1
+OPEN
+
+OUTLN
+EXPIRED & LOCKED
+
+FLOWS_FILES
+EXPIRED & LOCKED
+
+.....
+
+▶비번변경권한: 본인, 관리자(SYSTEM, SYS)
+SYSTEM>ALTER USER USER1
+  2  IDENTIFIED BY lion;
+
+사용자가 변경되었습니다.
+
+SYSTEM>conn USER1/lion
+연결되었습니다.
+USER1>
+USER1>ALTER USER USER1
+  2  IDENTIFIED BY cat;
+
+사용자가 변경되었습니다.
+
+USER1>password 로도 변경 가능
+
+▶비번 EXPIRE
+USER1>conn USER1/cat
+연결되었습니다.
+USER1>conn system/oracle
+연결되었습니다.
+SYSTEM>CREATE USER USER2
+  2  IDENTIFIED BY tiger
+  3  PASSWORD EXPIRE;
+
+사용자가 생성되었습니다.
+
+SYSTEM>GRANT CONNECT, RESOURCE TO USER2;
+
+권한이 부여되었습니다.
+
+SYSTEM>conn USER2/tiger
+ERROR:
+ORA-28001: the password has expired
+
+USER2에 대한 비밀번호를 변경합니다.
+새 비밀번호:
+새 비밀번호 다시 입력:
+비밀번호가 변경되었습니다.
+연결되었습니다.
+USER2>conn USER2/lion
+연결되었습니다.
+USER2>conn USER1/cat
+연결되었습니다.
+USER1>DESC T1;
+ 이름                                      널?      유형
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 NUMBER
+
+USER1>INSERT INTO T1 VALUES(2020);
+1 개의 행이 만들어졌습니다.
+
+USER1>INSERT INTO T1 VALUES(2021);
+1 개의 행이 만들어졌습니다.
+
+USER1>SELECT * FROM T1;
+
+        ID
+----------
+      2020
+      2021
+
+USER1>COMMIT;
+
+커밋이 완료되었습니다.
+
+▶USER1 삭제
+USER1>DROP USER USER1;
+DROP USER USER1
+*
+1행에 오류:
+ORA-01031: 권한이 불충분합니다
+
+▷프롬포트1
+USER1>DROP USER USER1;
+DROP USER USER1
+*
+1행에 오류:
+ORA-01031: 권한이 불충분합니다
+
+USER1>conn scott/tiger
+연결되었습니다.
+SCOTT>
+
+▷프롬포트2
+SQL> set sqlprompt "_USER>"
+SYSTEM>DROP USER USER1;
+DROP USER USER1
+*
+1행에 오류:
+ORA-01940: 현재 접속되어 있는 사용자는 삭제할 수 없습니다
+
+
+SYSTEM>DROP USER USER1;
+DROP USER USER1
+*
+1행에 오류:
+ORA-01922: 'USER1'(을)를 삭제하려면 CASCADE를 지정하여야 합니다
+
+
+SYSTEM>DROP USER USER1 cascade;
+
+사용자가 삭제되었습니다.
+
+▷SCOTT>GRANT SELECT ON EMP TO USER2;
+권한이 부여되었습니다.
+
+>conn USER2/lion
+연결되었습니다.
+USER2>SELECT * FROM SCOTT.EMP;
+
+
+▶LOCK 프롬포트2
+SYSTEM>ALTER USER scott
+  2  account lock;
+
+사용자가 변경되었습니다.
+
+SYSTEM>conn scott/tiger
+ERROR:
+ORA-28000: the account is locked
+
+
+경고: 이제는 ORACLE에 연결되어 있지 않습니다.
+>
+>conn system/oracle
+연결되었습니다.
+SYSTEM>ALTER USER scott
+  2  IDENTIFIED BY tiger
+  3  account unlock;
+
+사용자가 변경되었습니다.
+
+SYSTEM>
+
+▶QUERY: SELECT
+  DML: INSERT, UPDATE, DELETE
+  TCL: COMMINT, ROLLBACK
+  DDL: CREATE, ALTER, DROP, RENAME, TRUNCATE, COMMENT
+  DCL: GRANT, REVOKE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,737 @@
+ SINGLE ROW FUNCTION 
+
+
+
+ select    칼럼명  ,  upper (칼럼명) 대문자로 변경
+                         lower (칼럼명) 소문자로 변경
+                         intcap(칼럼명) 앞에만 대문자 변경
+
+
+SQL> select ename, upper(ename), lower(ename), initcap(ename)
+  2  from emp;
+
+ENAME      UPPER(ENAM LOWER(ENAM INITCAP(EN
+---------- ---------- ---------- ----------
+SMITH      SMITH      smith      Smith
+ALLEN      ALLEN      allen      Allen
+WARD       WARD       ward       Ward
+JONES      JONES      jones      Jones
+MARTIN     MARTIN     martin     Martin
+BLAKE      BLAKE      blake      Blake
+CLARK      CLARK      clark      Clark
+SCOTT      SCOTT      scott      Scott
+KING       KING       king       King
+TURNER     TURNER     turner     Turner
+ADAMS      ADAMS      adams      Adams
+
+ENAME      UPPER(ENAM LOWER(ENAM INITCAP(EN
+---------- ---------- ---------- ----------
+JAMES      JAMES      james      James
+FORD       FORD       ford       Ford
+MILLER     MILLER     miller     Miller
+
+14 개의 행이 선택되었습니다.
+
+함수는 ANCI 표준이 아니다. 즉 다른 프로그램에서는 안될 수 있음.
+
+
+----------------------------------글자 정리 ----------------------------------------------------------
+
+
+SUBSTR (특정문자만 추출)
+LENGTH (길이 값출력)
+LPAD (왼쪽 특정 문자 채움)
+RPAD(오른쪽 특정 문자 채움)
+INSTR(특정 문자의 위치 추출)
+CONCAT == || (두 문자열 결합 출력)
+
+
+
+
+SQL> SELECT SUBSTR(ENAME, 1,3) , SUBSTR(ENAME,4) , LENGTH(ENAME),
+  2  LPAD(SAL,10,'*'), RPAD(SAL,10,'*'), INSTR(ENAME,'A'), CONCAT(ENAME,JOB)
+  3  from emp;
+
+SUBSTR SUBSTR(ENAME,4 LENGTH(ENAME) LPAD(SAL,10,'*')     RPAD(SAL,10,'*')
+------ -------------- ------------- -------------------- --------------------
+INSTR(ENAME,'A') CONCAT(ENAME,JOB)
+---------------- -------------------
+SMI    TH                         5 *******800           800*******
+               0 SMITHCLERK
+
+ALL    EN                         5 ******1600           1600******
+               1 ALLENSALESMAN
+
+WAR    D                          4 ******1250           1250******
+               2 WARDSALESMAN
+
+
+SUBSTR SUBSTR(ENAME,4 LENGTH(ENAME) LPAD(SAL,10,'*')     RPAD(SAL,10,'*')
+------ -------------- ------------- -------------------- --------------------
+INSTR(ENAME,'A') CONCAT(ENAME,JOB)
+---------------- -------------------
+JON    ES                         5 ******2975           2975******
+               0 JONESMANAGER
+
+MAR    TIN                        6 ******1250           1250******
+               2 MARTINSALESMAN
+
+BLA    KE                         5 ******2850           2850******
+               3 BLAKEMANAGER
+
+
+SUBSTR SUBSTR(ENAME,4 LENGTH(ENAME) LPAD(SAL,10,'*')     RPAD(SAL,10,'*')
+------ -------------- ------------- -------------------- --------------------
+INSTR(ENAME,'A') CONCAT(ENAME,JOB)
+---------------- -------------------
+CLA    RK                         5 ******2450           2450******
+               3 CLARKMANAGER
+
+SCO    TT                         5 ******3000           3000******
+               0 SCOTTANALYST
+
+KIN    G                          4 ******5000           5000******
+               0 KINGPRESIDENT
+
+
+SUBSTR SUBSTR(ENAME,4 LENGTH(ENAME) LPAD(SAL,10,'*')     RPAD(SAL,10,'*')
+------ -------------- ------------- -------------------- --------------------
+INSTR(ENAME,'A') CONCAT(ENAME,JOB)
+---------------- -------------------
+TUR    NER                        6 ******1500           1500******
+               0 TURNERSALESMAN
+
+ADA    MS                         5 ******1100           1100******
+               1 ADAMSCLERK
+
+JAM    ES                         5 *******950           950*******
+               2 JAMESCLERK
+
+
+SUBSTR SUBSTR(ENAME,4 LENGTH(ENAME) LPAD(SAL,10,'*')     RPAD(SAL,10,'*')
+------ -------------- ------------- -------------------- --------------------
+INSTR(ENAME,'A') CONCAT(ENAME,JOB)
+---------------- -------------------
+FOR    D                          4 ******3000           3000******
+               0 FORDANALYST
+
+MIL    LER                        6 ******1300           1300******
+               0 MILLERCLERK
+
+
+14 개의 행이 선택되었습니다.
+
+
+-----------------------------------------숫자 함수 --------------------------------------------------------------------------
+
+ROUND (반올림)
+TRUNC (절삭)
+MOD (나머지 구해주는 함수)
+
+SQL> SELECT ROUND(45.129,2),
+  2         TRUNC(45.129,2)
+  3  FROM DUAL;
+
+ROUND(45.129,2) TRUNC(45.129,2)
+--------------- ---------------
+          45.13           45.12
+
+
+
+SQL> SELECT ROUND(45.129,-1) ,
+  2         TRUNC(45.129,-1)
+  3  FROM DUAL;
+
+ROUND(45.129,-1) TRUNC(45.129,-1)
+---------------- ----------------
+              50               40
+
+
+
+SQL> SELECT ROUND(SAL,-2),TRUNC(COMM,-2),MOD(100,2)
+  2  FROM EMP;
+
+ROUND(SAL,-2) TRUNC(COMM,-2) MOD(100,2)
+------------- -------------- ----------
+          800                         0
+         1600            300          0
+         1300            500          0
+         3000                         0
+         1300           1400          0
+         2900                         0
+         2500                         0
+         3000                         0
+         5000                         0
+         1500              0          0
+         1100                         0
+
+ROUND(SAL,-2) TRUNC(COMM,-2) MOD(100,2)
+------------- -------------- ----------
+         1000                         0
+         3000                         0
+         1300                         0
+
+14 개의 행이 선택되었습니다.
+
+
+
+
+
+------------------------------------------날짜함수 --------------------------------------------------------------------------
+
+SYSDATE (오늘 날짜 ,현재시간 )
+
+SQL> SELECT SYSDATE
+  2  FROM DUAL;
+
+SYSDATE
+--------
+20/07/07
+
+SQL> INSERT INTO EMP(EMPNO, ENAME, SAL, HIREDATE)
+  2  VALUES (1111, 'HONG', 3000, SYSDATE);
+
+1 개의 행이 만들어졌습니다.
+
+
+HIREDATE, MONTHS_BETWEEN (사이 월수)
+ADD_MONTHS(월수 더하기)
+LAST_DAY(월 마지막날)
+NEXT_DAY(가까운날)
+
+
+
+
+SQL> SELECT HIREDATE, MONTHS_BETWEEN(SYSDATE, HIREDATE),
+  2  ADD_MONTHS(HIREDATE,6),
+  3  LAST_DAY(HIREDATE),
+  4  NEXT_DAY(HIREDATE,'금')
+  5  FROM EMP;
+
+HIREDATE MONTHS_BETWEEN(SYSDATE,HIREDATE) ADD_MONT LAST_DAY NEXT_DAY
+-------- -------------------------------- -------- -------- --------
+80/12/17                       474.691259 81/06/17 80/12/31 80/12/19
+81/02/20                       472.594485 81/08/20 81/02/28 81/02/27
+81/02/22                       472.529969 81/08/22 81/02/28 81/02/27
+81/04/02                        471.17513 81/10/02 81/04/30 81/04/03
+81/09/28                       465.336421 82/03/28 81/09/30 81/10/02
+81/05/01                       470.207388 81/11/01 81/05/31 81/05/08
+81/06/09                       468.949324 81/12/09 81/06/30 81/06/12
+87/04/19                       398.626743 87/10/19 87/04/30 87/04/24
+81/11/17                       463.691259 82/05/17 81/11/30 81/11/20
+81/09/08                       465.981582 82/03/08 81/09/30 81/09/11
+87/05/23                       397.497711 87/11/23 87/05/31 87/05/29
+
+HIREDATE MONTHS_BETWEEN(SYSDATE,HIREDATE) ADD_MONT LAST_DAY NEXT_DAY
+-------- -------------------------------- -------- -------- --------
+81/12/03                       463.142872 82/06/03 81/12/31 81/12/04
+81/12/03                       463.142872 82/06/03 81/12/31 81/12/04
+82/01/23                       461.497711 82/07/23 82/01/31 82/01/29
+20/07/07                                0 21/01/07 20/07/31 20/07/10
+
+
+QL> SELECT ENAME "사원명", HIREDATE "입사일" ,  NEXT_DAY( ADD_MONTHS(HIREDATE,6), '금') "6개월 후 금"
+  2  FROM EMP;
+
+사원명     입사일   6개월 후
+---------- -------- --------
+SMITH      80/12/17 81/06/19
+ALLEN      81/02/20 81/08/21
+WARD       81/02/22 81/08/28
+JONES      81/04/02 81/10/09
+MARTIN     81/09/28 82/04/02
+BLAKE      81/05/01 81/11/06
+CLARK      81/06/09 81/12/11
+SCOTT      87/04/19 87/10/23
+KING       81/11/17 82/05/21
+TURNER     81/09/08 82/03/12
+ADAMS      87/05/23 87/11/27
+
+사원명     입사일   6개월 후
+---------- -------- --------
+JAMES      81/12/03 82/06/04
+FORD       81/12/03 82/06/04
+MILLER     82/01/23 82/07/30
+HONG       20/07/07 21/01/08
+
+15 개의 행이 선택되었습니다.
+
+
+ COL "6개월 후 금" FORMAT A50
+
+
+SQL> SELECT SYSDATE - HIREDATE
+  2  FROM EMP;
+
+SYSDATE-HIREDATE
+----------------
+      14447.4523
+      14382.4523
+      14380.4523
+      14341.4523
+      14162.4523
+      14312.4523
+      14273.4523
+      12133.4523
+      14112.4523
+      14182.4523
+      12099.4523
+
+SYSDATE-HIREDATE
+----------------
+      14096.4523
+      14096.4523
+      14045.4523
+      .029884259
+
+15 개의 행이 선택되었습니다.
+
+
+-----------------------------------형 변환 함수 --------------------------------------------------------
+
+TO_DATE
+TO_CHAR 
+
+
+
+SQL> SELECT TO_CHAR(SYSDATE,'CC YYYY/MM/DD : HH24:MI:SS')
+  2  FROM DUAL;
+
+TO_CHAR(SYSDATE,'CCYYYY/
+------------------------
+21 2020/07/07 : 11:29:06
+
+
+
+SQL> SELECT EMPNO, ENAME , HIREDATE
+  2  FROM EMP
+  3  WHERE TO_CHAR(HIREDATE, 'YYYY/MM/DD') =
+  4  TO_CHAR(SYSDATE, 'YYYY/MM/DD');
+
+     EMPNO ENAME      HIREDATE
+---------- ---------- --------
+      1111 HONG       20/07/07
+
+
+SQL> SELECT ENAME , TO_CHAR(SAL, '$999,999.99')
+  2  FROM EMP;
+
+ENAME      TO_CHAR(SAL,
+---------- ------------
+SMITH           $800.00
+ALLEN         $1,600.00
+WARD          $1,250.00
+JONES         $2,975.00
+MARTIN        $1,250.00
+BLAKE         $2,850.00
+CLARK         $2,450.00
+SCOTT         $3,000.00
+KING          $5,000.00
+TURNER        $1,500.00
+ADAMS         $1,100.00
+
+ENAME      TO_CHAR(SAL,
+---------- ------------
+JAMES           $950.00
+FORD          $3,000.00
+MILLER        $1,300.00
+HONG          $3,000.00
+
+15 개의 행이 선택되었습니다.
+
+
+  1  SELECT ENAME , TO_CHAR(SAL, 'L999,999.99')
+  2* FROM EMP
+SQL> /
+
+ENAME      TO_CHAR(SAL,'L999,999
+---------- ---------------------
+SMITH                   ￦800.00
+ALLEN                 ￦1,600.00
+WARD                  ￦1,250.00
+JONES                 ￦2,975.00
+MARTIN                ￦1,250.00
+BLAKE                 ￦2,850.00
+CLARK                 ￦2,450.00
+SCOTT                 ￦3,000.00
+KING                  ￦5,000.00
+TURNER                ￦1,500.00
+ADAMS                 ￦1,100.00
+
+ENAME      TO_CHAR(SAL,'L999,999
+---------- ---------------------
+JAMES                   ￦950.00
+FORD                  ￦3,000.00
+MILLER                ￦1,300.00
+HONG                  ￦3,000.00
+
+15 개의 행이 선택되었습니다.
+
+형변환 : TO_NUMBER , TO_CHAR, TO_DATE 
+
+
+-----------------------------------일반 함수-------------------------------------------------------------------------------
+
+일반: NVL, DECODE (CASE문)
+
+
+SQL> SELECT ENAME , SAL , SAL *12 , COMM , NVL(COMM,0)
+  2  FROM EMP;
+
+ENAME             SAL     SAL*12       COMM NVL(COMM,0)
+---------- ---------- ---------- ---------- -----------
+SMITH             800       9600                      0
+ALLEN            1600      19200        300         300
+WARD             1250      15000        500         500
+JONES            2975      35700                      0
+MARTIN           1250      15000       1400        1400
+BLAKE            2850      34200                      0
+CLARK            2450      29400                      0
+SCOTT            3000      36000                      0
+KING             5000      60000                      0
+TURNER           1500      18000          0           0
+ADAMS            1100      13200                      0
+
+ENAME             SAL     SAL*12       COMM NVL(COMM,0)
+---------- ---------- ---------- ---------- -----------
+JAMES             950      11400                      0
+FORD             3000      36000                      0
+MILLER           1300      15600                      0
+HONG             3000      36000                      0
+
+15 개의 행이 선택되었습니다.
+
+
+
+DECODE(기준 , 변수1, 변수1 변환 , 변수2, 변수2 변환 ---- 나머지) 
+
+SQL> .
+
+ENAME      JOB              SAL      UPSAL
+---------- --------- ---------- ----------
+SMITH      CLERK            800        840
+ALLEN      SALESMAN        1600       1648
+WARD       SALESMAN        1250     1287.5
+JONES      MANAGER         2975    3064.25
+MARTIN     SALESMAN        1250     1287.5
+BLAKE      MANAGER         2850     2935.5
+CLARK      MANAGER         2450     2523.5
+SCOTT      ANALYST         3000       3090
+KING       PRESIDENT       5000       5150
+TURNER     SALESMAN        1500       1545
+ADAMS      CLERK           1100       1155
+
+ENAME      JOB              SAL      UPSAL
+---------- --------- ---------- ----------
+JAMES      CLERK            950      997.5
+FORD       ANALYST         3000       3090
+MILLER     CLERK           1300       1365
+HONG                       3000       3090
+
+15 개의 행이 선택되었습니다.
+
+
+
+  SELECT ENAME , JOB , SAL ,
+               DECODE (JOB,'MANAGER', SAL*1.1,
+                'CLERK', SAL*1.05,
+               SAL*1.03) "UPSAL" ,
+        CASE
+         WHEN JOB = 'MANAGER' THEN SAL*1.1
+          WHEN JOB = 'CLERK' THEN SAL*1.05
+         ELSE
+                   SAL*1.03
+         END "UPSAL2"
+  FROM EMP
+SQL> /
+
+ENAME      JOB              SAL      UPSAL     UPSAL2
+---------- --------- ---------- ---------- ----------
+SMITH      CLERK            800        840        840
+ALLEN      SALESMAN        1600       1648       1648
+WARD       SALESMAN        1250     1287.5     1287.5
+JONES      MANAGER         2975     3272.5     3272.5
+MARTIN     SALESMAN        1250     1287.5     1287.5
+BLAKE      MANAGER         2850       3135       3135
+CLARK      MANAGER         2450       2695       2695
+SCOTT      ANALYST         3000       3090       3090
+KING       PRESIDENT       5000       5150       5150
+TURNER     SALESMAN        1500       1545       1545
+ADAMS      CLERK           1100       1155       1155
+
+ENAME      JOB              SAL      UPSAL     UPSAL2
+---------- --------- ---------- ---------- ----------
+JAMES      CLERK            950      997.5      997.5
+FORD       ANALYST         3000       3090       3090
+MILLER     CLERK           1300       1365       1365
+HONG                       3000       3090       3090
+
+15 개의 행이 선택되었습니다.
+
+
+--------------------------------------------조인 방법 -----------------------------------------------------------------------
+
+SQL> select ename, dname
+  2  from emp,dept
+  3  where emp.deptno =
+  4  dept.deptno;
+
+ENAME      DNAME
+---------- --------------
+SMITH      RESEARCH
+ALLEN      SALES
+WARD       SALES
+JONES      RESEARCH
+MARTIN     SALES
+BLAKE      SALES
+CLARK      ACCOUNTING
+SCOTT      RESEARCH
+KING       ACCOUNTING
+TURNER     SALES
+ADAMS      RESEARCH
+
+ENAME      DNAME
+---------- --------------
+JAMES      SALES
+FORD       RESEARCH
+MILLER     ACCOUNTING
+
+14 개의 행이 선택되었습니다.
+
+SQL> select ename, emp.deptno, dname
+  2  from emp,dept
+  3  where emp.deptno =
+  4  dept.deptno ;
+
+ENAME          DEPTNO DNAME
+---------- ---------- --------------
+SMITH              20 RESEARCH
+ALLEN              30 SALES
+WARD               30 SALES
+JONES              20 RESEARCH
+MARTIN             30 SALES
+BLAKE              30 SALES
+CLARK              10 ACCOUNTING
+SCOTT              20 RESEARCH
+KING               10 ACCOUNTING
+TURNER             30 SALES
+ADAMS              20 RESEARCH
+
+ENAME          DEPTNO DNAME
+---------- ---------- --------------
+JAMES              30 SALES
+FORD               20 RESEARCH
+MILLER             10 ACCOUNTING
+
+14 개의 행이 선택되었습니다.
+
+join (2개이상의 테이블을 하나의 테이블 처럼 사용하는것)
+
+
+SQL> select e.ename, d.dname
+  2  from emp e, dept d
+  3  where e.deptno = d.deptno;
+
+ENAME      DNAME
+---------- --------------
+SMITH      RESEARCH
+ALLEN      SALES
+WARD       SALES
+JONES      RESEARCH
+MARTIN     SALES
+BLAKE      SALES
+CLARK      ACCOUNTING
+SCOTT      RESEARCH
+KING       ACCOUNTING
+TURNER     SALES
+ADAMS      RESEARCH
+
+ENAME      DNAME
+---------- --------------
+JAMES      SALES
+FORD       RESEARCH
+MILLER     ACCOUNTING
+
+14 개의 행이 선택되었습니다.
+
+SQL> SELECT E.ENAME , S.GRADE , E.SAL
+  2  FROM EMP E , SALGRADE S
+  3  WHERE E.SAL >= S.LOSAL
+  4  AND E.SAL <= S.HISAL;
+
+ENAME           GRADE        SAL
+---------- ---------- ----------
+SMITH               1        800
+JAMES               1        950
+ADAMS               1       1100
+WARD                2       1250
+MARTIN              2       1250
+MILLER              2       1300
+TURNER              3       1500
+ALLEN               3       1600
+CLARK               4       2450
+BLAKE               4       2850
+JONES               4       2975
+
+ENAME           GRADE        SAL
+---------- ---------- ----------
+SCOTT               4       3000
+FORD                4       3000
+KING                5       5000
+
+14 개의 행이 선택되었습니다.
+
+
+SQL> SELECT E.ENAME, S.GRADE , E.SAL
+  2  FROM EMP E , SALGRADE S
+  3  WHERE E.SAL BETWEEN S.LOSAL AND S.HISAL;
+
+ENAME           GRADE        SAL
+---------- ---------- ----------
+SMITH               1        800
+JAMES               1        950
+ADAMS               1       1100
+WARD                2       1250
+MARTIN              2       1250
+MILLER              2       1300
+TURNER              3       1500
+ALLEN               3       1600
+CLARK               4       2450
+BLAKE               4       2850
+JONES               4       2975
+
+ENAME           GRADE        SAL
+---------- ---------- ----------
+SCOTT               4       3000
+FORD                4       3000
+KING                5       5000
+
+14 개의 행이 선택되었습니다.
+
+
+EQUI-JOIN 
+NON EQUI-JOIN
+
+
+1.사원들의 이름 , 부서번호, 부서 이름을 출력하라
+
+SELECT E.ENAME , D.DEPTNO , D.DNAME
+FROM EMP E , DEPT D 
+WHERE E.DEPTNO = D.DEPTNO 
+
+ERD???
+
+
+2. 30번 부서의 사원들의 이름,직업, 부서위치를 출력하라
+
+SELECT E.ENAME, E.JOB, D.LOC, E.DEPTNO
+FROM EMP E, DEPT D 
+WHERE E.DEPTNO = D.DEPTNO 
+AND E.DEPTNO = 30 
+
+-----------------------------------------------SELF-JOIN ------------------------------------------------------------
+
+SQL> SELECT E.ENAME , C.ENAME
+  2  FROM EMP E, EMP C
+  3  WHERE  E.MGR = C.EMPNO
+  ;
+
+ENAME      ENAME
+---------- ----------
+FORD       JONES
+SCOTT      JONES
+JAMES      BLAKE
+TURNER     BLAKE
+MARTIN     BLAKE
+WARD       BLAKE
+ALLEN      BLAKE
+MILLER     CLARK
+ADAMS      SCOTT
+CLARK      KING
+BLAKE      KING
+
+ENAME      ENAME
+---------- ----------
+JONES      KING
+SMITH      FORD
+
+13 개의 행이 선택되었습니다.
+
+별칭을 다르게 만들어서 가상으로 같은 테이블을 복사함 
+
+SELF-JOIN 
+
+
+---------------------------------OUTER-JOIN---------------------------------------------------
+
+OUTER-JOIN
+(+) == NULL 값 추가 ? 
+
+SQL> SELECT E.ENAME , C.ENAME,E.EMPNO
+  2  FROM EMP E, EMP C
+  3  WHERE E.MGR = C.EMPNO(+);
+
+ENAME      ENAME           EMPNO
+---------- ---------- ----------
+FORD       JONES            7902
+SCOTT      JONES            7788
+JAMES      BLAKE            7900
+TURNER     BLAKE            7844
+MARTIN     BLAKE            7654
+WARD       BLAKE            7521
+ALLEN      BLAKE            7499
+MILLER     CLARK            7934
+ADAMS      SCOTT            7876
+CLARK      KING             7782
+BLAKE      KING             7698
+
+ENAME      ENAME           EMPNO
+---------- ---------- ----------
+JONES      KING             7566
+SMITH      FORD             7369
+KING                        7839
+
+14 개의 행이 선택되었습니다.
+
+
+JOIN 조건
+
+1. EQUI- JOIN 
+2. NON EQUI - JOIN
+3. SELF-JOIN
+4. OUTER-JOIN 
+
+
+-------------------------테이블 3개 연결-----------------------------------
+
+3개 테이블 연결 (조건문 2개)
+
+ 1     SELECT E.ENAME, D.DNAME , S.GRADE
+  2      FROM EMP E, SALGRADE S , DEPT D
+  3      WHERE E.DEPTNO = D.DEPTNO
+  4      AND E.SAL >= S.LOSAL
+  5*     AND E.SAL <= S.HISAL
+  6
+SQL> /
+
+ENAME      DNAME               GRADE
+---------- -------------- ----------
+SMITH      RESEARCH                1
+JAMES      SALES                   1
+ADAMS      RESEARCH                1
+WARD       SALES                   2
+MARTIN     SALES                   2
+MILLER     ACCOUNTING              2
+TURNER     SALES                   3
+ALLEN      SALES                   3
+CLARK      ACCOUNTING              4
+BLAKE      SALES                   4
+JONES      RESEARCH                4
+
+ENAME      DNAME               GRADE
+---------- -------------- ----------
+SCOTT      RESEARCH                4
+FORD       RESEARCH                4
+KING       ACCOUNTING              5
+
+14 개의 행이 선택되었습니다.
