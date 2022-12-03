@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- id가 bigSize인 요소의 글자폰트를 20px
+class 가 red인 요소의 글자색을 red
+id가 PinkOne인 요소의 배경색을 핑크로 변경 -->
+<style>
+    * { padding:0;
+        margin:0;
+    }
+    #bigSize {
+        font-size: 20px;
+    }
+    .red {
+        color: red;
+    }
+    #PinkOne {
+        background-color: pink;
+    }
+    #blueOne {
+        color: blue;
+    }
+
+    ol#nav {
+        list-style-type: lower-greek;
+    }
+</style>
+<body>
+    
+
+    <ol id="nav">
+        <li id ="bigSize" class="red">다양한 요소를 선택지로 사용할수 있다</li>
+        <li id="blueOne">다양한 요소를 선택지로 사용할수 있다</li>
+        <li class="red">다양한 요소를 선택지로 사용할수 있다</li>
+        <li id="PinkOne">다양한 요소를 선택지로 사용할수 있다</li>
+    </ol>
+</body>
+</html>

@@ -1,0 +1,35 @@
+        /* div1 너비 100 높이 100 패딩 50 배경 초록 */
+        @charset "UTF-8";
+        
+        div{
+            width: 100px;
+            padding: 50px;
+        }
+        #div1{    
+            height: 100px;           
+            background-color: green;
+            position: absolute;
+            right: 100px;
+        }
+        #div2{
+            height: 50px;  
+            background-color: blue;
+            position:absolute;
+            left: 200px;
+            top: 150px;
+        }
+        /* div2 너비 100 높이 50 패딩50 배경 파랑 */
+        #div3{
+            width: 50px;
+            height: 30px;
+            padding: 15px;
+            border-radius: 30px;
+            background-color: red;
+        }
+        #div3:hover{
+            background-color: blue;
+        }
+        #div3:active{
+            background-color: green;
+            margin-top: 3px;
+        }
